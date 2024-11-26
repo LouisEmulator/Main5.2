@@ -417,7 +417,6 @@ void SEASON3B::CNewUICatapultWindow::DoFire(int iKey, int iResult, int iType, in
     CHARACTER* c = &CharactersClient[iIndex];
     OBJECT* o = &c->Object;
 
-    //  투석기 공격 애니메이션.
     SetAction ( o, 1 );
 
     BYTE bySubType = 0;
@@ -439,11 +438,11 @@ void SEASON3B::CNewUICatapultWindow::DoFire(int iKey, int iResult, int iType, in
     Vector(iPositionX*TERRAIN_SCALE, iPositionY*TERRAIN_SCALE, 100.f, vTargetPos );
     switch(iType)
     {
-    case 1: //  공성 무기.
+    case 1:
         CreateEffect(MODEL_FLY_BIG_STONE1, vPos, vTargetPos, o->Light, bySubType, &Hero->Object, 1, byKeyH, byKeyL);
         break;
 
-    case 2: //  수성 무기.
+    case 2:
         CreateEffect(MODEL_FLY_BIG_STONE2, vPos, vTargetPos, o->Light, bySubType, &Hero->Object, 1, byKeyH, byKeyL);
         break;
     }
@@ -459,18 +458,17 @@ void SEASON3B::CNewUICatapultWindow::DoFireFixStartPosition(int iType, int iPosi
 
     switch ( iType )
     {
-    case 1: //  공성 무기.
+    case 1:
         Vector(9200, 3000, 500.f, vPos);
         CreateEffect(MODEL_FLY_BIG_STONE1, vPos, vTargetPos, Hero->Object.Light, 0, &Hero->Object, 1);
         break;
 
-    case 2: //  수성 무기.
+    case 2:
         Vector(9400, 19000, 500.f, vPos);
         CreateEffect( MODEL_FLY_BIG_STONE2, vPos, vTargetPos, Hero->Object.Light, 0, &Hero->Object, 1);
         break;
     }
 
-    //  떨어질 위치를 알려준다.
     vec3_t vLight = { 1.f, 0.3f, 0.1f };
     CreateEffect(BITMAP_SHOCK_WAVE, vTargetPos, Hero->Object.Angle, vLight, 6);
 

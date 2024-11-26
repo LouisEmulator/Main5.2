@@ -124,14 +124,13 @@ bool SEASON3B::CNewUIMyInventory::EquipItem(int iIndex, BYTE* pbyItemPacket)
 	if(iIndex >= 0 && iIndex < MAX_EQUIPMENT_INDEX && g_pNewItemMng && CharacterMachine)
 	{
 		ITEM* pTargetItemSlot = &CharacterMachine->Equipment[iIndex];
-		if(pTargetItemSlot->Type > 0)	//. 이미 차고있다면
+		if(pTargetItemSlot->Type > 0)
 		{
-			UnequipItem(iIndex);	//. 장비 해제
+			UnequipItem(iIndex);
 		}
 
-		//. 임시 아이템 생성
 		ITEM* pTempItem = g_pNewItemMng->CreateItem(pbyItemPacket);		
-		//. 장착 할 수 있는가??
+
 		if(NULL == pTempItem)	
 		//if(NULL == pTempItem || false == IsEquipable(iIndex, pTempItem))	
 		{
@@ -162,7 +161,6 @@ void SEASON3B::CNewUIMyInventory::UnequipItem(int iIndex)
 	{
 		ITEM* pEquippedItem = &CharacterMachine->Equipment[iIndex];
 
-		//. 장착 효과 제거
 		if(pEquippedItem && pEquippedItem->Type != -1)
 		{
 #ifdef PBG_FIX_SKILLHOTKEY
@@ -170,12 +168,10 @@ void SEASON3B::CNewUIMyInventory::UnequipItem(int iIndex)
 #endif //PBG_FIX_SKILLHOTKEY
 
 #ifdef PBG_FIX_DARKPET_RENDER
-			// 다크호스
 			if( pEquippedItem->Type == ITEM_HELPER+4 )
 			{
 				Hero->InitPetInfo(PET_TYPE_DARK_HORSE);
 			}
-			// 다크스피릿
 			else if( pEquippedItem->Type == ITEM_HELPER+5 )
 			{
 				giPetManager::DeletePet(Hero);
@@ -235,7 +231,7 @@ void SEASON3B::CNewUIMyInventory::UnequipAllItems()
 		{
 #ifdef KJH_FIX_DARKLOAD_PET_SYSTEM
 			UnequipItem( i );
-#else // KJH_FIX_DARKLOAD_PET_SYSTEM											//## 소스정리 대상임.
+#else // KJH_FIX_DARKLOAD_PET_SYSTEM
 			ITEM* pEquippedItem = &CharacterMachine->Equipment[i];
 			//. 장착 효과 제거		
 			if(pEquippedItem && pEquippedItem->Type != -1)
@@ -249,7 +245,7 @@ void SEASON3B::CNewUIMyInventory::UnequipAllItems()
 
 				DeleteEquippingEffect();
 			}
-#endif // KJH_FIX_DARKLOAD_PET_SYSTEM											//## 소스정리 대상임.
+#endif // KJH_FIX_DARKLOAD_PET_SYSTEM
 		}
 	}
 }
@@ -468,7 +464,6 @@ void SEASON3B::CNewUIMyInventory::SetPos(int x, int y)
 	m_Pos.x = x;
 	m_Pos.y = y;
 	
-	//. 다시 셋팅
 	SetEquipmentSlotInfo();
 	
 	m_pNewInventoryCtrl->SetPos(x+15, y+200);
@@ -512,17 +507,14 @@ bool SEASON3B::CNewUIMyInventory::UpdateMouseEvent()
 	if(m_pNewInventoryCtrl && false == m_pNewInventoryCtrl->UpdateMouseEvent())
 		return false;
 
-	//. PickedItem 처리
-	if(true == EquipmentWindowProcess())		//. 처리가 완료 되었다면
+	if(true == EquipmentWindowProcess())
 		return false;
 	if(true == InventoryProcess())
 		return false;
 
-	//. 버튼 처리
-	if(true == BtnProcess())	//. 처리가 완료 되었다면
+	if(true == BtnProcess())
 		return false;
 	
-	//. 버리기
 	CNewUIPickedItem* pPickedItem = CNewUIInventoryCtrl::GetPickedItem();
 	if(pPickedItem && SEASON3B::IsPress(VK_LBUTTON) && CheckMouseIn(0, 0, GetScreenWidth(), 429))
 	{
@@ -545,7 +537,7 @@ bool SEASON3B::CNewUIMyInventory::UpdateMouseEvent()
 		ITEM* pItemObj = pPickedItem->GetItem();
 		if( pItemObj && pItemObj->Jewel_Of_Harmony_Option != 0 )
 		{
-			// 2217 "강화된 아이템은 버릴 수 없습니다."			
+		
 			g_pChatListBox->AddText("", GlobalText[2217], SEASON3B::TYPE_ERROR_MESSAGE);
 			
 			ResetMouseLButton();
@@ -553,7 +545,6 @@ bool SEASON3B::CNewUIMyInventory::UpdateMouseEvent()
 		}
 		else if(pItemObj && IsHighValueItem(pItemObj) == true)
 		{
-			// 269 "고가의 아이템은 버릴 수 없습니다."
 			g_pChatListBox->AddText("", GlobalText[269], SEASON3B::TYPE_ERROR_MESSAGE);
 			CNewUIInventoryCtrl::BackupPickedItem();
 			
@@ -562,34 +553,19 @@ bool SEASON3B::CNewUIMyInventory::UpdateMouseEvent()
 		}
 		else if(pItemObj && IsDropBan(pItemObj))
 		{
-			// "버릴 수 없는 아이템입니다."
 			g_pChatListBox->AddText("", GlobalText[1915], SEASON3B::TYPE_ERROR_MESSAGE);
 			CNewUIInventoryCtrl::BackupPickedItem();
 			
 			ResetMouseLButton();
 			return false;
 		}
-#ifdef CSK_FIX_WOPS_K27964_LOSTMAP_POP
-		// 잃어버린지도 환영의사원에서는 못버리게 수정
 		else if(pItemObj && pItemObj->Type == ITEM_POTION+28 && gMapManager.IsCursedTemple() == true)
 		{
 			ResetMouseLButton();
 			return false;
 		}
-#endif // CSK_FIX_WOPS_K27964_LOSTMAP_POP
-		
-		// 칼리마맵에서는 잃어버린 지도를 못버립니다.
-		// 던져도 상관없다고 해서 일단 주석으로 처리
-// 		else if(pItemObj && pItemObj->Type == ITEM_POTION+28 && gMapManager.InHellas() == true)
-// 		{
-// 			// 메세지 추가해줘야 한다.
-// 
-// 			ResetMouseLButton();
-// 			return false;
-// 		}
 		else
 		{
-			//떨어트리다
 			RenderTerrain(true);
 			if(RenderTerrainTile(SelectXF,SelectYF,(int)SelectXF,(int)SelectYF,1.f,1,true))
 			{
@@ -598,7 +574,6 @@ bool SEASON3B::CNewUIMyInventory::UpdateMouseEvent()
 				int ty = (int)(CollisionPosition[1]/TERRAIN_SCALE);
 				if(pPickedItem->GetOwnerInventory() == m_pNewInventoryCtrl)
 				{
-					// 사망중에는 던질 수 없다
 					if( Hero->Dead == false )
 					{
 						SendRequestDropItem(MAX_EQUIPMENT_INDEX+iSourceIndex,tx,ty);
@@ -617,7 +592,6 @@ bool SEASON3B::CNewUIMyInventory::UpdateMouseEvent()
 		}
 	}
 
-	// 세트 옵션 설명 리스트
 	g_csItemOption.SetViewOptionList(false);
 #ifdef SOCKET_SYSTEM
 	if(CheckMouseIn(m_Pos.x, m_Pos.y+20, INVENTORY_WIDTH * 0.5f, 15) == true)
@@ -628,7 +602,6 @@ bool SEASON3B::CNewUIMyInventory::UpdateMouseEvent()
 		g_csItemOption.SetViewOptionList(true);	
 	}
 
-	//. 인벤토리 내의 영역 클릭시 하위 UI처리 및 이동 불가
 	if(CheckMouseIn(m_Pos.x, m_Pos.y, INVENTORY_WIDTH, INVENTORY_HEIGHT))
 	{
 		if(SEASON3B::IsPress(VK_RBUTTON))
@@ -665,7 +638,6 @@ bool SEASON3B::CNewUIMyInventory::UpdateKeyEvent()
 		{
 			if(m_bRepairEnableLevel == true && g_pNewUISystem->IsVisible(SEASON3B::INTERFACE_NPCSHOP) == false
 #ifdef PBG_WOPS_REPAIRKEY
-				//조합창사용시 수리는 안되게 된다
 				&& g_pNewUISystem->IsVisible(SEASON3B::INTERFACE_MIXINVENTORY) == false
 #endif //PBG_WOPS_REPAIRKEY
 #ifdef LEM_ADD_LUCKYITEM
@@ -679,7 +651,6 @@ bool SEASON3B::CNewUIMyInventory::UpdateKeyEvent()
 			}
 		}
 
-		// 개인상점 인벤토리 단축키 
 		if(CanOpenMyShopInterface() == true && SEASON3B::IsPress('S') )	
 		{
 #ifdef DO_PROCESS_DEBUGCAMERA
@@ -846,9 +817,8 @@ void SEASON3B::CNewUIMyInventory::RenderSocketOption()
 		g_pRenderText->SetTextColor(100, 100, 100, 255);
 	}
 
-	// "소켓 옵션"
 	unicode::t_char strText[128];
-	unicode::_sprintf(strText, "[%s]", GlobalText[2651]);	// "소켓 옵션"
+	unicode::_sprintf(strText, "[%s]", GlobalText[2651]);
 	g_pRenderText->RenderText(m_Pos.x + INVENTORY_WIDTH * 0.5f, m_Pos.y+25, strText, INVENTORY_WIDTH * 0.3f, 0, RT3_SORT_CENTER);
 
 	if(CheckMouseIn(m_Pos.x + INVENTORY_WIDTH * 0.5f, m_Pos.y+20, INVENTORY_WIDTH * 0.5f, 15) == true)
@@ -1357,7 +1327,6 @@ void SEASON3B::CNewUIMyInventory::RenderEquippedItem()
 			int iLevel = (pEquipmentItemSlot->Level>>3)&15;
 			int iMaxDurability = calcMaxDurability(pEquipmentItemSlot, pItemAttr, iLevel);
 			
-			// 용사/전사의반지 예외처리
 			if( i == EQUIPMENT_RING_LEFT || i == EQUIPMENT_RING_RIGHT)
 			{
 				if( pEquipmentItemSlot->Type == ITEM_HELPER+20 && iLevel == 1 

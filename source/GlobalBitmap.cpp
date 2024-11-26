@@ -197,7 +197,7 @@ void CBitmapCache::Update()
 {
 	m_ManageTimer.UpdateTime();
 
-	if(m_ManageTimer.IsTime())	//. 1.5초에 한번
+	if(m_ManageTimer.IsTime())
 	{
 		//. Main Map Cache
 		type_cache_map::iterator mi = m_mapCacheMain.begin();
@@ -211,7 +211,6 @@ void CBitmapCache::Update()
 			}
 			else
 			{
-				//. 사용하지 않는것들은 캐쉬에서 제거한다.
 				mi = m_mapCacheMain.erase(mi);
 			}
 		}
@@ -229,7 +228,6 @@ void CBitmapCache::Update()
 			}
 			else
 			{
-				//. 사용하지 않는것들은 캐쉬에서 제거한다.
 				mi = m_mapCachePlayer.erase(mi);
 			}
 		}
@@ -246,7 +244,6 @@ void CBitmapCache::Update()
 			}
 			else
 			{
-				//. 사용하지 않는것들은 캐쉬에서 제거한다.
 				mi = m_mapCacheInterface.erase(mi);
 			}
 		}
@@ -263,7 +260,6 @@ void CBitmapCache::Update()
 			}
 			else
 			{
-				//. 사용하지 않는것들은 캐쉬에서 제거한다.
 				mi = m_mapCacheEffect.erase(mi);
 			}
 		}
@@ -277,7 +273,6 @@ void CBitmapCache::Update()
 
 bool CBitmapCache::Find(GLuint uiBitmapIndex, BITMAP_t** ppBitmap)
 {
-	//. 퀵캐쉬에 있다면 찾는다.
 	for(int i=0; i<NUMBER_OF_QUICK_CACHE; i++)
 	{
 		if(uiBitmapIndex > m_QuickCache[i].dwBitmapIndexMin && 
@@ -286,7 +281,7 @@ bool CBitmapCache::Find(GLuint uiBitmapIndex, BITMAP_t** ppBitmap)
 			DWORD dwVI = uiBitmapIndex - m_QuickCache[i].dwBitmapIndexMin;
 			if(m_QuickCache[i].ppBitmap[dwVI])
 			{
-				if(m_QuickCache[i].ppBitmap[dwVI] == m_pNullBitmap)	//. 찾았으나 Null 비트맵이라면
+				if(m_QuickCache[i].ppBitmap[dwVI] == m_pNullBitmap)
 					*ppBitmap = NULL;
 				else
 				{
@@ -298,7 +293,6 @@ bool CBitmapCache::Find(GLuint uiBitmapIndex, BITMAP_t** ppBitmap)
 		}
 	}
 
-	//. 없다면 맵캐쉬들을 검색
 	if(BITMAP_PLAYER_TEXTURE_BEGIN <= uiBitmapIndex && BITMAP_PLAYER_TEXTURE_END >= uiBitmapIndex)
 	{
 		type_cache_map::iterator mi = m_mapCachePlayer.find(uiBitmapIndex);

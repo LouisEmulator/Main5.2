@@ -1264,8 +1264,8 @@ bool GMSwampOfQuiet::RenderMonsterVisual(CHARACTER* pCharacter, OBJECT* pObject,
 		break;
 #endif //LDK_ADD_EXTENSIONMAP_BOSS_MEDUSA
 #ifdef LDS_EXTENSIONMAP_MONSTERS_SWAMPOFQUIET
-	case MODEL_MONSTER01+201:	// 사피퀸
-	case MODEL_MONSTER01+204:	// 사피퀸 : 메두사 부하
+	case MODEL_MONSTER01+201:
+	case MODEL_MONSTER01+204:
 		{
 			Vector(1.0f, 0.6f, 0.1f, vLight);
 			Vector(0.0f, 0.0f, 0.0f, vRelative);
@@ -1275,7 +1275,7 @@ bool GMSwampOfQuiet::RenderMonsterVisual(CHARACTER* pCharacter, OBJECT* pObject,
 			CreateSprite(BITMAP_LIGHT, vPos, 2.0f, vLight, pObject);
 		}
 		break;
-	case MODEL_MONSTER01+202:	// 아이스 네이핀
+	case MODEL_MONSTER01+202:
 		{
 			int iBones[] = { 10, 61, 72, 21, 122, 116 };
 			Vector(1.0f, 1.0f, 1.0f, vLight);
@@ -1308,19 +1308,19 @@ bool GMSwampOfQuiet::RenderMonsterVisual(CHARACTER* pCharacter, OBJECT* pObject,
 				switch(rand()%3)
 				{
 				case 0:
-					CreateParticle(BITMAP_FIRE_HIK1,vPos,pObject->Angle,vLight,0,fScale);	// 불
+					CreateParticle(BITMAP_FIRE_HIK1,vPos,pObject->Angle,vLight,0,fScale);
 					break;
 				case 1:
-					CreateParticle(BITMAP_FIRE_CURSEDLICH,vPos,pObject->Angle,vLight,4,fScale);	// 불
+					CreateParticle(BITMAP_FIRE_CURSEDLICH,vPos,pObject->Angle,vLight,4,fScale);
 					break;
 				case 2:
-					CreateParticle(BITMAP_FIRE_HIK3,vPos,pObject->Angle,vLight,0,fScale);	// 불
+					CreateParticle(BITMAP_FIRE_HIK3,vPos,pObject->Angle,vLight,0,fScale);
 					break;
 				}
 			}
 		}
 		break;
-	case MODEL_MONSTER01+203:	// 쉐도우 마스터
+	case MODEL_MONSTER01+203:
 		{
 			int iBones[] = { 11, 15, 34, 21, 25, 39 };
 			Vector(1.0f, 1.0f, 1.f, vLight);
@@ -1328,15 +1328,15 @@ bool GMSwampOfQuiet::RenderMonsterVisual(CHARACTER* pCharacter, OBJECT* pObject,
 			{
 				if (rand()%6 > 0) continue;
 				pModel->TransformByObjectBone(vPos, pObject, iBones[i]);
-				CreateParticle(BITMAP_SMOKE,vPos,pObject->Angle,vLight,50,1.5f);	// 연기
-				CreateParticle(BITMAP_SMOKELINE1+rand()%3,vPos,pObject->Angle,vLight,0,1.1f);	// 3종 연기
+				CreateParticle(BITMAP_SMOKE,vPos,pObject->Angle,vLight,50,1.5f);
+				CreateParticle(BITMAP_SMOKELINE1+rand()%3,vPos,pObject->Angle,vLight,0,1.1f);
 			}
 		}
 		if (pObject->CurrentAction == MONSTER01_DIE)
 		{
 			if (pObject->LifeTime == 100)
 			{
-				pObject->LifeTime = 90;	// 한번만 실행
+				pObject->LifeTime = 90;
 				pObject->m_bRenderShadow = false;
 				
 				vec3_t vWorldPos, Light;

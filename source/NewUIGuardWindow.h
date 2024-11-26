@@ -58,20 +58,19 @@ namespace SEASON3B
 		POINT m_Pos;
 
 		CNewUIRadioGroupButton	m_TabBtn;
-		int						m_iNumCurOpenTab;		// 현재 열려있는 탭버튼번호
+		int						m_iNumCurOpenTab;
 
 		CNewUIButton m_BtnExit;
 		
-		CNewUIButton m_BtnProclaim;			// 공성 선포 버튼
-		CNewUIButton m_BtnRegister;			// 표식 등록 버튼
-		CNewUIButton m_BtnGiveUp;			// 공성 포기 버튼
+		CNewUIButton m_BtnProclaim;
+		CNewUIButton m_BtnRegister;
+		CNewUIButton m_BtnGiveUp;	
 
-		// 선포한 길드 리스트
+
 		CUIBCDeclareGuildListBox	m_DeclareGuildListBox;
-		// 확정된 길드 리스트
+
 		CUIBCGuildListBox			m_GuildListBox;
 		
-		// UI 출력 값
 		CASTLESIEGE_STATE	m_eTimeType;
 
 		char		m_szOwnerGuild[8+1];
@@ -116,7 +115,7 @@ namespace SEASON3B
 
 		float GetLayerDepth();	//. 5.0f
 		
-		void SetData(LPPMSG_ANS_CASTLESIEGESTATE Info);	// 서버에서 받아 화면 표시 설정
+		void SetData(LPPMSG_ANS_CASTLESIEGESTATE Info);
 
 		void AddDeclareGuildList( char* szGuildName, int nMarkCount, BYTE byIsGiveUP, BYTE bySeqNum );
 		void ClearDeclareGuildList();

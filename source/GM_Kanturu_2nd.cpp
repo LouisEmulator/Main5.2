@@ -918,7 +918,6 @@ bool M38Kanturu2nd::Render_Kanturu2nd_MonsterVisual(CHARACTER* c, OBJECT* o, BMD
 				RenderTerrainAlphaBitmap ( BITMAP_ENERGY_FIELD, o->Position[0], o->Position[1], 2.0f, 2.0f, Light, Angle );
 			}
 
-			// 사운드 처리
 			if(o->CurrentAction == MONSTER01_ATTACK1)
 			{
 				if (o->SubType == FALSE)
@@ -979,7 +978,6 @@ bool M38Kanturu2nd::Render_Kanturu2nd_MonsterVisual(CHARACTER* c, OBJECT* o, BMD
 					}
 					o->m_dwTime = timeGetTime();
 					
-					// 트윈테일 걷는 사운드는 이곳에서!!
 					PlayBuffer(SOUND_KANTURU_2ND_TWIN_MOVE1 + rand() % 2);
 				}
 			}
@@ -989,20 +987,16 @@ bool M38Kanturu2nd::Render_Kanturu2nd_MonsterVisual(CHARACTER* c, OBJECT* o, BMD
 				o->m_bRenderShadow = false;
 				if(o->AnimationFrame <= 3.0f)
 				{
-					// 연기 올라오는 이펙트
 					Vector(0.1f, 1.0f, 0.2f, vLight);
 					for(int i=0; i<5; i++)
 					{
 						CreateParticle(BITMAP_SMOKE, o->Position, o->Angle, vLight, 39);
 					}
-					// 물방울 올라오는 이펙트
 					Vector(0.4f, 1.0f, 0.6f, vLight);
 					CreateParticle(BITMAP_TWINTAIL_WATER, o->Position, o->Angle, vLight, 0);
 
-					// 인페르노 효과 이펙트
 					CreateEffect ( MODEL_SKILL_INFERNO, o->Position, o->Angle, o->Light, 9, o );
 
-					// 구름 회전 시키는 이펙트
 					if(o->AnimationFrame <= 0.2f)
 					{
 						Vector(0.4f, 1.0f, 0.6f, vLight);

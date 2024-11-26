@@ -506,8 +506,7 @@ int SeparateTextIntoLines( const char *lpszText, char *lpszSeparated, int iMaxLi
 	{
 		iMbclen = _mbclen( ( unsigned char*)lpSeek);
 		if ( iMbclen + ( int)( lpSeek - lpLineStart) >= iLineSize)
-		{	// 꽉 찼다. 다음 줄로
-			// 최근 공백이 가까우면 공백까지
+		{
 			if ( lpSpace && ( int)( lpSeek - lpSpace) < min( 10, iLineSize / 2))
 			{
 				lpDst -= ( lpSeek - lpSpace - 1);
@@ -517,7 +516,7 @@ int SeparateTextIntoLines( const char *lpszText, char *lpszSeparated, int iMaxLi
 			lpLineStart = lpSeek;
 			*lpDst = '\0';
 			if ( iLine >= iMaxLine - 1)
-			{	// 모든 줄을 다 썼다.
+			{
 				break;
 			}
 			++iLine;
@@ -525,14 +524,12 @@ int SeparateTextIntoLines( const char *lpszText, char *lpszSeparated, int iMaxLi
 			lpSpace = NULL;
 		}
 
-		// 한 글자 복사
 		memcpy( lpDst, lpSeek, iMbclen);
 		if ( *lpSeek == ' ')
 		{
 			lpSpace = lpSeek;
 		}
 	}
-	// 끝
 	*lpDst = '\0';
 
 	return ( iLine + 1);
@@ -2286,7 +2283,6 @@ bool RenderMainScene()
 #endif //DYNAMIC_FRUSTRUM
 
 #ifdef DO_PROCESS_DEBUGCAMERA
-	// 게임 카메라 Frustum 구성된 이후에 디버깅용 카메라로 Camera View Transform 구성하도록 한다.
 	ProcessDebugCamera();	
 #endif // DO_PROCESS_DEBUGCAMERA
 
@@ -2587,7 +2583,7 @@ void MainScene(HDC hDC)
 #endif //PJH_NEW_SERVER_SELECT_MAP
 		)
 	{
-		glClearColor(178.f/256.f,178.f/256.f,178.f/256.f,1.f);	// 배경색 회색으로
+		glClearColor(178.f/256.f,178.f/256.f,178.f/256.f,1.f);
 	}
 #ifndef PJH_NEW_SERVER_SELECT_MAP
 	else if(World == WD_78NEW_CHARACTER_SCENE)
@@ -2598,7 +2594,7 @@ void MainScene(HDC hDC)
 #ifdef YDG_ADD_MAP_DOPPELGANGER1
 	else if(gMapManager.WorldActive == WD_65DOPPLEGANGER1)
 	{
-		glClearColor(148.f/256.f,179.f/256.f,223.f/256.f,1.f);	// 배경색 하늘색으로
+		glClearColor(148.f/256.f,179.f/256.f,223.f/256.f,1.f);
 	}
 #endif	// YDG_ADD_MAP_DOPPELGANGER1
     else
@@ -2781,7 +2777,7 @@ void MainScene(HDC hDC)
 			PlayBuffer(SOUND_KARUTAN_DESERT_ENV, NULL, true);
 			break;
 		case WD_81KARUTAN2:
-			if (HeroTile == 12)	// 투명타일 위에서
+			if (HeroTile == 12)
 			{
 				StopBuffer(SOUND_KARUTAN_DESERT_ENV, true);
 				PlayBuffer(SOUND_KARUTAN_KARDAMAHAL_ENV, NULL, true);
@@ -2794,22 +2790,11 @@ void MainScene(HDC hDC)
 			break;
 #endif	// ASG_ADD_MAP_KARUTAN
 		}
-		if(gMapManager.WorldActive != WD_0LORENCIA && gMapManager.WorldActive != WD_2DEVIAS && gMapManager.WorldActive != WD_3NORIA
-#ifdef CSK_ADD_MAP_ICECITY	
-			&& gMapManager.WorldActive != WD_58ICECITY_BOSS
-#endif // CSK_ADD_MAP_ICECITY	
-#ifdef LDS_ADD_SOUND_UNITEDMARKETPLACE
-			&& gMapManager.WorldActive != WD_79UNITEDMARKETPLACE
-#endif // LDS_ADD_SOUND_UNITEDMARKETPLACE
-			)
+		if(gMapManager.WorldActive != WD_0LORENCIA && gMapManager.WorldActive != WD_2DEVIAS && gMapManager.WorldActive != WD_3NORIA && gMapManager.WorldActive != WD_58ICECITY_BOSS	&& gMapManager.WorldActive != WD_79UNITEDMARKETPLACE)
 		{
 			StopBuffer(SOUND_WIND01,true);
 		}
-		if ( gMapManager.WorldActive != WD_0LORENCIA && gMapManager.InDevilSquare() == false
-#ifdef LDS_ADD_SOUND_UNITEDMARKETPLACE
-			 && gMapManager.WorldActive != WD_79UNITEDMARKETPLACE
-#endif // LDS_ADD_SOUND_UNITEDMARKETPLACE
-			)
+		if ( gMapManager.WorldActive != WD_0LORENCIA && gMapManager.InDevilSquare() == false && gMapManager.WorldActive != WD_79UNITEDMARKETPLACE)
 		{
 			StopBuffer(SOUND_RAIN01,true);
 		}
@@ -3005,8 +2990,6 @@ extern int g_iNoMouseTime;
 extern GLvoid KillGLWindow(GLvoid);
 
 
-//void StartDevilSquareCountDown( int iType);	// 임시
-
 void Scene(HDC hDC)
 {
 	g_Luminosity = sinf(WorldTime*0.004f)*0.15f+0.6f;
@@ -3017,15 +3000,15 @@ void Scene(HDC hDC)
 		MovieScene(hDC);
 		break;
 #endif // MOVIE_DIRECTSHOW
-	case WEBZEN_SCENE://웹젠 로고 나오는 씬
+	case WEBZEN_SCENE:
         WebzenScene(hDC);
 		break;
-	case LOADING_SCENE://로딩 씬
+	case LOADING_SCENE:
       	LoadingScene(hDC);
 		break;
-	case LOG_IN_SCENE://계정 입력받는 씬
-	case CHARACTER_SCENE://케릭터 선택하는 씬
-	case MAIN_SCENE://메인 씬
+	case LOG_IN_SCENE:
+	case CHARACTER_SCENE:
+	case MAIN_SCENE:
 		MainScene(hDC);
 		break;
 	}
@@ -3035,7 +3018,7 @@ void Scene(HDC hDC)
 	_asm { __emit 0x15 }
 Pos_NoMouseTimeCheck2:
 	if ( g_iNoMouseTime > 31)
-	{	// g_iNoMouseTime 체크를 건너뛰게 조작한 경우
+	{
 		SendHackingChecked( 0x02, 0);
 		FAKE_CODE( Pos_NoMouse_KillWindow);
 Pos_NoMouse_KillWindow:

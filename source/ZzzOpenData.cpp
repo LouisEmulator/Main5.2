@@ -2451,7 +2451,6 @@ void OpenMonsterModel(int Type)
   	BMD *b = &Models[Index];
 	if(b->NumActions > 0 || b->NumMeshs > 0) return;
 
-	// 몬스터 모델 로딩
 	gLoadData.AccessModel(Index,"Data\\Monster\\","Monster",Type+1);
 
 	if(b->NumMeshs == 0) return;
@@ -2460,7 +2459,7 @@ void OpenMonsterModel(int Type)
     {
     	gLoadData.OpenTexture(Index,"Npc\\");
     }
-    else if ( gMapManager.InBattleCastle()==true && Type==74 )   //  수호석상.
+    else if ( gMapManager.InBattleCastle()==true && Type==74 )
     {
         gLoadData.OpenTexture ( Index, "Object31\\" );
     }
@@ -4181,7 +4180,6 @@ void OpenSkills()
     gLoadData.AccessModel ( MODEL_PEGASUS, "Data\\Skill\\", "Rider", 2 );
     gLoadData.AccessModel ( MODEL_DARK_HORSE , "Data\\Skill\\", "DarkHorse" );
 	
-	//^ 펜릴 모델 데이타 로드(모델 데이타, 텍스쳐)
 	gLoadData.AccessModel(MODEL_FENRIR_BLACK, "Data\\Skill\\", "fenril_black");
 	gLoadData.OpenTexture(MODEL_FENRIR_BLACK, "Skill\\");
 

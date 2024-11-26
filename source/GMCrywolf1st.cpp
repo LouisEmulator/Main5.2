@@ -2781,9 +2781,7 @@ bool M34CryWolf1st::Render_Mvp_Interface()
 		else
 			RenderNumber2D ( 520+87, 384+18, 60 - nPastTick, 14, 14 );
 	}
-//크라이울프 시간을 찍는다.
 
-//늑대의 석상 hp를 찍어준다.
 	float Hp = ((88.f / 100.f) * (float)m_StatueHP);
 	float nx = ((89.f / 100.f) * (float)m_StatueHP);
 
@@ -2803,11 +2801,11 @@ bool M34CryWolf1st::SetCurrentActionCrywolfMonster(CHARACTER* c, OBJECT* o)
 	switch(c->MonsterIndex)
 	{
 	case 440:
-	case 340:		//  다크엘프
-	case 344:		//  발람
-	case 345:		//  데쓰스피릿
-	case 341:		//  소람
-	case 349:		//  발가스
+	case 340:
+	case 344:
+	case 345:
+	case 341:
+	case 349:
 		return CheckMonsterSkill(c, o);
 	}
 	return false;

@@ -468,14 +468,11 @@ bool SEASON3B::CNewUICryWolf::Render()
 		RenderNumber2D ( 520+87, 384+18, 0, 14, 14 );
 	}
 
-	//늑대의 석상 hp를 찍어준다.
 	int HpS = 100 - m_StatueHP;
 	float Hp = ((88.f / 100.f) * (float)HpS);
 	float nx = ((89.f / 100.f) * (float)HpS);
 	RenderImage(IMAGE_MVP_INTERFACE + 9, 548 + nx, 323, 89.f - nx, 30 ,Hp/128.f,0.f,((((88.f / 100.f) * (float)(100.f - HpS)))/128.f),29.f/32.f);
 	
-	//늑대의 석상 hp를 찍어준다.
-
 	M34CryWolf1st::RenderNoticesCryWolf();
 
 	if(M34CryWolf1st::Get_State_Only_Elf() == false || M34CryWolf1st::IsCyrWolf1st() == false)

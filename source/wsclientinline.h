@@ -520,7 +520,6 @@ extern DWORD g_dwLatestMagicTick;
 		spe.Init( 0xC1, 0x19);\
 		spe << ( BYTE)(HIBYTE(Type))<<( BYTE)(LOBYTE(Type)) << ( BYTE)( ( p_Key)>>8) << ( BYTE)( ( p_Key)&0xff);\
 		spe.Send( TRUE);\
-		hanguo_check3();\
 	}\
 }
 #endif //PBG_ADD_NEWCHAR_MONK_SKILL
@@ -658,7 +657,6 @@ BYTE MakeSkillSerialNumber(BYTE * pSerialNumber);
 		spe << ( BYTE)(HIBYTE(Type))<<( BYTE)(LOBYTE(Type)) << ( BYTE)( p_x) << ( BYTE)( p_y) << ( BYTE)( p_Angle) << ( BYTE)( p_Dest) << ( BYTE)( p_Tpos) << ( BYTE)( ( p_TKey)>>8) << ( BYTE)( ( p_TKey)&0xff);\
 		spe << MakeSkillSerialNumber(p_SkillSerial);\
 		spe.Send( TRUE);\
-		hanguo_check6();\
 	}\
 }
 #else // ENABLE_EDIT
@@ -1128,7 +1126,7 @@ __forceinline void SendRequestEquipmentItem(int SrcFlag,int SrcIndex,int DstFlag
 	BYTE spareBits;
 	if (g_SocketItemMgr.IsSocketItem(&PickItem))
 	{
-		spareBits = PickItem.SocketSeedSetOption;	// 소켓아이템이면 조화보석자리에 소켓 세트옵션을 사용한다.
+		spareBits = PickItem.SocketSeedSetOption;
 	}
 	else
 	{
@@ -2079,9 +2077,6 @@ __forceinline bool SendRequestMixExit()
     spe.Send();\
 }
 
-//----------------------------------------------------------------------------
-// CG [0xB2][0x01] 
-//----------------------------------------------------------------------------
 #define SendRequestBCReg()\
 {\
 	CStreamPacketEngine spe;\

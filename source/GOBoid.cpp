@@ -144,9 +144,6 @@ bool CreateBugSub ( int Type, vec3_t Position, OBJECT *Owner, OBJECT * o, int Su
 	return TRUE;
 }
 
-//////////////////////////////////////////////////////////////////////////
-//  보조 유닛을 생성한다.
-//////////////////////////////////////////////////////////////////////////
 void CreateBug(int Type,vec3_t Position,OBJECT *Owner,int SubType,int LinkBone)
 {
     if ( gMapManager.InChaosCastle()==true ) return;
@@ -209,7 +206,7 @@ bool MoveBug ( OBJECT* o, bool bForceRender )
                 o->Alpha = 1.f;
             }
 
-			//b->BoneHead = 11; // 목 돌아가는 기능 일단 제거
+			//b->BoneHead = 11;
             VectorCopy ( o->Owner->HeadAngle, o->HeadAngle );
             VectorCopy ( o->Owner->Position, o->Position );
             VectorCopy ( o->Owner->Angle, o->Angle );
@@ -221,48 +218,48 @@ bool MoveBug ( OBJECT* o, bool bForceRender )
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
 				)
             {
-                SetAction(o, FENRIR_ATTACK);	// 펜릴 일반 공격
+                SetAction(o, FENRIR_ATTACK);
         		o->Velocity = 0.4f;
             }
 			else if(o->Owner->CurrentAction >= PLAYER_FENRIR_SKILL && o->Owner->CurrentAction <= PLAYER_FENRIR_SKILL_ONE_LEFT)
 			{
-				SetAction(o, FENRIR_ATTACK_SKILL);	// 펜릴 스킬 공격
+				SetAction(o, FENRIR_ATTACK_SKILL);
         		o->Velocity = 0.4f;
 			}
 			else if(o->Owner->CurrentAction >= PLAYER_FENRIR_DAMAGE && o->Owner->CurrentAction <= PLAYER_FENRIR_DAMAGE_ONE_LEFT)
 			{
-				SetAction(o, FENRIR_DAMAGE);	// 펜릴 데미지
+				SetAction(o, FENRIR_DAMAGE);
         		o->Velocity = 0.4f;
 			}
 			else if(o->Owner->CurrentAction >= PLAYER_FENRIR_STAND && o->Owner->CurrentAction <= PLAYER_FENRIR_STAND_ONE_LEFT)
 			{
-				SetAction(o, FENRIR_STAND);	// 펜릴 정지
+				SetAction(o, FENRIR_STAND);
 				o->Velocity = 0.4f;
 			}
 			else if(o->Owner->CurrentAction == PLAYER_DIE1)
 			{
-				SetAction(o, FENRIR_STAND);	// 펜릴 정지
+				SetAction(o, FENRIR_STAND);
 				o->Velocity = 0.4f;
 			}
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
 			else if(o->Owner->CurrentAction >= PLAYER_RAGE_FENRIR_DAMAGE && o->Owner->CurrentAction <= PLAYER_RAGE_FENRIR_DAMAGE_ONE_LEFT)
 			{
-				SetAction(o, FENRIR_DAMAGE);	// 펜릴 데미지
+				SetAction(o, FENRIR_DAMAGE);
         		o->Velocity = 0.4f;
 			}
 			else if(o->Owner->CurrentAction >= PLAYER_RAGE_FENRIR && o->Owner->CurrentAction <= PLAYER_RAGE_FENRIR_ONE_LEFT)
 			{
-				SetAction(o, FENRIR_ATTACK_SKILL);	// 펜릴 스킬 공격
+				SetAction(o, FENRIR_ATTACK_SKILL);
         		o->Velocity = 0.4f;
 			}
 			else if(o->Owner->CurrentAction >= PLAYER_RAGE_FENRIR_STAND && o->Owner->CurrentAction <= PLAYER_RAGE_FENRIR_STAND_ONE_LEFT)
 			{
-				SetAction(o, FENRIR_STAND);	// 펜릴 정지
+				SetAction(o, FENRIR_STAND);
 				o->Velocity = 0.4f;
 			}
 			else if(o->Owner->CurrentAction >= PLAYER_SKILL_THRUST && o->Owner->CurrentAction <= PLAYER_SKILL_HP_UP_OURFORCES)
 			{
-				SetAction(o, FENRIR_STAND);	// 펜릴 정지
+				SetAction(o, FENRIR_STAND);
 				o->Velocity = 0.4f;
 			}
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
@@ -270,12 +267,12 @@ bool MoveBug ( OBJECT* o, bool bForceRender )
 			{
 				if(o->Owner->CurrentAction >= PLAYER_FENRIR_WALK && o->Owner->CurrentAction <= PLAYER_FENRIR_WALK_ONE_LEFT)
 				{
-					SetAction(o, FENRIR_WALK);	// 펜릴 걷기
+					SetAction(o, FENRIR_WALK);
 					o->Velocity = 1.0f;				
 				}
 				else if(o->Owner->CurrentAction >= PLAYER_FENRIR_RUN && o->Owner->CurrentAction <= PLAYER_FENRIR_RUN_ONE_LEFT_ELF)
 				{
-					SetAction(o, FENRIR_RUN);	// 펜릴 달리기
+					SetAction(o, FENRIR_RUN);
 					o->Velocity = 0.6f;	
 				}
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
@@ -290,10 +287,9 @@ bool MoveBug ( OBJECT* o, bool bForceRender )
 					o->Velocity = 1.0f;				
 				}
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
-				
-				//^ 펜릴 이펙트 관련 (걷기나 달리기시 이펙트)
+
 				Vector ( 1.f, 1.f, 1.f, Light );
-                if ( gMapManager.WorldActive==WD_10HEAVEN )	// 천공에서 파동 효과
+                if ( gMapManager.WorldActive==WD_10HEAVEN )
                 {
                     bool   bWave = false;
                     vec3_t p = { 120.f, 0.f, 32.f };
@@ -361,12 +357,10 @@ bool MoveBug ( OBJECT* o, bool bForceRender )
                 SetAction ( o, 3 );
         		o->Velocity = 0.34f;
             }
-            //  이동시.
 			else if ( o->Owner->CurrentAction==PLAYER_RUN_RIDE_HORSE )
 			{
 				Vector ( 1.f, 1.f, 1.f, Light );
 
-                //  이동 행동으로 변경.
 				SetAction ( o, 1 );
                 if ( gMapManager.WorldActive==WD_10HEAVEN || g_Direction.m_CKanturu.IsMayaScene() )
                 {
@@ -417,7 +411,7 @@ bool MoveBug ( OBJECT* o, bool bForceRender )
 						Vector ( o->Position[0]+(float)(rand()%64-32),
 								 o->Position[1]+(float)(rand()%64-32),
 								 o->Position[2]+(float)(rand()%32-16), Position );
-						//  데비아스에서는 눈연기.
+
 						if ( gMapManager.WorldActive==WD_2DEVIAS )
 							CreateParticle ( BITMAP_SMOKE, Position, o->Angle, Light );
 						else if ( gMapManager.WorldActive!=WD_10HEAVEN )
@@ -443,7 +437,7 @@ bool MoveBug ( OBJECT* o, bool bForceRender )
 				SetAction(o, 6);
 				o->Velocity = 1.0f;
 			}
-            else    //  기본 행동.
+            else
             {
                 SetAction ( o, 0 );
                 o->WeaponLevel = 0;
@@ -471,7 +465,6 @@ bool MoveBug ( OBJECT* o, bool bForceRender )
 				}
             }
 
-            //  잔상.
             if ( o->CurrentAction==3 )
             {
                 vec3_t Pos1, Pos2, p, p2;
@@ -483,8 +476,6 @@ bool MoveBug ( OBJECT* o, bool bForceRender )
                 b->TransformPosition ( BoneTransform[9], Pos2, p2 );
                 CreateBlur ( Hero, p, p2, Light, 0 );
             }
-
-            //  다크홀스 스킬.
             if ( o->CurrentAction==3 )
             {
                 RenderDarkHorseSkill ( o, b );

@@ -107,10 +107,8 @@ bool SEASON3B::CNewUI3DCamera::Render()
 	if(m_list3DObjs.empty())
 		return true;
 
-	//. 2D를 그리던 중이였으므로 EndBitmap를 호출한다.
 	EndBitmap();
 
-	/******************** 3D 그리기 루틴 ********************/
 	glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
@@ -119,12 +117,10 @@ bool SEASON3B::CNewUI3DCamera::Render()
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
-	GetOpenGLMatrix(CameraMatrix);	// 카메라 매트릭스 초기화
+	GetOpenGLMatrix(CameraMatrix);
     EnableDepthTest();
     EnableDepthMask();
 
-	// 기존 3D와 꼬이는 것을 방지하기 위해
-	// 깊이 버퍼를 클리어 시켜준다.
 	glClear(GL_DEPTH_BUFFER_BIT);
 	
 	type_list_3dobj::iterator li = m_list3DObjs.begin();
@@ -136,7 +132,6 @@ bool SEASON3B::CNewUI3DCamera::Render()
 		}
 	}
 
-	// 현재 카메라의 매트릭스를 가지고 MousePosition 업데이트
 	UpdateMousePositionn();
 
 	glMatrixMode(GL_MODELVIEW);
@@ -144,10 +139,8 @@ bool SEASON3B::CNewUI3DCamera::Render()
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 
-	//. 다시 2D를 그려야 하므로 BeginBitmap를 호출한다.
 	BeginBitmap();
 
-	//. 3D 위에 그려지는 2D Effect를 그린다.
 	while(!m_deque2DEffects.empty())
 	{
 		UI_2DEFFECT_INFO& UI2DEffectInfo = m_deque2DEffects.front();

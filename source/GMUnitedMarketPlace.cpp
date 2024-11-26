@@ -543,7 +543,6 @@ bool GMUnitedMarketPlace::PlayMonsterSound(OBJECT* o)
 	return false; 
 }
 
-// 오브젝트 사운드
 void GMUnitedMarketPlace::PlayObjectSound(OBJECT* o)
 {
 	if(	IsUnitedMarketPlace() == false )
@@ -567,11 +566,8 @@ bool GMUnitedMarketPlace::CreateRain( PARTICLE* o )
 		return false;
 	}
 
-	// 비효과
 	o->Type = BITMAP_RAIN;
-	Vector(Hero->Object.Position[0]+(float)(rand()%1600-800),Hero->Object.Position[1]+(float)(rand()%1400-500),
-		Hero->Object.Position[2]+(float)(rand()%200+200),
-		o->Position);
+	Vector(Hero->Object.Position[0]+(float)(rand()%1600-800),Hero->Object.Position[1]+(float)(rand()%1400-500),Hero->Object.Position[2]+(float)(rand()%200+200),o->Position);
 	Vector(-30.f,0.f,0.f,o->Angle);
 	vec3_t Velocity;
 	Vector(0.f,0.f,-(float)(rand()%24+20),Velocity);

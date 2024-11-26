@@ -168,15 +168,14 @@ bool SEASON3B::CNewUIBuffWindow::UpdateMouseEvent()
 
 		if( SEASON3B::CheckMouseIn(x, y, BUFF_IMG_WIDTH, BUFF_IMG_HEIGHT) )
 		{
-			// 취소할수 있는 버프를 이곳에서 추가. (메세지박스 추가 후)
-			if(buff == eBuff_InfinityArrow)		// 인피니티애로우
+			if(buff == eBuff_InfinityArrow)
 			{
 				if(SEASON3B::IsRelease(VK_RBUTTON))
 				{
 					SEASON3B::CreateMessageBox(MSGBOX_LAYOUT_CLASS(SEASON3B::CInfinityArrowCancelMsgBoxLayout));
 				}
 			}
-#ifdef KJH_ADD_SKILL_SWELL_OF_MAGICPOWER		// 마력증대
+#ifdef KJH_ADD_SKILL_SWELL_OF_MAGICPOWER
 			else if(buff == eBuff_SwellOfMagicPower)
 			{
 				if(SEASON3B::IsRelease(VK_RBUTTON))

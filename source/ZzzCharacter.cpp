@@ -1,8 +1,4 @@
 ///////////////////////////////////////////////////////////////////////////////
-// 케릭터 관련 함수
-// 케릭터 랜더링, 움직임등을 처리
-//
-// *** 함수 레벨: 3
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
@@ -185,7 +181,7 @@ void SetPlayerStop(CHARACTER *c)
 		{
 	
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
-			if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)//레이지파이터이면
+			if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)
 			{
 				if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1)
 					SetAction(&c->Object, PLAYER_RAGE_FENRIR_STAND_TWO_SWORD);
@@ -199,13 +195,13 @@ void SetPlayerStop(CHARACTER *c)
 			else
 			{
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
-			if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1)	// 양손무기
+			if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1)
 				SetAction(&c->Object, PLAYER_FENRIR_STAND_TWO_SWORD);
-			else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1) // 오른손 무기
+			else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1)
 				SetAction(&c->Object, PLAYER_FENRIR_STAND_ONE_RIGHT);
-			else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1) // 왼손 무기
+			else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1)
 				SetAction(&c->Object, PLAYER_FENRIR_STAND_ONE_LEFT);
- 			else	// 맨손
+ 			else
 				SetAction(&c->Object, PLAYER_FENRIR_STAND);
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
 			}
@@ -284,12 +280,11 @@ void SetPlayerStop(CHARACTER *c)
 				}
 				else
 				{
-                //  무기가 없거나. 블러듴캐슬이 아닌 안전지대 일때
 			    if ( ( c->Weapon[0].Type==-1 && c->Weapon[1].Type==-1 ) || ( c->SafeZone && ( gMapManager.InBloodCastle() == false ) ) )
 				{
 					if (gCharacterManager.GetBaseClass(c->Class) == CLASS_ELF)
 						SetAction(&c->Object, PLAYER_STOP_FEMALE);
-					else if (gCharacterManager.GetBaseClass(c->Class) == CLASS_SUMMONER && !gMapManager.InChaosCastle())	// 소환술사는 카오스캐슬에선 남자 애니메이션.
+					else if (gCharacterManager.GetBaseClass(c->Class) == CLASS_SUMMONER && !gMapManager.InChaosCastle())
 						SetAction(&c->Object, PLAYER_STOP_SUMMONER);
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
 					else if (GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)
@@ -300,7 +295,6 @@ void SetPlayerStop(CHARACTER *c)
 				}
 				else
 				{
-                    //  칼 장착.
 					if(c->Weapon[0].Type>=MODEL_SWORD && c->Weapon[0].Type<MODEL_MACE+MAX_ITEM_INDEX)
 					{
 						if(!ItemAttribute[c->Weapon[0].Type-MODEL_ITEM].TwoHand)
@@ -316,12 +310,10 @@ void SetPlayerStop(CHARACTER *c)
 							SetAction(&c->Object,PLAYER_STOP_TWO_HAND_SWORD);
 						}
 					}
-                    //  창 장착.
-    				else if(c->Weapon[0].Type==MODEL_SPEAR+1 || c->Weapon[0].Type==MODEL_SPEAR+2)
+     				else if(c->Weapon[0].Type==MODEL_SPEAR+1 || c->Weapon[0].Type==MODEL_SPEAR+2)
 					{
 						SetAction(&c->Object,PLAYER_STOP_SPEAR);
 					}
-                    //  창 장착.
 					else if(c->Weapon[0].Type>=MODEL_SPEAR && c->Weapon[0].Type<MODEL_SPEAR+MAX_ITEM_INDEX)
 					{
 						if(!ItemAttribute[c->Weapon[0].Type-MODEL_ITEM].TwoHand)
@@ -329,7 +321,6 @@ void SetPlayerStop(CHARACTER *c)
 						else
 							SetAction(&c->Object,PLAYER_STOP_SCYTHE);
 					}
-					// 소환술사 스틱.
 					else if (c->Weapon[0].Type >= MODEL_STAFF+14 && c->Weapon[0].Type <= MODEL_STAFF+20)
 					{
 						::SetAction(&c->Object, PLAYER_STOP_WAND);
@@ -549,7 +540,6 @@ void SetPlayerWalk(CHARACTER *c)
 		{
             if ( gMapManager.WorldActive==WD_8TARKAN || gMapManager.WorldActive==WD_10HEAVEN || g_Direction.m_CKanturu.IsMayaScene() )
             {
-				// 애니메이션 튀는거때문에 아예 막아버림
 //                if(c->Weapon[0].Type==-1 && c->Weapon[1].Type==-1)
 //				    SetAction(&c->Object,PLAYER_FLY_RIDE);
 //			    else
@@ -972,7 +962,7 @@ void SetPlayerAttack(CHARACTER *c)
 			}
 			else if( gCharacterManager.GetEquipedBowType( c ) == BOWTYPE_CROSSBOW )
 			{
-				SetAction( &c->Object, PLAYER_FENRIR_ATTACK_CROSSBOW );	//석궁공격
+				SetAction( &c->Object, PLAYER_FENRIR_ATTACK_CROSSBOW );
 			}
 			else
 			{
@@ -1474,7 +1464,7 @@ void SetPlayerDie(CHARACTER *c)
 				}
 
 				if(c->Helper.Type == MODEL_HELPER+37)
-					PlayBuffer(SOUND_FENRIR_DEATH, o);	// 펜릴 죽는
+					PlayBuffer(SOUND_FENRIR_DEATH, o);
 		    }
         }
         c->Object.AnimationFrame = 0.001f;
@@ -4413,7 +4403,7 @@ void MoveCharacter(CHARACTER *c,OBJECT *o)
 			}
 			else if(c->Helper.Type == MODEL_HELPER+37 && !c->SafeZone)
 			{
-				SetAction(o, PLAYER_FENRIR_ATTACK_DARKLORD_STRIKE);	//^ 펜릴 스킬 관련
+				SetAction(o, PLAYER_FENRIR_ATTACK_DARKLORD_STRIKE);
 			}
 			else
 			{
@@ -4425,7 +4415,7 @@ void MoveCharacter(CHARACTER *c,OBJECT *o)
 			break;
 		case AT_SKILL_FLASH:
 			CalcAddPosition(o,-20.f,-90.f,100.f,Position);
-			CreateEffect(BITMAP_BOSS_LASER,Position,o->Angle,Light,0,o,o->PKKey,FindHotKey( AT_SKILL_FLASH ));//클라이언트마법처리
+			CreateEffect(BITMAP_BOSS_LASER,Position,o->Angle,Light,0,o,o->PKKey,FindHotKey( AT_SKILL_FLASH ));
             PlayBuffer(SOUND_FLASH);
 			break;
 		case AT_SKILL_BLAST_UP:
@@ -6252,9 +6242,7 @@ float CharacterMoveSpeed(CHARACTER *c)
 			&& ( c->Wing.Type!=-1 || ( c->Helper.Type>=MODEL_HELPER+2 && c->Helper.Type<=MODEL_HELPER+3 ) ) && !c->SafeZone 
 			&& !isholyitem )
 		{
-            if ( c->Wing.Type==MODEL_WING+5
-				|| c->Wing.Type==MODEL_WING+36
-				)
+            if ( c->Wing.Type==MODEL_WING+5	|| c->Wing.Type==MODEL_WING+36)
             {
 			    c->Run = 40;
 			    Speed = 16;
@@ -10825,118 +10813,119 @@ void RenderCharacter(CHARACTER *c,OBJECT *o,int Select)
 			{
                 PartObjectColor(c->BodyPart[5].Type,o->Alpha,0.5f,Light);
 
-			if(!g_isCharacterBuff(o, eBuff_Cloaking))
-			{
-				for(int i=0;i<2;i++)
+				if(!g_isCharacterBuff(o, eBuff_Cloaking))
 				{
-					b->TransformPosition(o->BoneTransform[c->Weapon[i].LinkBone],p,Position,true);
-					CreateSprite(BITMAP_LIGHT,Position,1.3f,Light,o);
-					b->TransformPosition(o->BoneTransform[c->Weapon[i].LinkBone-6],p,Position,true);
-					CreateSprite(BITMAP_LIGHT,Position,1.3f,Light,o);
-					b->TransformPosition(o->BoneTransform[c->Weapon[i].LinkBone-7],p,Position,true);
-					CreateSprite(BITMAP_LIGHT,Position,1.3f,Light,o);
+					for(int i=0;i<2;i++)
+					{
+						b->TransformPosition(o->BoneTransform[c->Weapon[i].LinkBone],p,Position,true);
+						CreateSprite(BITMAP_LIGHT,Position,1.3f,Light,o);
+						b->TransformPosition(o->BoneTransform[c->Weapon[i].LinkBone-6],p,Position,true);
+						CreateSprite(BITMAP_LIGHT,Position,1.3f,Light,o);
+						b->TransformPosition(o->BoneTransform[c->Weapon[i].LinkBone-7],p,Position,true);
+						CreateSprite(BITMAP_LIGHT,Position,1.3f,Light,o);
+					}
 				}
-			}
-			if ((c->BodyPart[BODYPART_BOOTS].Type >= MODEL_BOOTS+29 && c->BodyPart[BODYPART_BOOTS].Type <= MODEL_BOOTS+33)
-				|| c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+43)
-			{
-                if ( EquipmentLevelSet>9 )
-                {
-                    VectorCopy ( o->Light, Light );
 
-					if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+29) Vector ( 0.65f, 0.3f, 0.1f, o->Light );
-					if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+30) Vector ( 0.1f, 0.1f, 0.9f, o->Light );
-					if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+31) Vector ( 0.0f, 0.32f, 0.24f, o->Light );
-					if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+32) Vector ( 0.5f, 0.24f, 0.8f, o->Light );
-					if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+33) Vector ( 0.6f, 0.4f, 0.0f, o->Light );
-					if (c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+43)
-						Vector(0.6f, 0.3f, 0.4f, o->Light);
-                    if ( EquipmentLevelSet==10 )
-                    {
-						if((rand()%4)==0)
+				if ((c->BodyPart[BODYPART_BOOTS].Type >= MODEL_BOOTS+29 && c->BodyPart[BODYPART_BOOTS].Type <= MODEL_BOOTS+33)
+					|| c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+43)
+				{
+					if ( EquipmentLevelSet>9 )
+					{
+						VectorCopy ( o->Light, Light );
+
+						if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+29) Vector ( 0.65f, 0.3f, 0.1f, o->Light );
+						if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+30) Vector ( 0.1f, 0.1f, 0.9f, o->Light );
+						if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+31) Vector ( 0.0f, 0.32f, 0.24f, o->Light );
+						if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+32) Vector ( 0.5f, 0.24f, 0.8f, o->Light );
+						if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+33) Vector ( 0.6f, 0.4f, 0.0f, o->Light );
+						if(c->BodyPart[BODYPART_BOOTS].Type == MODEL_BOOTS+43) Vector(0.6f, 0.3f, 0.4f, o->Light);
+
+						if ( EquipmentLevelSet==10 )
 						{
-							Vector(0.0f, -18.0f, 50.0f, p);
+							if((rand()%4)==0)
+							{
+								Vector(0.0f, -18.0f, 50.0f, p);
+								b->TransformPosition(o->BoneTransform[0],p,Position,true);
+								CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
+								Vector(0.0f, 0.0f, 70.0f, p);
+								b->TransformPosition(o->BoneTransform[0],p,Position,true);
+								CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
+								Vector(0.0f, 18.0f, 50.0f, p);
+								b->TransformPosition(o->BoneTransform[0],p,Position,true);
+								CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
+							}
+						}
+						else if ( EquipmentLevelSet==11 )
+						{
+							if((rand()%3)==0)
+							{
+								Vector(0.0f, -18.0f, 50.0f, p);
+								b->TransformPosition(o->BoneTransform[0],p,Position,true);
+								CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
+								Vector(0.0f, 0.0f, 70.0f, p);
+								b->TransformPosition(o->BoneTransform[0],p,Position,true);
+								CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
+								Vector(0.0f, 18.0f, 50.0f, p);
+								b->TransformPosition(o->BoneTransform[0],p,Position,true);
+								CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
+							}
+						}
+						else if ( EquipmentLevelSet==12 )
+						{
+							if((rand()%2)==0)
+							{
+								Vector(0.0f, -18.0f, 50.0f, p);
+								b->TransformPosition(o->BoneTransform[0],p,Position,true);
+								CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
+								Vector(0.0f, 0.0f, 70.0f, p);
+								b->TransformPosition(o->BoneTransform[0],p,Position,true);
+								CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
+								Vector(0.0f, 18.0f, 50.0f, p);
+								b->TransformPosition(o->BoneTransform[0],p,Position,true);
+								CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
+							}
+						}
+						else if ( EquipmentLevelSet==13 )
+						{
+							Vector(0.0f, -20.0f, 50.0f, p);
 							b->TransformPosition(o->BoneTransform[0],p,Position,true);
 							CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
 							Vector(0.0f, 0.0f, 70.0f, p);
 							b->TransformPosition(o->BoneTransform[0],p,Position,true);
 							CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-							Vector(0.0f, 18.0f, 50.0f, p);
+							Vector(0.0f, 20.0f, 50.0f, p);
 							b->TransformPosition(o->BoneTransform[0],p,Position,true);
 							CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
 						}
-                    }
-                    else if ( EquipmentLevelSet==11 )
-                    {
-						if((rand()%3)==0)
+	#ifdef LDK_ADD_14_15_GRADE_ITEM_SET_EFFECT
+						else if ( EquipmentLevelSet==14 )
 						{
-							Vector(0.0f, -18.0f, 50.0f, p);
+							Vector(0.0f, -20.0f, 50.0f, p);
 							b->TransformPosition(o->BoneTransform[0],p,Position,true);
 							CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
 							Vector(0.0f, 0.0f, 70.0f, p);
 							b->TransformPosition(o->BoneTransform[0],p,Position,true);
 							CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-							Vector(0.0f, 18.0f, 50.0f, p);
+							Vector(0.0f, 20.0f, 50.0f, p);
 							b->TransformPosition(o->BoneTransform[0],p,Position,true);
 							CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
 						}
-                    }
-                    else if ( EquipmentLevelSet==12 )
-                    {
-						if((rand()%2)==0)
+						else if ( EquipmentLevelSet==15 )
 						{
-							Vector(0.0f, -18.0f, 50.0f, p);
+							Vector(0.0f, -20.0f, 50.0f, p);
 							b->TransformPosition(o->BoneTransform[0],p,Position,true);
 							CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
 							Vector(0.0f, 0.0f, 70.0f, p);
 							b->TransformPosition(o->BoneTransform[0],p,Position,true);
 							CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-							Vector(0.0f, 18.0f, 50.0f, p);
+							Vector(0.0f, 20.0f, 50.0f, p);
 							b->TransformPosition(o->BoneTransform[0],p,Position,true);
 							CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
 						}
-                    }
-                    else if ( EquipmentLevelSet==13 )
-                    {
-						Vector(0.0f, -20.0f, 50.0f, p);
-						b->TransformPosition(o->BoneTransform[0],p,Position,true);
-						CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-						Vector(0.0f, 0.0f, 70.0f, p);
-						b->TransformPosition(o->BoneTransform[0],p,Position,true);
-						CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-						Vector(0.0f, 20.0f, 50.0f, p);
-						b->TransformPosition(o->BoneTransform[0],p,Position,true);
-						CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-                    }
-#ifdef LDK_ADD_14_15_GRADE_ITEM_SET_EFFECT
-                    else if ( EquipmentLevelSet==14 )
-                    {
-						Vector(0.0f, -20.0f, 50.0f, p);
-						b->TransformPosition(o->BoneTransform[0],p,Position,true);
-						CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-						Vector(0.0f, 0.0f, 70.0f, p);
-						b->TransformPosition(o->BoneTransform[0],p,Position,true);
-						CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-						Vector(0.0f, 20.0f, 50.0f, p);
-						b->TransformPosition(o->BoneTransform[0],p,Position,true);
-						CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-                    }
-                    else if ( EquipmentLevelSet==15 )
-                    {
-						Vector(0.0f, -20.0f, 50.0f, p);
-						b->TransformPosition(o->BoneTransform[0],p,Position,true);
-						CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-						Vector(0.0f, 0.0f, 70.0f, p);
-						b->TransformPosition(o->BoneTransform[0],p,Position,true);
-						CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-						Vector(0.0f, 20.0f, 50.0f, p);
-						b->TransformPosition(o->BoneTransform[0],p,Position,true);
-						CreateParticle(BITMAP_WATERFALL_2, Position, o->Angle, o->Light, 3);
-                    }
-#endif //LDK_ADD_14_15_GRADE_ITEM_SET_EFFECT
-                    VectorCopy ( Light, o->Light );
-                }
-			}
+	#endif //LDK_ADD_14_15_GRADE_ITEM_SET_EFFECT
+						VectorCopy ( Light, o->Light );
+					}
+				}
                 if ( EquipmentLevelSet>9 )
                 {
                     if ( (rand()%20)==0 )//(o->CurrentAction<PLAYER_WALK_MALE || o->CurrentAction>PLAYER_RUN_RIDE_WEAPON) && (rand()%6)==0)
@@ -12214,40 +12203,40 @@ void SetChangeClass(CHARACTER *c)
         SetPlayerStop(c);
 
 	int iSkinModelIndex = gCharacterManager.GetSkinModelIndex(c->Class);
-	if(c->BodyPart[BODYPART_HELM  ].Type >= MODEL_BODY_HELM)
+	if(c->BodyPart[BODYPART_HELM].Type >= MODEL_BODY_HELM)
 	{
-		c->BodyPart[BODYPART_HELM  ].Type = MODEL_BODY_HELM+iSkinModelIndex;
-		c->BodyPart[BODYPART_HELM  ].Level= 0;
-		c->BodyPart[BODYPART_HELM  ].Option1= 0;
-        c->BodyPart[BODYPART_HELM  ].ExtOption = 0;
+		c->BodyPart[BODYPART_HELM].Type = MODEL_BODY_HELM+iSkinModelIndex;
+		c->BodyPart[BODYPART_HELM].Level= 0;
+		c->BodyPart[BODYPART_HELM].Option1= 0;
+        c->BodyPart[BODYPART_HELM].ExtOption = 0;
 	}
-	if(c->BodyPart[EQUIPMENT_ARMOR ].Type >= MODEL_BODY_ARMOR)
+	if(c->BodyPart[BODYPART_ARMOR].Type >= MODEL_BODY_ARMOR)
     {
-		c->BodyPart[BODYPART_ARMOR ].Type = MODEL_BODY_ARMOR+iSkinModelIndex;
-		c->BodyPart[BODYPART_ARMOR ].Level= 0;
-		c->BodyPart[BODYPART_ARMOR ].Option1= 0;
-		c->BodyPart[BODYPART_ARMOR ].ExtOption = 0;
+		c->BodyPart[BODYPART_ARMOR].Type = MODEL_BODY_ARMOR+iSkinModelIndex;
+		c->BodyPart[BODYPART_ARMOR].Level= 0;
+		c->BodyPart[BODYPART_ARMOR].Option1= 0;
+		c->BodyPart[BODYPART_ARMOR].ExtOption = 0;
     }
-	if(c->BodyPart[EQUIPMENT_PANTS ].Type >= MODEL_BODY_PANTS)
+	if(c->BodyPart[BODYPART_PANTS].Type >= MODEL_BODY_PANTS)
     {
-		c->BodyPart[BODYPART_PANTS ].Type = MODEL_BODY_PANTS+iSkinModelIndex;
-		c->BodyPart[BODYPART_PANTS ].Level= 0;
-		c->BodyPart[BODYPART_PANTS ].Option1= 0;
-		c->BodyPart[BODYPART_PANTS ].ExtOption = 0;
+		c->BodyPart[BODYPART_PANTS].Type = MODEL_BODY_PANTS+iSkinModelIndex;
+		c->BodyPart[BODYPART_PANTS].Level= 0;
+		c->BodyPart[BODYPART_PANTS].Option1= 0;
+		c->BodyPart[BODYPART_PANTS].ExtOption = 0;
     }
-	if(c->BodyPart[EQUIPMENT_GLOVES].Type >= MODEL_BODY_GLOVES)
+	if(c->BodyPart[BODYPART_GLOVES].Type >= MODEL_BODY_GLOVES)
     {
 		c->BodyPart[BODYPART_GLOVES].Type = MODEL_BODY_GLOVES+iSkinModelIndex;
 		c->BodyPart[BODYPART_GLOVES].Level= 0;
 		c->BodyPart[BODYPART_GLOVES].Option1= 0;
 		c->BodyPart[BODYPART_GLOVES].ExtOption = 0;
     }
-	if(c->BodyPart[EQUIPMENT_BOOTS ].Type >= MODEL_BODY_BOOTS)
+	if(c->BodyPart[BODYPART_BOOTS].Type >= MODEL_BODY_BOOTS)
     {
-		c->BodyPart[BODYPART_BOOTS ].Type = MODEL_BODY_BOOTS+iSkinModelIndex;
-		c->BodyPart[BODYPART_BOOTS ].Level= 0;
-		c->BodyPart[BODYPART_BOOTS ].Option1= 0;
-		c->BodyPart[BODYPART_BOOTS ].ExtOption = 0;
+		c->BodyPart[BODYPART_BOOTS].Type = MODEL_BODY_BOOTS+iSkinModelIndex;
+		c->BodyPart[BODYPART_BOOTS].Level= 0;
+		c->BodyPart[BODYPART_BOOTS].Option1= 0;
+		c->BodyPart[BODYPART_BOOTS].ExtOption = 0;
     }
     
 	SetCharacterScale(c);
@@ -14803,11 +14792,6 @@ CHARACTER *CreateHero(int Index,int Class,int Skin,float x,float y,float Rotate)
 	c->Skin = Skin;
 
 	g_CharacterClearBuff(o);
-
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
-	int Level = 0;
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
 
 	if(SceneFlag == LOG_IN_SCENE)
 	{

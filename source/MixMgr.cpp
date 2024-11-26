@@ -938,39 +938,39 @@ float CMixRecipes::MixrateFactor()
 	case MRCP_INT:
 		++m_iMixRateIter;
 		if (m_pMixRates[m_iMixRateIter].op != MRCP_LP) assert(!"문법에러");
-		++m_iMixRateIter;	// ( 스킵
+		++m_iMixRateIter;
 		fValue = int(MixrateAddSub());
 		break;
 	case MRCP_NUMBER:
-		fValue = (float)m_pMixRates[m_iMixRateIter].value;	// 상수 값
+		fValue = (float)m_pMixRates[m_iMixRateIter].value;
 		break;
-	case MRCP_MAXRATE:	// 스크립트의 최대 확률
+	case MRCP_MAXRATE:
 		fValue = GetCurRecipe()->m_iSuccessRate;
 		break;
-	case MRCP_ITEM:			// 조합창 아이템 가격 총합
+	case MRCP_ITEM:
 		fValue = m_dwTotalItemValue;
 		break;
-	case MRCP_WING:			// 조합창 날개 가격 총합
+	case MRCP_WING:
 		fValue = m_dwWingItemValue;
 		break;
-	case MRCP_EXCELLENT:		// 조합창 엑템 가격 총합
+	case MRCP_EXCELLENT:
 		fValue = m_dwExcellentItemValue;
 		break;
-	case MRCP_EQUIP:			// 조합창 무기+방어구 가격 총합
+	case MRCP_EQUIP:
 		fValue = m_dwEquipmentItemValue;
 		break;
-	case MRCP_SET:			// 조합창 세트아이템 가격 총합
+	case MRCP_SET:
 		fValue = m_dwSetItemValue;
 		break;
-	case MRCP_LUCKOPT:		// 아이템의 행운 옵션 보너스 값
+	case MRCP_LUCKOPT:
 		if (m_bFindMixLuckItem) fValue = 25;
 		else fValue = 0;
 		break;
-	case MRCP_LEVEL1:		// 조합 조건 첫번째 아이템의 레벨 (1~13)
+	case MRCP_LEVEL1:
 		fValue = m_iFirstItemLevel;
 		break;
 #ifdef YDG_FIX_SOCKETSPHERE_MIXRATE
-	case MRCP_NONJEWELITEM:	// 보석가격을 제외한 조합창 아이템 가격 총합 (축,영,혼,창,생,조,수,석묶음)
+	case MRCP_NONJEWELITEM:
 		fValue = m_dwTotalNonJewelItemValue;
 		break;
 #endif	// YDG_FIX_SOCKETSPHERE_MIXRATE
@@ -985,17 +985,12 @@ void CMixRecipes::CalcMixReqZen(int iNumMixItems, CMixItem * pMixItems)
 	if(iNumMixItems < 0)	return;
 	if(pMixItems == NULL)	return;
 #endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
-	// 조합시 필요 젠
-	//	필요 젠 타입 A: [고정 금액]
-	//	필요 젠 타입 B: [확률] * 10,000젠
-	//	필요 젠 타입 C: [고정 금액] (물약당 금액)
-	//	필요 젠 타입 D: [제련레벨에 따라 제련아이템 환원 테이블 이용]
 	m_dwRequiredZen = 0;
 	if (GetCurRecipe() == NULL) return;
 	switch(GetCurRecipe()->m_bRequiredZenType)
 	{
 	case 'A':
-	case 'C':	// 출력시에 물약당 가격으로 표시
+	case 'C':
 		m_dwRequiredZen = GetCurRecipe()->m_dwRequiredZen;
 		break;
 	case 'B':
@@ -1003,7 +998,6 @@ void CMixRecipes::CalcMixReqZen(int iNumMixItems, CMixItem * pMixItems)
 		break;
 	case 'D':
 		{
-			// 조화의 보석 제련 아이템 환원 가격 얻어내기
 			int iItemType = 0;
 			if( ITEM_SWORD <= pMixItems[0].m_sType && ITEM_STAFF > pMixItems[0].m_sType )
 			{
@@ -1026,7 +1020,6 @@ void CMixRecipes::CalcMixReqZen(int iNumMixItems, CMixItem * pMixItems)
 	}
 }
 
-// 조합옵션 조건 검사용
 BOOL CMixRecipes::IsChaosItem(CMixItem & rSource)
 {
 	if (rSource.m_sType == ITEM_MACE+6 || rSource.m_sType == ITEM_BOW+6 || rSource.m_sType == ITEM_STAFF+7) return TRUE;

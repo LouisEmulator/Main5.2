@@ -177,12 +177,10 @@ bool COMGEM::CheckInv()
 		switch(GetError())
 		{
 		case COMERROR_NOTALLOWED:
-		// 1817 "조합에 필요한 아이템이 부족합니다."
-		g_pChatListBox->AddText("", GlobalText[1817], SEASON3B::TYPE_ERROR_MESSAGE);
+			g_pChatListBox->AddText("", GlobalText[1817], SEASON3B::TYPE_ERROR_MESSAGE);
 			break;
 		case DEERROR_NOTALLOWED:
-		// 1818 "해체할 수 없습니다."
-		g_pChatListBox->AddText("", GlobalText[1818], SEASON3B::TYPE_ERROR_MESSAGE);
+			g_pChatListBox->AddText("", GlobalText[1818], SEASON3B::TYPE_ERROR_MESSAGE);
 			break;
 		}
 

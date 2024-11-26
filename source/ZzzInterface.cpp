@@ -1,6 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
 #include "stdafx.h"
 #include <imm.h>
 #include "UIManager.h"
@@ -3608,7 +3605,6 @@ void Action(CHARACTER *c,OBJECT *o,bool Now)
 					}
 					else if( gMapManager.IsCursedTemple())
 					{
-#ifdef YDG_FIX_CURSEDTEMPLE_GAUGEBAR_ERROR
 						if (!g_CursedTemple->IsGaugebarEnabled())
 						{
 #ifdef LJH_FIX_CANNOT_CLICK_BASKETS_IN_CURSED_TEMPLE 
@@ -3627,13 +3623,8 @@ void Action(CHARACTER *c,OBJECT *o,bool Now)
 							{
 								g_CursedTemple->SetGaugebarEnabled(true);
 							}
-#endif	// YDG_FIX_CURSEDTEMPLE_GAUGEBAR_ERROR
-							g_pCursedTempleWindow->CheckTalkProgressNpc(CharactersClient[TargetNpc].MonsterIndex, 
-								CharactersClient[TargetNpc].Key);
-#ifdef YDG_FIX_CURSEDTEMPLE_GAUGEBAR_ERROR
+							g_pCursedTempleWindow->CheckTalkProgressNpc(CharactersClient[TargetNpc].MonsterIndex, CharactersClient[TargetNpc].Key);
 						}
-#endif	// YDG_FIX_CURSEDTEMPLE_GAUGEBAR_ERROR
-
 					}
 					else
 					{	
@@ -7734,9 +7725,7 @@ void MoveHero()
 							//else
 							Wall = TW_NOGROUND;
 							WORD CurrAtt = TerrainWall[TargetY*256+TargetX];
-							if ( CurrAtt>=Wall && (CurrAtt&TW_ACTION)!=TW_ACTION
-								&& (CurrAtt&TW_HEIGHT)!=TW_HEIGHT
-								)
+							if ( CurrAtt>=Wall && (CurrAtt&TW_ACTION)!=TW_ACTION && (CurrAtt&TW_HEIGHT)!=TW_HEIGHT)
 								DontMove = true;
 							else
 								DontMove = false;

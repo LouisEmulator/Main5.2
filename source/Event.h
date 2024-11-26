@@ -1,15 +1,9 @@
 // Event.h: interface for the CEvent class.
-//
 //////////////////////////////////////////////////////////////////////
-
-#if !defined(AFX_EVENT_H__8075B067_D2AB_48AC_8A39_370D3B3DD089__INCLUDED_)
-#define AFX_EVENT_H__8075B067_D2AB_48AC_8A39_370D3B3DD089__INCLUDED_
 
 #pragma once
 
-// 앞으로 이벤트 관련 클래스는 이곳에다가 생성한다.
-
-#define XMAS_EVENT_TIME		60000	// 3마리 캐릭터 나와 있는 시간(1분)
+#define XMAS_EVENT_TIME		60000
 
 class CXmasEvent
 {
@@ -95,6 +89,3 @@ public:
 
 #define g_09SummerEvent		C09SummerEvent::GetInstance()
 #endif // KJH_ADD_09SUMMER_EVENT
-
-
-#endif // !defined(AFX_EVENT_H__8075B067_D2AB_48AC_8A39_370D3B3DD089__INCLUDED_)

@@ -79,7 +79,6 @@ double CTimer::GetTimeElapsed()
 
 	if (m_bUsePerformanceCounter)	// if using Performance Counter
 	{
-		// 현재 시간을 얻어 이전 시간을 뺀다
 		::QueryPerformanceCounter((LARGE_INTEGER*)&timeElapsed);
 		timeElapsed -= m_pcTimerStart;
 		return (double)timeElapsed * (double)m_resolution;
@@ -91,9 +90,6 @@ double CTimer::GetTimeElapsed()
 	}
 }
 
-//*****************************************************************************
-// 절대 시간을 얻는다
-//*****************************************************************************
 double CTimer::GetAbsTime()
 {
 	__int64 absTime;

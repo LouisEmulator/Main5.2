@@ -252,7 +252,7 @@ namespace battleCastle
     {
       for ( int i=0; i<6; ++i )
         {
-            if ( bAllClear==true )  //  열려있지 않은 모든 성문의 속성을 연다.
+            if ( bAllClear==true )
             {
                 DWORD wall = TerrainWall[(g_byGateLocation[i][1]+1)*TERRAIN_SIZE+(g_byGateLocation[i][0])];
                 if ( (wall&TW_NOMOVE)==TW_NOMOVE )
@@ -1642,7 +1642,7 @@ namespace battleCastle
             c->m_bIsSelected = (g_isCrownState ? true : false);
             break;
 
-        case 277:   //  성문.
+        case 277:
             g_bBeGate = true;
             break;
 
@@ -1656,8 +1656,8 @@ namespace battleCastle
             }
             break;
 
-        case 286 :  //  궁수병.
-        case 287 :  //  창기병.
+        case 286:
+        case 287:
             {
                 switch ( o->AI )
                 {
@@ -1667,7 +1667,6 @@ namespace battleCastle
 
                         o->AttackPoint[0] = 0;
 
-                        //  공격 범위에 들어와 있는가?
                         if ( CalcDistanceChrToChr( o, 1, fRange ) || g_byGuardAI==GUARD_ATTACK_READY )
                         {
                             SetAction ( o, 4 );

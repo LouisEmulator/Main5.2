@@ -56,10 +56,10 @@ bool GMEmpireGuardian4::CreateObject(OBJECT* o)
 {
 	switch(o->Type)
 	{
-	case 129:	// 불기운 박스 청
-	case 130:	// 불기운 박스 녹
-	case 131:	// 연기박스
-	case 132:	// 연기박스
+	case 129:
+	case 130:
+	case 131:
+	case 132:
 		{
 			o->Angle[2] = (float)((int)o->Angle[2]%360);
 			VectorCopy(o->Angle,o->HeadAngle);
@@ -73,7 +73,7 @@ bool GMEmpireGuardian4::CreateObject(OBJECT* o)
 			o->SubType = 100;
 		}
 		return true;
-	case 10:				// 함정 손이펙트들은 랜덤 애니메이션.
+	case 10:
 		{
 			o->SubType = rand() % 50; 
 		}
@@ -94,8 +94,8 @@ CHARACTER* GMEmpireGuardian4::CreateMonster(int iType, int PosX, int PosY, int K
 
  	switch (iType)
  	{
-#ifdef LDS_ADD_EG_4_MONSTER_WORLDBOSS_GAIONKALEIN	// 제국 수호군 맵 4   (일	  )몬스터 월드 보스 가이온 카레인	(504/164)
-	case 504: // 제국 수호군 맵 4   (일	  )몬스터 월드 보스 가이온 카레인	(504/164)
+#ifdef LDS_ADD_EG_4_MONSTER_WORLDBOSS_GAIONKALEIN
+	case 504:
 		{
 			OpenMonsterModel(164);
 			pCharacter = CreateCharacter(Key, MODEL_MONSTER01+164, PosX, PosY);

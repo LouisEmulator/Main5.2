@@ -40,7 +40,7 @@ bool CNewUITrade::Create(CNewUIManager* pNewUIMng, int x, int y)
 		SAFE_DELETE(m_pYourInvenCtrl);
 		return false;
 	}
-	m_pYourInvenCtrl->LockInventory();	// 상대방 물품은 클릭 안되게 함.
+	m_pYourInvenCtrl->LockInventory();
 
 	m_pMyInvenCtrl = new CNewUIInventoryCtrl;
 	if (false == m_pMyInvenCtrl->Create(g_pNewUI3DRenderMng, g_pNewItemMng,

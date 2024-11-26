@@ -95,13 +95,12 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 					o->Scale = (float)(rand()%5+20)*0.1f;
 				}
 
-				// 라이프타임
 				o->LifeTime = 20 + rand()%3;
 				if(o->SubType == 2) 
 				{
 					o->LifeTime = 40 + rand()%3;
 				}
-				// 위치
+
 				o->Position[0] += (float)(rand()%50 - 25);
 				o->Position[1] += (float)(rand()%50 - 25);
 				o->Position[2] += (float)(rand()%200 - 100) + 250.0f;
@@ -150,8 +149,6 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 				}
 #endif	// YDG_ADD_DOPPELGANGER_PORTAL
 				break;
-
-//////////////////////////////////////////////////////////////////////////
 
 			case BITMAP_FLOWER01:
 			case BITMAP_FLOWER01+1:
@@ -232,7 +229,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 				case 0:
     				o->Scale = 0.15f;
 					break;
-				case 4:		//. Monster81(울프) 눈깔 라이트
+				case 4:
 					o->Scale = 0.25f;
 					break;
 				case 1:
@@ -660,18 +657,15 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 				}
     			o->Rotation = (float)(rand()%360);
 				break;
-
-//--------------------------------------------------------------------------------------------------------------
-
 			case BITMAP_FLAME:
                 switch (o->SubType)
                 {
-                case 0: //  불기둥에 사용된는 불.
+                case 0:
 				    o->LifeTime = 20;
 				    Vector(0.f,0.f,(float)(rand()%128+128)*0.15f,o->Velocity);
         		    o->Scale = Scale*(float)(rand()%64+64)*0.01f;
                     break;
-				case 6:	// 짧은 불기둥
+				case 6:
 					o->LifeTime = 10;
 				    Vector(0.f,0.f,(float)(rand()%128+256)*0.12f,o->Velocity);
         		    o->Scale = Scale*(float)(rand()%64+64)*0.01f;
@@ -692,7 +686,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						o->Position[1] += o->Position[0] - o->StartPosition[0];
 					}
 					break;
-                case 1: //  작은 불기둥.
+                case 1:
 				    o->LifeTime = 15;
         		    o->Scale += (float)(rand()%32+32)*0.01f;
 				    Vector(0.f,(float)(rand()%4+4)*0.15f,0.f,o->Velocity);
@@ -701,7 +695,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 				    o->LifeTime = 4;
 				    Vector(0.f,(float)(rand()%4+4)*0.15f,0.f,o->Velocity);
 					break;
-                case 2: //  불. 같은 속도로 이동.
+                case 2:
                     {
                         float Luminosity;
 
@@ -715,13 +709,12 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
                         inter = (Light[0]-inter)/15.0f;
 				        Vector(0.f,inter,0.f,o->Velocity);
 
-                        //  색.
                         Luminosity = (float)sinf(WorldTime*0.002f)*0.3f+0.7f;
 			            Vector(Luminosity,Luminosity*0.5f,Luminosity*0.5f,o->Light);
                     }
                     break;
 
-                case 3: //  제자리에서 회전만 한다.
+                case 3:
                     {
                         float Luminosity;
 
@@ -765,7 +758,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						o->Position[1] += o->Position[0] - o->StartPosition[0];
 					}
 					break;
-				case 10:	// 불 뿜어져 나오는 효과.(BITMAP_ADV_SMOKE 2번과 동일)
+				case 10:
 					o->LifeTime = 20+rand()%5;
 					o->Rotation = 0.f;
 					o->Scale = Scale*0.5f + (float)(rand()%10)*0.02f;
@@ -783,7 +776,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 					break;
 #endif // CSK_RAKLION_BOSS
 #ifdef LDS_ADD_EMPIRE_GUARDIAN
-                case 12: //  짧은 불기둥
+                case 12:
 					o->LifeTime = 10;
 					Vector(0.f,0.f,(float)(rand()%128+128)*0.15f,o->Velocity);
 					o->Scale = Scale*(float)(rand()%64+64)*0.01f;
@@ -825,14 +818,14 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 			case BITMAP_ENERGY://thunder energy
         		o->Scale = Scale*(float)(rand()%8+6)*0.1f;
 				o->Rotation = (float)(rand()%360);
-				o->Gravity = 20.f;	//. 회전속도
+				o->Gravity = 20.f;
 
 				if ( o->SubType==1 )
 				{
 					o->LifeTime = 10;
 					Vector ( 0.5f, 0.5f, 0.5f, o->Light );
 				}
-				else if(o->SubType == 2)	// 빨강	//^ 펜릴 이펙트 관련
+				else if(o->SubType == 2)
 				{
 					o->TexType = BITMAP_MAGIC+1;
 					o->LifeTime = 10;
@@ -1069,8 +1062,6 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 				}
 				break;
 				
-//////////////////////////////////////////////////////////////////////////
-
 			case BITMAP_CLUD64:
 				{
 					if(o->SubType == 0 || o->SubType == 2)
@@ -1129,7 +1120,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						o->Position[2] -= 20.f;
 						o->Gravity = (float)(rand()%10+5)*0.1f;
 					}
-					else if(o->SubType == 6)	// ◎
+					else if(o->SubType == 6)
 					{
       					o->LifeTime = 25;
      					o->Scale = (float)(rand()%8+50)*0.01f*Scale;
@@ -1140,7 +1131,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						Vector(0, 0, 0, o->Light);
 						VectorCopy(o->Target->Position, o->StartPosition);
 					}
-					else if( o->SubType == 7 )		// 썬더네이핀 공격 이팩트 (연기)
+					else if( o->SubType == 7 )
 					{
 						o->LifeTime = 40;
 						o->Velocity[0] = (float)(rand()%20-10)*0.1f;
@@ -1150,7 +1141,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						o->Gravity = 0;
 						o->Alpha = 0.5f;
 					}
-					else if( o->SubType == 8 )		// 고스트 네이핀 공격 이팩트 (연기)
+					else if( o->SubType == 8 )
 					{
 						o->LifeTime = 20;
 						o->Velocity[0] = (float)(rand()%20-10)*0.1f;
@@ -1161,7 +1152,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						o->Alpha = 0.5f;
 					}
 #ifdef ADD_SOCKET_ITEM
-					else if( o->SubType == 9 )		// 프로스트메이스 (아이스연기 내려오는 효과)
+					else if( o->SubType == 9 )
 					{ 
 						if(rand()%2 != 0)
 							o->TexType = BITMAP_SMOKE;
@@ -1178,7 +1169,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 					}
 #endif // ADD_SOCKET_ITEM
 #ifdef ASG_ADD_SUMMON_RARGLE
-					else if(o->SubType == 10)	// BITMAP_FIRE_CURSEDLICH o->SubType == 1과 비슷.
+					else if(o->SubType == 10)	// BITMAP_FIRE_CURSEDLICH
 					{
 						o->Position[0] += (rand()%10-5)*0.2f;
 						o->Position[1] += (rand()%10-5)*0.2f;
@@ -1282,13 +1273,13 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 			case BITMAP_SMOKE:
 				switch(SubType)
 				{
-				case 0://일반
+				case 0:
 #ifdef PBG_ADD_PKFIELD
 				case 61:
 #endif //PBG_ADD_PKFIELD
-				case 4://일반
-                case 9://
-				case 23:	// 일반 (녹색)
+				case 4:
+                case 9:
+				case 23:
       				o->LifeTime = 16;
 #ifdef PBG_ADD_PKFIELD
 					if(o->Type == MODEL_MONSTER01+159)
@@ -1305,7 +1296,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
       				o->Angle[0] = (float)(rand()%360);
                     o->Rotation = (float)((int)WorldTime%360);
 					break;
-				case 17://색 바꾸기 가능 일반
+				case 17:
 					VectorCopy ( o->Light, o->TurningForce );
       				o->LifeTime = 12;
      				o->Scale = Scale*(float)(rand()%32+8)*0.01f;
@@ -1380,7 +1371,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
       				o->Rotation = (float)(rand()%360);
 					o->Gravity = (float)(rand()%32+60)*0.1f;
 					break;
-				case 18:	//. Fire.   천천히 커진다.
+				case 18:
       				o->LifeTime = 20;
      				o->Scale = (float)(rand()%64+64)*0.01f;
       				o->Rotation = (float)(rand()%360);
@@ -1393,7 +1384,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
     				o->Angle[2] = (float)(rand()%360);
      				Vector(0.f,-(float)(rand()%8+40),0.f,o->Velocity);
 					break;
-				case 11://초록
+				case 11:
 				case 14:
      				o->LifeTime = 50;
     				o->Position[0] += (float)(rand()%64-32);
@@ -1405,7 +1396,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 					VectorCopy ( o->Light, o->TurningForce );
      				Vector(0.f,-(float)(rand()%8+40),0.f,o->Velocity);
 					break;
-                case 15:    //  스케일을 갖는 일반 연기.
+                case 15:
       				o->LifeTime = 80;
       				o->Angle[0] = (float)(rand()%360);
                     o->Rotation = (float)((int)WorldTime%360);
@@ -1414,9 +1405,9 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 				case 53:
 #endif //#ifdef PJH_GIANT_MAMUD
 #ifdef ASG_ADD_SUMMON_RARGLE
-				case 56:	// 보라색.
+				case 56:
 #endif	// ASG_ADD_SUMMON_RARGLE
-				case 1:		//초록
+				case 1:
      				o->LifeTime = 50;
      				o->Scale = (float)(rand()%32+80)*0.01f;
     				o->Position[0] += (float)(rand()%64-32);
@@ -1426,19 +1417,19 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
     				o->Angle[2] = (float)(rand()%360);
      				Vector(0.f,-(float)(rand()%8+40),0.f,o->Velocity);
 					break;
-				case 2://검정
+				case 2:
       				o->LifeTime = 50;
      				o->Scale = (float)(rand()%64+64)*0.01f;
       				o->Rotation = (float)(rand()%360);
 					o->Gravity = (float)(rand()%32+60)*0.1f;
 					break;
-                case 16://검정.
+                case 16:
       				o->LifeTime = 50;
      				o->Scale = (float)(rand()%64+64)*0.01f;
       				o->Rotation = (float)(rand()%360);
 					o->Gravity = (float)(rand()%32+60)*0.1f;
                     break;
-                case 5://회색.
+                case 5:
       				o->LifeTime = 20;
      				o->Scale = (float)(rand()%64+98)*0.01f;
       				o->Rotation = (float)(rand()%360);
@@ -1455,7 +1446,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
          			Vector(0.f,0.f,0.f,o->Velocity);
                     break;
 
-                case    7 :
+                case 7 :
      			    o->LifeTime = 30;
 				    Vector(0.f,(float)(rand()%4+6)*o->Scale,0.f,o->Velocity);
 
@@ -1463,40 +1454,38 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
                     o->Scale *= (float)(rand()%20+120)*0.01f;
                     o->Rotation = (float)(rand()%360);
                     break;
-
-                    //  나태.
                 case 8:
 				    o->LifeTime = 24;
                     Vector(0.f,-(float)(rand()%8+32)*0.3f,0.f,o->Velocity);
         		    o->Scale *= 0.8f;
 				    o->Rotation = (float)(rand()%360);
                     break;
-				case 19://색 바꾸기,스케일 가능 일반
+				case 19:
 					VectorCopy ( o->Light, o->TurningForce );
       				o->LifeTime = 40;
      				o->Scale = Scale*(float)(rand()%32+8)*0.01f;
       				o->Angle[0] = (float)(rand()%360);
                     o->Rotation = (float)((int)WorldTime%360);
 					break;
-				case 20://색 바꾸기,스케일 가능 일반
+				case 20:
       				o->LifeTime = 40;
      				o->Scale = Scale*(float)(rand()%32+8)*0.01f;
       				o->Angle[0] = (float)(rand()%360);
                     o->Rotation = (float)((int)WorldTime%360);
 					break;
-				case 21:	//. 검은연기 박스 Fixed : 2004/11/05
+				case 21:
 					o->LifeTime = 80;
 					o->Scale = o->Scale * (float)(rand()%64+64)*0.005f;
       				o->Rotation = (float)(rand()%360);
 					o->Gravity = (float)(rand()%32+60)*0.1f;
 					break;
-				case 22:	//. 붉은연기 박스 : 2004/11/26
+				case 22:
 					o->LifeTime = 60;
 					o->Scale = o->Scale * (float)(rand()%64+64)*0.005f;
       				o->Rotation = (float)(rand()%360);
 					o->Gravity = (float)(rand()%32+60)*0.1f;
 					break;
-				case 24:	// 일반 (녹색, 스케일 조정가능)
+				case 24:
 #ifdef ASG_ADD_SUMMON_RARGLE
 				case 57:	// 보라색.
 #endif	// ASG_ADD_SUMMON_RARGLE
@@ -1577,7 +1566,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						o->Gravity = (float)(rand()%100-50)*0.1f;
 					}
 					break;
-				case 43: // 몬스터(마야) 입김 효과- (색 ,스케일 조정 가능)
+				case 43:
 					{
 						o->TexType = BITMAP_CLUD64;
       					o->LifeTime = 40;
@@ -1586,7 +1575,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						Vector(rand()%20/10.0f-1.0f, 2.0f, 15.0f, o->Velocity);
 					}
 					break;
-				case 44: // 몬스터(마야) 몸체 효과- (색 ,스케일 조정 가능)
+				case 44:
 					{
       					o->LifeTime = 60;
 						o->Scale += (float)(rand()%10)/2.0f;
@@ -1598,7 +1587,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						Vector(0.1f, 0.2f, 0.3f, o->Light);
 					}
 					break;
-				case 45: // 몬스터(마야) 석상 효과 - (색, 스케일 조정 가능)
+				case 45:
 					{
 						o->TexType = BITMAP_LIGHT+2;
       					o->LifeTime = 15;
@@ -1608,7 +1597,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						o->Position[2] += (float)(rand()%40)-20.0f;
 					}
 					break;
-				case 46: // 연기 - 위로 올라가는것 (색, 스케일 조정 가능)
+				case 46:
 					{
 						//o->TexType = BITMAP_CLOUD;
       					o->LifeTime = 60 + (int)(o->Scale*10.0f);
@@ -1680,7 +1669,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 					break;
 #endif // CSK_RAKLION_BOSS
 #ifdef YDG_ADD_SKILL_GIGANTIC_STORM
-				case 54: // 연기 - 위로 올라가는것 (색, 스케일 조정 가능)
+				case 54:
 					{
 						//o->TexType = BITMAP_CLOUD;
       					o->LifeTime = (int)(o->Scale*8.0f);
@@ -1751,7 +1740,7 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 					break;
 #endif //PBG_ADD_PKFIELD
 #ifdef LDS_ADD_MAP_EMPIREGUARDIAN4_MAPEFFECT
-				case 64:	// 방향성 연기(독가스효과)
+				case 64:
 					{
 						o->LifeTime = 30;
 						o->Scale = o->Scale * 0.3f;
@@ -1760,7 +1749,6 @@ int CreateParticle(int Type,vec3_t Position,vec3_t Angle,vec3_t Light,int SubTyp
 						o->Velocity[1] = 10.0f;
 						o->Velocity[2] = 0.0f;
 						
-						// 위치점 정의
 						const float ANG_REVISION = 20.0f;
 						float fAng;
 						fAng = (float)((rand() % (int)ANG_REVISION) + 10);

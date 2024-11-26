@@ -784,10 +784,10 @@ void OpenItemScript(char *FileName)
 	if(fp != NULL)
 	{
 		int Size = sizeof(ITEM_ATTRIBUTE);
-		// 읽기
+
 		BYTE *Buffer = new BYTE [Size*MAX_ITEM];
 		fread(Buffer,Size*MAX_ITEM,1,fp);
-		// crc 체크
+
 		DWORD dwCheckSum;
 		fread(&dwCheckSum,sizeof ( DWORD),1,fp);
 		fclose(fp);
@@ -824,8 +824,7 @@ void OpenItemScript(char *FileName)
 void PrintItem(char *FileName)
 {
 	FILE *fp = fopen(FileName,"wt");
-    fprintf(fp,"                이름  최소공격력 최대공격력 방어력 방어율 필요힘 필요민첩 필요에너지\n");
-	//fprintf(fp,"                이름    카오스성공확률\n");
+    fprintf(fp,"Print Item\n");
 	bool Excellent = true;
 	for(int i=0;i<16*MAX_ITEM_INDEX;i++)
 	{
@@ -922,12 +921,9 @@ void PrintItem(char *FileName)
 				ip.Type       = i;
        			ItemConvert(&ip,j<<3,Excellent,0);
 
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-				ItemValue( &ip, 0);
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
 				int iValue = ItemValue( &ip, 0);
 				int iRate = min( iValue / 20000, 100);
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
+
 				if(j==0)
      				fprintf(fp,"%20s %8d %8d %8d %8d %8d %8d %8d %8d %8d\n",p->Name,DamageMin,DamageMax,Defense, SuccessfulBlocking,RequireStrength,RequireDexterity,RequireEnergy,p->WeaponSpeed,ItemValue(&ip));
      				//fprintf(fp,"%20s %4d%%",p->Name, iRate);
@@ -1422,12 +1418,7 @@ void ItemConvert(ITEM *ip,BYTE Attribute1,BYTE Attribute2, BYTE Attribute3 )
 #endif //PBG_ADD_NEWCHAR_MONK_ITEM
 			)
     {
-#ifndef PBG_MOD_NEWCHAR_MONK_WING_2			//정리할시에 제거할 소스
-		/////////////////////////////////////////////////////////////////////
-		// 망토 관련 군주의망토/무인의 망토를 다른 날개 처럼 옵션을 제거 하고
-		// 아이템의 수치로 적용한다- 기획의도
-		/////////////////////////////////////////////////////////////////////
-        //  방어력 증가.
+#ifndef PBG_MOD_NEWCHAR_MONK_WING_2
 		int Cal = 0;
 		if(Level <= 9)
 			Cal = Level;

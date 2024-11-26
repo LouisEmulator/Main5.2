@@ -80,33 +80,23 @@ bool CInput::Create(HWND hWnd, long lScreenWidth, long lScreenHeight)
 	return true;
 }
 
-//*****************************************************************************
-// 함수 이름 : Update()
-// 함수 설명 : Input 상태를 처리. Main 무한루프에서 한 번만 호출.
-//*****************************************************************************
 void CInput::Update()
 {
-	// 각 축의 변화량 초기화.
 	m_lDX = m_lDY = 0L;
-	// Down, Up, Double Click은 순간에만 true가 되야되므로 false로 초기화 함.
 	m_bLBtnUp = m_bRBtnUp = m_bMBtnUp
 		= m_bLBtnDn = m_bRBtnDn = m_bMBtnDn
 		= m_bLBtnDbl = m_bRBtnDbl = m_bMBtnDbl = false;
 
-// 마우스 커서 위치 처리.
-	// 마우스 커서 위치 얻기.
 	::GetCursorPos(&m_ptCursor);
 	::ScreenToClient(m_hWnd, &m_ptCursor);
 
-	// X, Y좌표값을 제한함.
 	m_ptCursor.x = LIMIT(m_ptCursor.x, 0, m_lScreenWidth - 1);
 	m_ptCursor.y = LIMIT(m_ptCursor.y, 0, m_lScreenHeight - 1);
 
-	// 각 축의 변화량 Data를 계산.
 	m_lDX = m_ptCursor.x - m_ptFormerCursor.x;
 	m_lDY = m_ptCursor.y - m_ptFormerCursor.y;
 
-	if (m_lDX || m_lDY)	// 움직임이 있었다면 더블클릭이 아니므로.
+	if (m_lDX || m_lDY)
 		m_bFormerBtn0Dn = m_bFormerBtn1Dn = m_bFormerBtn2Dn = false;
 
 	m_ptFormerCursor = m_ptCursor;

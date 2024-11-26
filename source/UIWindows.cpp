@@ -1888,8 +1888,8 @@ void CUIPhotoViewer::RenderPhotoCharacter()
 int CUIPhotoViewer::SetPhotoPose(int iCurrentAni, int iMoveDir)
 {
 	if (m_PhotoHelper.Live == true && 
-	(m_PhotoHelper.Type == MODEL_UNICON || m_PhotoHelper.Type == MODEL_PEGASUS || m_PhotoHelper.Type == MODEL_DARK_HORSE //이혁재 - 다크호스 추가
-	|| (m_PhotoHelper.Type >= MODEL_FENRIR_BLACK && m_PhotoHelper.Type <= MODEL_FENRIR_GOLD)	//^ 펜릴 포토 관련
+	(m_PhotoHelper.Type == MODEL_UNICON || m_PhotoHelper.Type == MODEL_PEGASUS || m_PhotoHelper.Type == MODEL_DARK_HORSE
+	|| (m_PhotoHelper.Type >= MODEL_FENRIR_BLACK && m_PhotoHelper.Type <= MODEL_FENRIR_GOLD)
 	)) 
 	{
 		static const int MAX_POSE_NUM = 3;
@@ -2322,7 +2322,7 @@ void CUIPhotoViewer::CopyPlayer()
 		case 2:CreateBugSub(MODEL_UNICON  ,m_PhotoChar.Object.Position,&m_PhotoChar.Object,&m_PhotoHelper);break;
 		case 3:CreateBugSub(MODEL_PEGASUS, m_PhotoChar.Object.Position,&m_PhotoChar.Object,&m_PhotoHelper);break;
 		case 4:CreateBugSub(MODEL_DARK_HORSE, m_PhotoChar.Object.Position,&m_PhotoChar.Object,&m_PhotoHelper);break;
-		case 37:	//^ 펜릴 편지 관련
+		case 37:
 			if(m_PhotoChar.Helper.Option1 == 0x01)
 			{
 				CreateBugSub(MODEL_FENRIR_BLACK, m_PhotoChar.Object.Position, &m_PhotoChar.Object, &m_PhotoHelper);

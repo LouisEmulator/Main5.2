@@ -282,7 +282,6 @@ void PushObject(vec3_t PushPosition,vec3_t Position,float Power,vec3_t Angle)
 	return false;
 }*/
 
-//^ 펜릴 스킬 관련
 void SetAction_Fenrir_Skill(CHARACTER* c, OBJECT* o)
 {
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
@@ -300,13 +299,13 @@ void SetAction_Fenrir_Skill(CHARACTER* c, OBJECT* o)
 	else
 	{
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
-	if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1)	// 양손무기
+	if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1)
 		SetAction(o, PLAYER_FENRIR_SKILL_TWO_SWORD);
-	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1) // 오른손 무기
+	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1)
 		SetAction(o, PLAYER_FENRIR_SKILL_ONE_RIGHT);
-	else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1) // 왼손 무기
+	else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1)
 		SetAction(o, PLAYER_FENRIR_SKILL_ONE_LEFT);
-	else	// 맨손
+	else
 		SetAction(o, PLAYER_FENRIR_SKILL);
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
 	}
@@ -330,17 +329,17 @@ void SetAction_Fenrir_Damage(CHARACTER* c, OBJECT* o)
 	else
 	{
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
-	if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1)	// 양손무기
+	if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1)
 		SetAction(o, PLAYER_FENRIR_DAMAGE_TWO_SWORD);
-	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1) // 오른손 무기
+	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1)
 		SetAction(o, PLAYER_FENRIR_DAMAGE_ONE_RIGHT);
 	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1 && c->Weapon[1].Type ==MODEL_BOW+7)
 		SetAction(o, PLAYER_FENRIR_DAMAGE_ONE_RIGHT);
-	else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1) // 왼손 무기
+	else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1)
 		SetAction(o, PLAYER_FENRIR_DAMAGE_ONE_LEFT);
 	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1 && c->Weapon[0].Type ==MODEL_BOW+15)
 		SetAction(o, PLAYER_FENRIR_DAMAGE_ONE_LEFT);
-	else	// 맨손
+	else
 		SetAction(o, PLAYER_FENRIR_DAMAGE);
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
 	}
@@ -349,57 +348,57 @@ void SetAction_Fenrir_Damage(CHARACTER* c, OBJECT* o)
 
 void SetAction_Fenrir_Run(CHARACTER* c, OBJECT* o)
 {
-	if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1 && c->Weapon[0].Type !=MODEL_BOW+15 && c->Weapon[1].Type !=MODEL_BOW+7)	// 양손무기
+	if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1 && c->Weapon[0].Type !=MODEL_BOW+15 && c->Weapon[1].Type !=MODEL_BOW+7)
 	{
-		if(gCharacterManager.GetBaseClass(c->Class) == CLASS_ELF)	// 요정이면
+		if(gCharacterManager.GetBaseClass(c->Class) == CLASS_ELF)
 			SetAction(o, PLAYER_FENRIR_RUN_TWO_SWORD_ELF);
-		else if(gCharacterManager.GetBaseClass(c->Class) == CLASS_DARK)	// 마검사이면
+		else if(gCharacterManager.GetBaseClass(c->Class) == CLASS_DARK)
 			SetAction(o, PLAYER_FENRIR_RUN_TWO_SWORD_MAGOM);
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
-		else if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)//레이지파이터이면
+		else if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)
 			SetAction(o, PLAYER_RAGE_FENRIR_RUN_TWO_SWORD);
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
-		else	// 흑기사, 흑마법사, 다크로드
+		else
 			SetAction(o, PLAYER_FENRIR_RUN_TWO_SWORD);
 	}
-	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1) // 오른손 무기
+	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1)
 	{
-		if(gCharacterManager.GetBaseClass(c->Class) == CLASS_ELF)	// 요정이면
+		if(gCharacterManager.GetBaseClass(c->Class) == CLASS_ELF)
 			SetAction(o, PLAYER_FENRIR_RUN_ONE_RIGHT_ELF);
-		else if(gCharacterManager.GetBaseClass(c->Class) == CLASS_DARK)	// 마검사이면
+		else if(gCharacterManager.GetBaseClass(c->Class) == CLASS_DARK)
 			SetAction(o, PLAYER_FENRIR_RUN_ONE_RIGHT_MAGOM);
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
-		else if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)//레이지파이터이면
+		else if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)
 			SetAction(o, PLAYER_RAGE_FENRIR_RUN_ONE_RIGHT);
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
-		else	// 흑기사, 흑마법사, 다크로드
+		else
 			SetAction(o, PLAYER_FENRIR_RUN_ONE_RIGHT);
 	}
 	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1 && c->Weapon[1].Type ==MODEL_BOW+7)
 		SetAction(o, PLAYER_FENRIR_RUN_ONE_RIGHT_ELF);
-	else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1) // 왼손 무기
+	else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1)
 	{
-		if(gCharacterManager.GetBaseClass(c->Class) == CLASS_ELF)	// 요정이면
+		if(gCharacterManager.GetBaseClass(c->Class) == CLASS_ELF)
 			SetAction(o, PLAYER_FENRIR_RUN_ONE_LEFT_ELF);
-		else if(gCharacterManager.GetBaseClass(c->Class) == CLASS_DARK)	// 마검사이면
+		else if(gCharacterManager.GetBaseClass(c->Class) == CLASS_DARK)
 			SetAction(o, PLAYER_FENRIR_RUN_ONE_LEFT_MAGOM);
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
-		else if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)//레이지파이터이면
+		else if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)
 			SetAction(o, PLAYER_RAGE_FENRIR_RUN_ONE_LEFT);
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
-		else	// 흑기사, 흑마법사, 다크로드
+		else
 			SetAction(o, PLAYER_FENRIR_RUN_ONE_LEFT);
 	}
 	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1 && c->Weapon[0].Type ==MODEL_BOW+15)
 		SetAction(o, PLAYER_FENRIR_RUN_ONE_LEFT_ELF);
-	else	// 맨손
+	else
 	{
-		if(gCharacterManager.GetBaseClass(c->Class) == CLASS_ELF)	// 요정이면
+		if(gCharacterManager.GetBaseClass(c->Class) == CLASS_ELF)
 			SetAction(o, PLAYER_FENRIR_RUN_ELF);
-		else if(gCharacterManager.GetBaseClass(c->Class) == CLASS_DARK)	// 마검사이면
+		else if(gCharacterManager.GetBaseClass(c->Class) == CLASS_DARK)
 			SetAction(o, PLAYER_FENRIR_RUN_MAGOM);
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
-		else if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)//레이지파이터이면
+		else if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)
 			SetAction(o, PLAYER_RAGE_FENRIR_RUN);
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
 		else
@@ -410,10 +409,10 @@ void SetAction_Fenrir_Run(CHARACTER* c, OBJECT* o)
 void SetAction_Fenrir_Walk(CHARACTER* c, OBJECT* o)
 {
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
-	if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)//레이지파이터이면
+	if(GetBaseClass(c->Class) == CLASS_RAGEFIGHTER)
 	{
 		if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1)
-			SetAction(o, PLAYER_RAGE_FENRIR_WALK_TWO_SWORD);		// 기본애니메이션 사용
+			SetAction(o, PLAYER_RAGE_FENRIR_WALK_TWO_SWORD);
 		else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1)
 			SetAction(o, PLAYER_RAGE_FENRIR_WALK_ONE_RIGHT);
 		else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1)
@@ -424,17 +423,17 @@ void SetAction_Fenrir_Walk(CHARACTER* c, OBJECT* o)
 	else
 	{
 #endif //PBG_ADD_NEWCHAR_MONK_ANI
-	if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1 && c->Weapon[0].Type !=MODEL_BOW+15 && c->Weapon[1].Type !=MODEL_BOW+7)	// 양손무기
+	if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1 && c->Weapon[0].Type !=MODEL_BOW+15 && c->Weapon[1].Type !=MODEL_BOW+7)
 		SetAction(o, PLAYER_FENRIR_WALK_TWO_SWORD);
-	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1) // 오른손 무기
+	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type == -1)
 		SetAction(o, PLAYER_FENRIR_WALK_ONE_RIGHT);
 	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1 && c->Weapon[1].Type ==MODEL_BOW+7)
 		SetAction(o, PLAYER_FENRIR_WALK_ONE_RIGHT);
-	else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1) // 왼손 무기
+	else if(c->Weapon[0].Type == -1 && c->Weapon[1].Type != -1)
 		SetAction(o, PLAYER_FENRIR_WALK_ONE_LEFT);
 	else if(c->Weapon[0].Type != -1 && c->Weapon[1].Type != -1 && c->Weapon[0].Type ==MODEL_BOW+15)
 		SetAction(o, PLAYER_FENRIR_WALK_ONE_LEFT);
-	else	// 맨손
+	else
 		SetAction(o, PLAYER_FENRIR_WALK);
 #ifdef PBG_ADD_NEWCHAR_MONK_ANI
 	}
@@ -486,7 +485,7 @@ void SetAction(OBJECT *o,int Action)
 {
 #ifdef CSK_HACK_TEST
 	OBJECT* pHeroObj = &Hero->Object;
-	if(pHeroObj == o)	// 자기자신이면
+	if(pHeroObj == o)
 	{
 		if(o->CurrentAction != Action)
 		{
@@ -799,7 +798,6 @@ bool PathFinding2(int sx,int sy,int tx,int ty,PATH_t *a, float fDistance, int iD
 {
 	bool Value = false;
 
-	//크라이울프이벤트 시작시에 요정이 제단을 찍었을경우 길찾기에서 제단을 밟아야 한다.
 	if(M34CryWolf1st::Get_State_Only_Elf() == true && M34CryWolf1st::IsCyrWolf1st() == true)
 	{
 		if((CharactersClient[TargetNpc].Object.Type >= MODEL_CRYWOLF_ALTAR1 && CharactersClient[TargetNpc].Object.Type <= MODEL_CRYWOLF_ALTAR5))

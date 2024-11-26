@@ -666,7 +666,7 @@ bool GMEmpireGuardian2::RenderObjectVisual( OBJECT* o, BMD* b )
 		}
 		return true;
 
-	case 37:	// 벽등
+	case 37:
 		{
 			Vector(0.f, 0.f, 0.f, p);
 			b->TransformPosition(BoneTransform[1], p, Position);
@@ -679,7 +679,7 @@ bool GMEmpireGuardian2::RenderObjectVisual( OBJECT* o, BMD* b )
 		}
 		return true;
 
-	case 50:	// sobo_med01 (만다라 석상 손위의 불 이팩트)
+	case 50:
 		{	
 			vec3_t vPos, vRelativePos, vLight1, vLight2, vAngle;
 			Vector(0.f, 0.f, 0.f, vPos);
@@ -1003,7 +1003,6 @@ bool GMEmpireGuardian2::RenderMonsterVisual(CHARACTER* c, OBJECT* o, BMD* b)
 				Vector(0.1f * fLumi, 1.0f * fLumi, 0.3f * fLumi, vLight);
 				CreateSprite(BITMAP_LIGHT, vPos, 3.0f, vLight, o);
 
-				// 양손에 파티클
 				Vector(0.5f, 0.5f, 0.5f, vLight);
 				CreateParticle(BITMAP_CHROME2, vPos, o->Angle, vLight, 0, 0.9f, o);
 			}
@@ -1014,12 +1013,10 @@ bool GMEmpireGuardian2::RenderMonsterVisual(CHARACTER* c, OBJECT* o, BMD* b)
 			{
 				for (i = 0; i < 2; ++i)
 				{
-					// 먼지
 					b->TransformByObjectBone(vPos, o, iBigGreenLights[i]);
 					Vector(0.3f, 1.0f, 0.8f, vLight);
 					CreateParticle ( BITMAP_WATERFALL_4, vPos, o->Angle, vLight, 15, 2.0f );
 
-					// 불똥
 					Vector(0.0f, 0.4f, 0.0f, vLight);
 					CreateParticle ( BITMAP_SPARK+1, vPos, o->Angle, vLight, 13, 1.0f, o );
 					CreateParticle ( BITMAP_SPARK+1, vPos, o->Angle, vLight, 13, 1.0f, o );
@@ -1031,17 +1028,14 @@ bool GMEmpireGuardian2::RenderMonsterVisual(CHARACTER* c, OBJECT* o, BMD* b)
 				o->m_bRenderShadow = false;
 				if(o->AnimationFrame <= 3.0f)
 				{
-					// 연기 올라오는 이펙트
 					Vector(0.1f, 1.0f, 0.2f, vLight);
 					for(int i=0; i<5; i++)
 					{
 						CreateParticle(BITMAP_SMOKE, o->Position, o->Angle, vLight, 39);
 					}
 
-					// 인페르노 효과 이펙트
 					CreateEffect ( MODEL_SKILL_INFERNO, o->Position, o->Angle, o->Light, 9, o );
 
-					// 구름 회전 시키는 이펙트
 					if(o->AnimationFrame <= 0.2f)
 					{
 						Vector(0.4f, 1.0f, 0.6f, vLight);

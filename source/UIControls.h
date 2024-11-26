@@ -13,20 +13,14 @@
 
 inline DWORD _ARGB(BYTE a, BYTE r, BYTE g, BYTE b) { return (a << 24) + (b << 16) + (g << 8) + (r); }
 
-#ifndef ASG_ADD_NEW_QUEST_SYSTEM		// 정리시 삭제.
+#ifndef ASG_ADD_NEW_QUEST_SYSTEM
 void CutText2(const char* Text,char* Text1,char* Text2,int Length);
 #endif	// ASG_ADD_NEW_QUEST_SYSTEM
 #ifdef KJH_FIX_BTS158_TEXT_CUT_ROUTINE
 int CutStr(const char* pszText, char * pTextOut, const int iTargetPixelWidth, const int iMaxOutLine, const int iOutStrLength, const int iFirstLineTab = 0);
 #endif // KJH_FIX_BTS158_TEXT_CUT_ROUTINE
 int CutText3(const char* pszText, char* pTextOut, const int TargetWidth, const int iMaxOutLine, const int iOutStrLength, const int iFirstLineTab = 0, const BOOL bReverseWrite = FALSE);
-// pszText : 원본 텍스트
-// pTextOut : 반환될 텍스트 배열의 첫번째 주소 Array[4][100] -> Array[0]
-// TargetWidth : 목표 너비
-// iiMaxOutLine : 최대 라인 수
-// iOutStrLength : 최대 텍스트 길이
-// iFirstLineTab : 첫 라인 띄어 쓰기 (px)
-// bReverseWrite : 나눈 텍스트를 배열 뒤에서부터 앞으로 저장
+
 void CutText4(const char* pszSource, char* pszResult1, char* pszResult2, int iCutCount);
 
 void RenderCheckBox(int iPos_x, int iPos_y, BOOL bFlag);
@@ -47,15 +41,15 @@ enum UISTATES
 
 enum UIOPTIONS
 {
-	UIOPTION_NULL = 0,				// 옵션 없음
-	UIOPTION_NUMBERONLY = 1,		// 숫자만 입력 가능
-	UIOPTION_SERIALNUMBER = 2,		// 숫자와 영대문자만 입력 가능
-	UIOPTION_ENTERIMECHKOFF = 4,	// 엔터를 눌러도 IME 상태를 바꾸지 않음 (엔터 눌러도 사라지지 않는 입력창, 멀티라인등)
+	UIOPTION_NULL = 0,
+	UIOPTION_NUMBERONLY = 1,
+	UIOPTION_SERIALNUMBER = 2,
+	UIOPTION_ENTERIMECHKOFF = 4,
 #ifdef LJH_ADD_RESTRICTION_ON_ID
-	UIOPTION_PAINTBACK = 8,			// 배경을 검은색으로 칠해줌
-	UIOPTION_NOLOCALIZEDCHARACTERS = 16	// 다국어지원용 아이디와 길드명 입력(영어로만 입력할 수 있게 기획)
+	UIOPTION_PAINTBACK = 8,
+	UIOPTION_NOLOCALIZEDCHARACTERS = 16
 #else  //LJH_ADD_RESTRICTION_ON_ID
-	UIOPTION_PAINTBACK = 8			// 배경을 검은색으로 칠해줌
+	UIOPTION_PAINTBACK = 8
 #endif //LJH_ADD_RESTRICTION_ON_ID
 
 };
@@ -85,20 +79,20 @@ typedef struct
 typedef struct
 {
 	BOOL	m_bIsSelected;
-	DWORD	m_dwUIID;		// 윈도우 ID
-	char	m_szTitle[64];	// 윈도우 타이틀
-	int		m_iStatus;		// 윈도우 상태
+	DWORD	m_dwUIID;
+	char	m_szTitle[64];
+	int		m_iStatus;
 } WINDOWLIST_TEXT;
 
 typedef struct
 {
 	BOOL	m_bIsSelected;
-	DWORD	m_dwLetterID;	// 편지 번호 (임의)
-	char	m_szID[MAX_ID_SIZE+1];	// 보낸사람
-	char	m_szText[MAX_TEXT_LENGTH + 1];			// 제목
-	char	m_szDate[16];			// 날짜
-	char	m_szTime[16];			// 시간
-	BOOL	m_bIsRead;				// 열람 여부
+	DWORD	m_dwLetterID;
+	char	m_szID[MAX_ID_SIZE+1];
+	char	m_szText[MAX_TEXT_LENGTH + 1];
+	char	m_szDate[16];
+	char	m_szTime[16];
+	BOOL	m_bIsRead;
 } LETTERLIST_TEXT;
 
 typedef struct
@@ -163,39 +157,34 @@ typedef struct _UNMIX_TEXT
 typedef struct _SOCKETLIST_TEXT
 {
 	BOOL	m_bIsSelected;
-	int		m_iSocketIndex;		// 소켓 번호
-	char	m_szText[64 + 1];	// 소켓 정보 문자열
+	int		m_iSocketIndex;
+	char	m_szText[64 + 1];
 } SOCKETLIST_TEXT;
 #endif	// ADD_SOCKET_MIX
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
 enum UI_MESSAGE_ENUM
 {							// Func						|Param1				|Param2
 	UI_MESSAGE_NULL = 0,	// NULL
 
-	// 윈도우 관리자 메시지
-	UI_MESSAGE_SELECT,		// 윈도우 선택				|선택된 윈도우ID
-	UI_MESSAGE_HIDE,		// 윈도우 숨김				|숨길 윈도우 ID
-	UI_MESSAGE_MAXIMIZE,	// 윈도우 최대화			|최대화 시킬 윈도우 ID
-	UI_MESSAGE_CLOSE,		// 윈도우 닫기				|닫을 윈도우ID
-	UI_MESSAGE_BOTTOM,		// 윈도우 순서 맨 밑으로	|밑으로 보낼 윈도우 ID
+	UI_MESSAGE_SELECT,
+	UI_MESSAGE_HIDE,
+	UI_MESSAGE_MAXIMIZE,
+	UI_MESSAGE_CLOSE,
+	UI_MESSAGE_BOTTOM,
 
-	// 윈도우 메시지
-	UI_MESSAGE_SELECTED,	// 윈도우 선택됨
-	UI_MESSAGE_TEXTINPUT,	// 텍스트 입력  
-	UI_MESSAGE_P_MOVE,		// (부모)윈도우가 이동
-	UI_MESSAGE_P_RESIZE,	// (부모)윈도우가 크기조절
-	UI_MESSAGE_BTNLCLICK,	// 버튼 클릭				|클릭된 버튼 ID
-	UI_MESSAGE_TXTRETURN,	// 텍스트값 전달			|보내는 윈도우 ID	|전달할 텍스트 주소
-							//												 (delete해줘야함)
-	UI_MESSAGE_YNRETURN,	// 선택 값 전달				|보내는 윈도우 ID	|선택 값 (1:Yes, 2:No)
+	UI_MESSAGE_SELECTED,
+	UI_MESSAGE_TEXTINPUT,
+	UI_MESSAGE_P_MOVE,
+	UI_MESSAGE_P_RESIZE,
+	UI_MESSAGE_BTNLCLICK,
+	UI_MESSAGE_TXTRETURN,
 
-	// 리스트 메시지
-	UI_MESSAGE_LISTDBLCLICK,// 리스트항목 더블클릭		|보내는 윈도우 ID
-	UI_MESSAGE_LISTSCRLTOP,	// 리스트 스크롤 맨위로
-	UI_MESSAGE_LISTSELUP,	// 리스트 선택 위로
-	UI_MESSAGE_LISTSELDOWN	// 리스트 선택 아래로
+	UI_MESSAGE_YNRETURN,
+
+	UI_MESSAGE_LISTDBLCLICK,
+	UI_MESSAGE_LISTSCRLTOP,
+	UI_MESSAGE_LISTSELUP,
+	UI_MESSAGE_LISTSELDOWN
 };
 
 struct UI_MESSAGE
@@ -204,7 +193,6 @@ struct UI_MESSAGE
 	int m_iParam1;
 	int m_iParam2;
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class CUIMessage
 {
@@ -216,9 +204,8 @@ public:
 	void GetUIMessage();
 protected:
 	std::deque<UI_MESSAGE> m_MessageList;
-	UI_MESSAGE m_WorkMessage;			// 현재 처리할 메시지 저장용
+	UI_MESSAGE m_WorkMessage;
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class CUIControl : public CUIMessage
 {
@@ -245,32 +232,27 @@ public:
 	virtual void SetArrangeType(int iArrangeType = 0, int iRelativePos_x = 0, int iRelativePos_y = 0);
 	virtual void SetResizeType(int iResizeType = 0, int iRelativeWidth = 0, int iRelativeHeight = 0);
 	virtual void Render() {}
-	virtual BOOL DoAction(BOOL bMessageOnly = FALSE);	// 메시지, 마우스 액션 등을 처리한다.
+	virtual BOOL DoAction(BOOL bMessageOnly = FALSE);
 
 protected:
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-	virtual void DoActionSub()					{ return;	}
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual void DoActionSub(BOOL bMessageOnly) {			}
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual BOOL DoMouseAction() { return TRUE; }
-	virtual void DefaultHandleMessage();			// 기본 메시지 처리 함수
-	virtual BOOL HandleMessage() { return FALSE; }	// 클래스별 메시지 처리 함수 (FALSE면 DefaultHandleMessage 실행)
+	virtual void DefaultHandleMessage();
+	virtual BOOL HandleMessage() { return FALSE; }
 
 protected:
-	DWORD m_dwUIID;		// 고유 ID
-	DWORD m_dwParentUIID;	// 부모 ID
+	DWORD m_dwUIID;
+	DWORD m_dwParentUIID;
 	int m_iState;
 	int m_iOptions;
 	int m_iPos_x, m_iPos_y;
 	int m_iWidth, m_iHeight;
-	int m_iArrangeType;		// 정렬 타입 (0: 좌->우;상->하, 1: 우->좌;상->하, 2:좌->우;하->상, 3:우->좌;하->상)
-	int m_iResizeType;		// 크기 조절 타입 (0: 절대;절대, 1: 상대;절대, 2: 절대;상대, 3: 상대;상대)
+	int m_iArrangeType;
+	int m_iResizeType;
 	int m_iRelativePos_x, m_iRelativePos_y;
 	int m_iRelativeWidth, m_iRelativeHeight;
-	int m_iCoordType;		// 좌표 타입
+	int m_iCoordType;
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class CUIButton : public CUIControl
 {
@@ -301,7 +283,7 @@ public:
 	virtual ~CUITextListBox();
 	
 	virtual void Clear();
-	virtual void AddText() {}									// 데이터에 맞게 상속받아 사용
+	virtual void AddText() {}
 
 	virtual void Render();
 	virtual void Scrolling(int iValue);
@@ -312,45 +294,45 @@ public:
 	virtual void Resize(int iValue);
 	virtual BOOL HandleMessage();
 
-	virtual void ResetCheckedLine(BOOL bFlag = FALSE);			// 라인 체크 초기화
-	virtual BOOL HaveCheckedLine();								// 체크된 라인이 있나
-	virtual int GetCheckedLines(std::deque<T*> * pSelectLineList);	// 체크된 라인들 얻기
+	virtual void ResetCheckedLine(BOOL bFlag = FALSE);
+	virtual BOOL HaveCheckedLine();
+	virtual int GetCheckedLines(std::deque<T*> * pSelectLineList);
 	virtual int GetLineNum() { return (m_bUseMultiline == TRUE ? m_RenderTextList.size() : m_TextList.size()); }
 
-	virtual void SLSetSelectLine(int iLineNum);					// 선택 라인 (1~라인수) , 0: 선택 없음
-	virtual void SLSelectPrevLine(int iLineNum = 1);			// 이전 라인으로 이동 (-)
-	virtual void SLSelectNextLine(int iLineNum = 1);			// 다음 라인으로 이동 (+)
-	virtual typename std::deque<T>::iterator SLGetSelectLine();		// 현재 라인 데이터 얻기
+	virtual void SLSetSelectLine(int iLineNum);
+	virtual void SLSelectPrevLine(int iLineNum = 1);
+	virtual void SLSelectNextLine(int iLineNum = 1);
+	virtual typename std::deque<T>::iterator SLGetSelectLine();
 
 	virtual int SLGetSelectLineNum() { return m_iSelectLineNum; }
 
 protected:
 	virtual BOOL DoMouseAction();
-	virtual void RemoveText();									// 넘치는 텍스트 제거
+	virtual void RemoveText();
 	virtual void ComputeScrollBar();
-	virtual void MoveRenderLine();								// 출력 시작 할 줄까지 m_TextListIter를 옮겨준다
-	virtual BOOL CheckMouseInBox();								// 마우스 처리를 할 영역인가 체크
+	virtual void MoveRenderLine();
+	virtual BOOL CheckMouseInBox();
 
-	virtual void RenderInterface() = 0;							// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber) = 0;			// 내부 텍스트 라인 출력
-	virtual void RenderCoveredInterface() { }					// 최상단 인터페이스 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber) = 0;		// 내부 라인 마우스 액션
+	virtual void RenderInterface() = 0;
+	virtual BOOL RenderDataLine(int iLineNumber) = 0;
+	virtual void RenderCoveredInterface() { }
+	virtual BOOL DoLineMouseAction(int iLineNumber) = 0;
 	virtual BOOL DoSubMouseAction() { return TRUE; }
 
-	virtual void CalcLineNum() {}								// 줄 수 재계산 (멀티라인에서 사용)
+	virtual void CalcLineNum() {}
 
 protected:
 	std::deque<T> m_TextList;
 	typename std::deque<T>::iterator m_TextListIter;
 
-	BOOL m_bUseSelectLine;				// 라인 선택 가능여부
-	BOOL m_bPressCursorKey;				// 키 입력 처리용a
-	int m_iSelectLineNum;				// 선택된 라인 번호
+	BOOL m_bUseSelectLine;
+	BOOL m_bPressCursorKey;
+	int m_iSelectLineNum;
 
-	BOOL m_bUseMultiline;		// 멀티라인 사용
-	std::deque<T> m_RenderTextList;	// 출력용 (m_TextList 에서 가져온다)
+	BOOL m_bUseMultiline;
+	std::deque<T> m_RenderTextList;
 
-	int m_iMaxLineCount;	// 최대 데이터수
+	int m_iMaxLineCount;
 	int m_iCurrentRenderEndLine;
 	int m_iNumRenderLine;
 
@@ -365,14 +347,13 @@ protected:
 	BOOL m_bScrollBtnClick;
 	BOOL m_bScrollBarClick;
 
-	int m_iScrollType;	// 스크롤 방향
-	BOOL m_bNewTypeScrollBar;	// 스크롤바 새모양
+	int m_iScrollType;
+	BOOL m_bNewTypeScrollBar;
 
-	BOOL m_bUseNewUIScrollBar;	// 새로운 모양 스크롤바 사용 (버튼없고 스크롤바 드래그만 가능한)
+	BOOL m_bUseNewUIScrollBar;
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-class CUIGuildListBox : public CUITextListBox<GUILDLIST_TEXT>	// 길드 리스트 창
+class CUIGuildListBox : public CUITextListBox<GUILDLIST_TEXT>
 {
 public:
 	CUIGuildListBox();
@@ -380,21 +361,15 @@ public:
 
 	virtual void AddText(const char* pszID, BYTE Number, BYTE Server);
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
-	virtual int GetRenderLinePos_y(int iLineNumber);
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
-	virtual BOOL DoLineMouseAction(int iLineNumber) { return TRUE; }	// 내부 라인 마우스 액션
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber) { return TRUE; }
 	virtual BOOL DoSubMouseAction();
 protected:
 	BOOL m_bIsGuildMaster;
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class CUISimpleChatListBox : public CUITextListBox<WHISPER_TEXT>	// 채팅 내용 리스트창 (윈도우,자동멀티라인)
+class CUISimpleChatListBox : public CUITextListBox<WHISPER_TEXT>
 {
 public:
 	CUISimpleChatListBox();
@@ -404,19 +379,13 @@ public:
 	virtual void AddText(const char* pszID, const char* pszText, int iType, int iColor);
 protected:
 	virtual void AddTextToRenderList(const char* pszID, const char* pszText, int iType, int iColor);
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
-	virtual int GetRenderLinePos_y(int iLineNumber);
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
-	virtual BOOL DoLineMouseAction(int iLineNumber)		{ return TRUE; }	// 내부 라인 마우스 액션
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
-			void CalcLineNum();	// 줄 수 계산
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber)		{ return TRUE; }
+	void CalcLineNum();
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class CUILetterTextListBox : public CUITextListBox<LETTER_TEXT>	// 편지 내용 리스트창 (윈도우,자동멀티라인)
+class CUILetterTextListBox : public CUITextListBox<LETTER_TEXT>
 {
 public:
 	CUILetterTextListBox();
@@ -426,19 +395,14 @@ public:
 	virtual void AddText(const char* pszText);
 protected:
 	virtual void AddTextToRenderList(const char* pszText);
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
-	virtual BOOL DoLineMouseAction(int iLineNumber) { return TRUE;	}	// 내부 라인 마우스 액션
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
-			void CalcLineNum();	// 줄 수 계산
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber) { return TRUE;	}
+			void CalcLineNum();
 	virtual int	GetRenderLinePos_y(int iLineNumber);
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class CUIChatPalListBox : public CUITextListBox<GUILDLIST_TEXT>	// 채팅 상대 리스트창 (윈도우)
+class CUIChatPalListBox : public CUITextListBox<GUILDLIST_TEXT>
 {
 public:
 	CUIChatPalListBox();
@@ -463,22 +427,21 @@ public:
 		}
 		return iResult;
 	}
-	void MakeTitleText(char* pszTitleText);	// 채팅 방에 있는 사람들 이름 요약
+	void MakeTitleText(char* pszTitleText);
 
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 
 protected:
 	int m_iLayoutType;
-	int m_iColumnWidth[4];	// 각 항목별 너비
-	BOOL m_bForceEditList;	// 리스트 외부 수정
+	int m_iColumnWidth[4];
+	BOOL m_bForceEditList;
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class CUIWindowListBox : public CUITextListBox<WINDOWLIST_TEXT>	// 윈도우 리스트 창
+class CUIWindowListBox : public CUITextListBox<WINDOWLIST_TEXT>
 {
 public:
 	CUIWindowListBox();
@@ -489,14 +452,13 @@ public:
 	virtual void SetNumRenderLine(int iLine);
 	WINDOWLIST_TEXT * GetSelectedText() { return (SLGetSelectLine() == m_TextList.end() ? NULL : &(*SLGetSelectLine())); }
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class CUILetterListBox : public CUITextListBox<LETTERLIST_TEXT>	// 편지 리스트 창
+class CUILetterListBox : public CUITextListBox<LETTERLIST_TEXT>
 {
 public:
 	CUILetterListBox();
@@ -520,19 +482,18 @@ public:
 		return iResult;
 	}
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 
 protected:
-	int m_iColumnWidth[4];	// 각 항목별 너비
+	int m_iColumnWidth[4];
 	BOOL m_bForceEditList;
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #ifdef ADD_SOCKET_MIX
-class CUISocketListBox : public CUITextListBox<SOCKETLIST_TEXT>	// 윈도우 리스트 창
+class CUISocketListBox : public CUITextListBox<SOCKETLIST_TEXT>
 {
 public:
 	CUISocketListBox();
@@ -543,15 +504,13 @@ public:
 	virtual void SetNumRenderLine(int iLine);
 	SOCKETLIST_TEXT * GetSelectedText() { return (SLGetSelectLine() == m_TextList.end() ? NULL : &(*SLGetSelectLine())); }
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif	// ADD_SOCKET_MIX
 
-// 길드공지 리스트창
 class CUIGuildNoticeListBox : public CUITextListBox<GUILDLOG_TEXT>
 {
 public:
@@ -559,20 +518,16 @@ public:
 	virtual ~CUIGuildNoticeListBox() {}
 
 	virtual void AddText( const char* szContent );
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual void DeleteText( DWORD dwIndex );
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual void SetNumRenderLine( int nLine );
 	GUILDLOG_TEXT * GetSelectedText() { return (SLGetSelectLine() == m_TextList.end() ? NULL : &(*SLGetSelectLine())); }
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 };
 
-// 길드멤버 리스트창
 class CUINewGuildMemberListBox : public CUITextListBox<GUILDLIST_TEXT>
 {
 public:
@@ -580,23 +535,19 @@ public:
 	virtual ~CUINewGuildMemberListBox() {}
 
 	virtual void AddText(const char* pszID, BYTE Number, BYTE Server, BYTE GuildStatus);
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual void DeleteText(DWORD dwUIID);
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual void SetNumRenderLine(int iLine);
 	GUILDLIST_TEXT * GetSelectedText() { return (SLGetSelectLine() == m_TextList.end() ? NULL : &(*SLGetSelectLine())); }
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 protected:
 	BOOL m_bIsGuildMaster;
 };
 
-// 연합길드 리스트
-class CUIUnionGuildListBox : public CUITextListBox<UNIONGUILD_TEXT>	// 용병길드 리스트 창
+class CUIUnionGuildListBox : public CUITextListBox<UNIONGUILD_TEXT>
 
 {
 public:
@@ -604,21 +555,17 @@ public:
 	virtual ~CUIUnionGuildListBox() {}
 
 	virtual void AddText(BYTE* pGuildMark, const char* szGuildName, int nMemberCount);
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual void DeleteText(DWORD dwGuildIndex);
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual int GetTextCount();
 	virtual void SetNumRenderLine(int iLine);
 	UNIONGUILD_TEXT * GetSelectedText() { return (SLGetSelectLine() == m_TextList.end() ? NULL : &(*SLGetSelectLine())); }
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 };
 
-// 보석 조합 리스트 창
 class CUIUnmixgemList : public CUITextListBox<UNMIX_TEXT>
 {
 public:
@@ -633,15 +580,14 @@ public:
 	inline bool IsEmpty() { return m_TextList.empty(); }
 
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 
 	bool	m_bNotify;
 };
 
-// 공성전 선포한 길드리스트
 class CUIBCDeclareGuildListBox : public CUITextListBox<BCDECLAREGUILD_TEXT>
 
 {
@@ -650,21 +596,18 @@ public:
 	virtual ~CUIBCDeclareGuildListBox() {}
 
 	virtual void AddText( const char* szGuildName, int nMarkCount, BYTE byIsGiveUp, BYTE bySeqNum );
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual void DeleteText(DWORD dwGuildIndex);
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual void SetNumRenderLine(int iLine);
 	BCDECLAREGUILD_TEXT * GetSelectedText() { return (SLGetSelectLine() == m_TextList.end() ? NULL : &(*SLGetSelectLine())); }
 	void Sort();
 
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 };
-// 공성전 확정된 길드리스트
+
 class CUIBCGuildListBox : public CUITextListBox<BCGUILD_TEXT>
 
 {
@@ -676,21 +619,16 @@ public:
 	virtual void AddText( const char* szGuildName, BYTE byJoinSide, BYTE byGuildInvolved 	
 		,int iGuildScore
 		);
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual void DeleteText(DWORD dwGuildIndex);
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
 	virtual void SetNumRenderLine(int iLine);
 	BCGUILD_TEXT * GetSelectedText() { return (SLGetSelectLine() == m_TextList.end() ? NULL : &(*SLGetSelectLine())); }
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 };
 
-//-------------------------------------------------------------------------------------------
-// 이동명령창 리스트박스
 class CUIMoveCommandListBox : public CUITextListBox<MOVECOMMAND_TEXT>
 {
 public:
@@ -704,18 +642,14 @@ public:
 	//void Sort();
 
 protected:
-	virtual void RenderInterface();	// 인터페이스 출력
-#ifdef KWAK_FIX_COMPILE_LEVEL4_WARNING
-#else // KWAK_FIX_COMPILE_LEVEL4_WARNING
-	virtual BOOL RenderDataLine(int iLineNumber);	// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int iLineNumber);	// 내부 라인 마우스 액션
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int iLineNumber);
+	virtual BOOL DoLineMouseAction(int iLineNumber);
 	virtual int GetRenderLinePos_y(int iLineNumber);
 };
 //-------------------------------------------------------------------------------------------
 
 #ifdef ASG_MOD_UI_QUEST_INFO
-// 진행 중인 퀘스트 항목 구조체.
 struct SCurQuestItem
 {
 	BOOL	m_bIsSelected;
@@ -723,7 +657,6 @@ struct SCurQuestItem
 	char	m_szText[64];
 };
 
-// 진행 중인 퀘스트 리스트 박스 UI 클래스
 class CUICurQuestListBox : public CUITextListBox<SCurQuestItem>
 {
 public:
@@ -737,9 +670,9 @@ public:
 	{ return (SLGetSelectLine() == m_TextList.end() ? NULL : &(*SLGetSelectLine())); }
 	
 protected:
-	virtual void RenderInterface();				// 인터페이스 출력
-	virtual BOOL RenderDataLine(int nLine);		// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int nLine);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int nLine);
+	virtual BOOL DoLineMouseAction(int nLine);
 	virtual int GetRenderLinePos_y(int nLine);
 };
 
@@ -798,13 +731,13 @@ struct RENDER_TEXT_DATA
 	char m_szText[MAX_TEXT_LENGTH + 1];
 	int m_iWidth;
 	int m_iHeight;
-	int m_iTab;				// 탭 크기
-	DWORD m_dwUseCount;		// 삭제용 사용 카운트
-	DWORD m_dwTextColor;	// 사용된 글자색과 배경색
+	int m_iTab;
+	DWORD m_dwUseCount;
+	DWORD m_dwTextColor;
 	DWORD m_dwBackColor;
-	int m_iTextureIndex;	// 텍스트 텍스쳐 번호
+	int m_iTextureIndex;
 	int m_iTextureIndexEx;
-	BOOL m_bUseTextEX;		// 확장 텍스트 그래픽 사용 여부 (256px 이상)
+	BOOL m_bUseTextEX;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class IUIRenderText
@@ -1127,7 +1060,7 @@ protected:
 	void SlideMove();
 	void ComputeSpeed();
 
-	int CheckCutSize(const char* pszSource, int iNeedValue);				// 자르는 사이즈 계산
+	int CheckCutSize(const char* pszSource, int iNeedValue);
 	
 protected:
 	HFONT m_hFont;
@@ -1203,7 +1136,6 @@ typedef struct
 	unicode::t_char m_szType;
 }IGS_StorageItem;
 
-// 선물함 보관함의 리스트 박스 UI 클래스
 class CUIInGameShopListBox : public CUITextListBox<IGS_StorageItem>
 {
 	enum IMAGE_LISTBOX_SIZE
@@ -1224,13 +1156,13 @@ public:
 	IGS_StorageItem* GetSelectedText()
 	{ return (SLGetSelectLine() == m_TextList.end() ? NULL : &(*SLGetSelectLine())); }
 #ifndef KJH_MOD_INGAMESHOP_ITEM_STORAGE_PAGE_UNIT				// #ifndef
-	void DelData(int iIndex);		// Data하나를 지운다.
+	void DelData(int iIndex);
 #endif // KJH_MOD_INGAMESHOP_ITEM_STORAGE_PAGE_UNIT
 	
 protected:
-	virtual void RenderInterface();				// 인터페이스 출력
-	virtual BOOL RenderDataLine(int nLine);		// 내부 텍스트 라인 출력
-	virtual BOOL DoLineMouseAction(int nLine);	// 내부 라인 마우스 액션
+	virtual void RenderInterface();
+	virtual BOOL RenderDataLine(int nLine);
+	virtual BOOL DoLineMouseAction(int nLine);
 	virtual int GetRenderLinePos_y(int nLine);
 };
 

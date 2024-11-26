@@ -17,15 +17,7 @@
 #include "DSPlaySound.h"
 #include "WSClient.h"
 
-
 PARTICLE  Points	[MAX_POINTS];
-
-
-///////////////////////////////////////////////////////////////////////////////
-// 숫자 처리(게임상의 공격시 데미지 뜨는거 등등)
-///////////////////////////////////////////////////////////////////////////////
-
-int g_iLatestPoint = -1;	// 가장 최근 숫자의 인덱스
 
 #ifdef PBG_ADD_NEWCHAR_MONK_SKILL
 void CreatePoint(vec3_t Position,int Value,vec3_t Color,float scale, bool bMove, bool bRepeatedly)

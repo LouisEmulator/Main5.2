@@ -136,8 +136,6 @@ static void BuxConvert(BYTE *Buffer,int Size)
 
 int OpenTerrainAttribute(char *FileName)
 {
-	// 암호화 이후
-
 	FILE *fp = fopen(FileName,"rb");
 	if(fp == NULL)
 	{
@@ -154,18 +152,16 @@ int OpenTerrainAttribute(char *FileName)
 	BYTE Width;
 	BYTE Height;
 
-	// 읽고
 	fseek(fp,0,SEEK_END);
-	int EncBytes = ftell(fp);	//
+	int EncBytes = ftell(fp);
 	fseek(fp,0,SEEK_SET);
 	unsigned char *EncData = new unsigned char [EncBytes];
 	fread( EncData, EncBytes, 1, fp);
 
-	// 암호화 풀기
-	int iSize = MapFileDecrypt( NULL, EncData, EncBytes);	//
-	unsigned char *byBuffer = new unsigned char[iSize];		//
-	MapFileDecrypt( byBuffer, EncData, EncBytes);	//
-	delete [] EncData;		//
+	int iSize = MapFileDecrypt( NULL, EncData, EncBytes);
+	unsigned char *byBuffer = new unsigned char[iSize];
+	MapFileDecrypt( byBuffer, EncData, EncBytes);
+	delete [] EncData;
 
     bool extAtt = false;
 
@@ -201,7 +197,7 @@ int OpenTerrainAttribute(char *FileName)
 	    memcpy ( TerrainWall, &byBuffer[4], TERRAIN_SIZE*TERRAIN_SIZE*sizeof(WORD) );
     }
 
-	delete [] byBuffer;	//
+	delete [] byBuffer;
 
 	bool Error = false;
 	if(Version!=0 || Width!=255 || Height!=255)
@@ -256,7 +252,6 @@ bool SaveTerrainAttribute(char *FileName, int iMap)
     return true;
 }
 
-//  속성 변경.
 void AddTerrainAttribute ( int x, int y, BYTE att )
 {
     int     iIndex = (x+(y*TERRAIN_SIZE));
@@ -278,11 +273,11 @@ void AddTerrainAttributeRange ( int x, int y, int dx, int dy, BYTE att, BYTE Add
     {
         for ( int i=0; i<dx; ++i )
         {
-            if ( Add )             //  추가.
+            if ( Add )
             {
                 AddTerrainAttribute ( x+i, y+j, att );
             }
-            else                    //  제거.
+            else
             {
                 SubTerrainAttribute ( x+i, y+j, att );
             }
@@ -331,7 +326,6 @@ int OpenTerrainMapping(char *FileName)	//
 	fread(EncData,1,EncBytes,fp);	//
 	fclose(fp);
 
-	// 암호화 된 것 풀기
 	int DataBytes = MapFileDecrypt( NULL, EncData, EncBytes);	//
 	unsigned char *Data = new unsigned char[DataBytes];		//
 	MapFileDecrypt( Data, EncData, EncBytes);	//
@@ -1778,7 +1772,6 @@ bool RenderTerrainTile(float xf,float yf,int xi,int yi,float lodf,int lodi,bool 
 	if(!Flag)
 	{
 		RenderTerrainFace(xf,yf,xi,yi,lodf);
-		// 길찾기 정보 표시
 #ifdef SHOW_PATH_INFO
 #ifdef CSK_DEBUG_MAP_PATHFINDING
 		if(g_bShowPath == true)
@@ -1825,7 +1818,6 @@ bool RenderTerrainTile(float xf,float yf,int xi,int yi,float lodf,int lodi,bool 
 #endif// _DEBUG
 		
 		vec3_t Normal;
-        //  현재 타일의 노멜벡터값을 구한다.
 		FaceNormalize ( TerrainVertex[0], TerrainVertex[1], TerrainVertex[2], Normal );
 		bool Success = CollisionDetectLineToFace ( MousePosition, MouseTarget, 3, TerrainVertex[0], TerrainVertex[1], TerrainVertex[2], TerrainVertex[3], Normal );
 		if ( Success==false )

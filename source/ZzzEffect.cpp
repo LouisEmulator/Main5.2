@@ -517,7 +517,6 @@ void CreateEffect(int Type,vec3_t Position,vec3_t Angle,
 		OBJECT *o = &Effects[icntEffect];
 
 #ifdef YDG_MOD_SEPARATE_EFFECT_SKILLS
-		// 스킬 이펙트면 스킬이펙트 구조의 메모리를 사용한다
 		if (g_SkillEffects.IsSkillEffect(Type, Position, Angle, Light, SubType, Owner, PKKey, SkillIndex, Skill, SkillSerialNum, Scale, sTargetIndex))
 		{
 			o = g_SkillEffects.CreateEffect();
@@ -8783,25 +8782,22 @@ void MoveEffect( OBJECT *o, int iIndex)
 			if (o->SubType == 0)
 			{
 				int anEffectVolume[3] = { 5, 4, 3 };
-				if (rand()%anEffectVolume[o->PKKey] == 0)	// 여기서 o->PKKey는 소환수 레벨.
+				if (rand()%anEffectVolume[o->PKKey] == 0)
 				{
 					vec3_t vPos, vLight;
 
-					// 연기효과
 					VectorCopy(o->HeadTargetAngle, vPos);
 					vPos[0] += (float)(rand()%500-250);
 					vPos[1] += (float)(rand()%500-250);
 					Vector(1.0f, 1.0f, 1.0f, vLight);
 					CreateParticle(BITMAP_SMOKE, vPos, o->Angle, vLight, 57, 3.5f);
 					
-					// 바닥효과
 					VectorCopy(o->HeadTargetAngle, vPos);
 					vPos[0] += (float)(rand()%400-200);
 					vPos[1] += (float)(rand()%400-200);
 					Vector(0.6f, 0.1f, 1.f, vLight);
 					CreateEffect(BITMAP_CLOUD, vPos, o->Angle, vLight, 0, NULL, -1, 0, 0, 0, 2.0f);
 
-					// 물방울 올라오는 이펙트
 					Vector(0.6f, 0.1f, 1.f, vLight);
 					CreateParticle(BITMAP_TWINTAIL_WATER, vPos, o->Angle, vLight, 1);
 				}
@@ -19811,14 +19807,14 @@ void RenderEffects ( bool bRenderBlendMesh )
 							
 							vec3_t vPos, p;
 							Vector(0.0f, 0.0f, 0.0f, p);
-							pOwnerModel->RotationPosition(pOwner->BoneTransform[33], p, vPos);	// ParentMatrix 전역변수 생성용
+							pOwnerModel->RotationPosition(pOwner->BoneTransform[33], p, vPos);	// ParentMatrix
 							VectorAdd(pOwner->Position, vPos, pModel->BodyOrigin);
 							Vector(0.0f, 0.0f, 0.0f, pObject->Angle);
 							
 							OBB_t OBB;
 							vec3_t Temp;
-							pModel->Animation(BoneTransform,pObject->AnimationFrame,pObject->PriorAnimationFrame,pObject->PriorAction,pObject->Angle,pObject->Angle,true);	// BoneTransform 전역변수 생성
-							pModel->Transform(BoneTransform,Temp,Temp,&OBB,true);	// BoneTransform으로 실제 모델 transform
+							pModel->Animation(BoneTransform,pObject->AnimationFrame,pObject->PriorAnimationFrame,pObject->PriorAction,pObject->Angle,pObject->Angle,true);	// BoneTransform
+							pModel->Transform(BoneTransform,Temp,Temp,&OBB,true);	// BoneTransform
 							
 							BodyLight(pObject, pModel);
 							pModel->BodyScale = pObject->Scale;

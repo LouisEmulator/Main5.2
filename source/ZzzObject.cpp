@@ -153,7 +153,7 @@ void ActionObject ( OBJECT* o )
                             o->Angle[0] = 90.f;
                             ClearActionObject ();
 
-                            AddTerrainAttributeRange ( 13, 70, 3, 6, TW_NOGROUND, false );  //  제거.
+                            AddTerrainAttributeRange ( 13, 70, 3, 6, TW_NOGROUND, false );
                         }
                     }
                 }
@@ -1266,7 +1266,7 @@ void Draw_RenderObject(OBJECT *o,bool Translate,int Select, int ExtraMon)
 			}
 			else
 #ifdef ADD_SOCKET_MIX
-			if (o->Type == MODEL_SEED_MASTER)	// 시드마스터
+			if (o->Type == MODEL_SEED_MASTER)
 			{
 				b->RenderBody(RENDER_TEXTURE,o->Alpha,o->BlendMesh,o->BlendMeshLight,o->BlendMeshTexCoordU,o->BlendMeshTexCoordV,o->HiddenMesh);
 				float fLumi = (sinf(WorldTime*0.001f) + 1.0f) * 0.2f + 0.0f;
@@ -1275,7 +1275,6 @@ void Draw_RenderObject(OBJECT *o,bool Translate,int Select, int ExtraMon)
 			else
 #endif	// ADD_SOCKET_MIX
 #ifdef LOREN_RAVINE_EVENT
-			///test...뮤턴트...박종훈
 			if(o->Type == MODEL_MONSTER01+45)
 			{
 				if(ExtraMon)
@@ -7973,7 +7972,7 @@ void RenderPartObjectBody(BMD *b,OBJECT *o,int Type,float Alpha,int RenderType)
 		b->RenderMesh(3,RENDER_BRIGHT|RENDER_CHROME,Alpha,3,o->BlendMeshLight,WorldTime*0.0001f,WorldTime*0.0005f);
 		glColor3f(1.f,1.f,1.f);
 	}
-	else if(Type == MODEL_SWORD+21)		//. 마검사 추가검
+	else if(Type == MODEL_SWORD+21)
 	{
 //		Vector(1.f,1.f,1.f,b->BodyLight);
 		b->RenderBody(RENDER_TEXTURE,Alpha,o->BlendMesh,o->BlendMeshLight,o->BlendMeshTexCoordU,o->BlendMeshTexCoordV,o->HiddenMesh);

@@ -1,9 +1,5 @@
 
-//-------------------------------------------------------------------------------------------------------------------------------
-// _LANGUGE_ENG
-//-------------------------------------------------------------------------------------------------------------------------------
-
-#ifdef _LANGUAGE_ENG
+#ifdef _LANGUAGE_ENG 
 
 // [2010.10.28 1.03H+]
 #define PBG_FIX_DROPBAN_GENS
@@ -26,9 +22,9 @@
 #endif // _DEBUG
 
 
-#define KJW_FIX_SLEEPUP_SKILL_INFO						// 소환술사 마스터레벨 슬립 강화 정보 출력 수정(10.10.01)
-#define KJW_FIX_LOGIN_ID_BLACK_SPACE					// 아이디 입력 부분에 검은색 배경이 연장되는 문제 수정(10.10.01)
-#define KJW_FIX_SLIDE_MOVE								// 슬라이드 움직이는 방식 변경 ( 기존의 방식은 앞에 공백을 집어넣는 형태로 입력 글자수에도 제한을 줌 )(10.10.12)
+#define KJW_FIX_SLEEPUP_SKILL_INFO
+#define KJW_FIX_LOGIN_ID_BLACK_SPACE
+#define KJW_FIX_SLIDE_MOVE
 
 //----------------------------------------------------------------------------------------------
 // << Season 5-4 >>
@@ -38,7 +34,7 @@
 
 	//-----------------------------------------------------------------------------
 	// [ Season 5 - Part 4 ]
-	#define PJH_ADD_MASTERSKILL								//소환술사 마스터레벨 추가(2010.03.09)
+	#define PJH_ADD_MASTERSKILL
 		#ifdef PJH_ADD_MASTERSKILL								
 		#undef KJH_FIX_WOPS_K22193_SUMMONER_MASTERSKILL_UI_ABNORMAL_TEXT	//해외에 소환술사 마스터스킬 추가(10.05.28)
 	#endif //PJH_ADD_MASTERSKILL								
@@ -82,19 +78,8 @@
 	#define PBG_FIX_CHARACTERSELECTINDEX					// 캐릭터 인덱스 버그수정(10.07.05)
 #endif //SEASON5_4
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//----------------------------------------------------------------------------------------------
-// << 버그수정 >>
-//----------------------------------------------------------------------------------------------
-// [2010.06.24 글로벌 1.03A+] - 이주흥
 
 #define KJH_FIX_INGAMESHOP_SENDGIFT_ELIXIROFCONTROL		// 인게임샵 선물하기에서 다크로드가 아닌 클래스도 선물하기 받을수 있는문제 수정 (10.06.23)
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//----------------------------------------------------------------------------------------------
-// << 버그수정 >>
-//----------------------------------------------------------------------------------------------
-// [2010.06.10 글로벌 1.03z] - 이주흥
-
 #define KJH_FIX_SELL_EXPIRED_UNICON_PET					// 기간지난 유니콘펫 상점판매 가능하게 수정 (10.06.08)
 #define KJH_FIX_SELL_EXPIRED_CRITICAL_WIZARD_RING		// 기간지난 치명적인 마법사의 반지 상점판매 가능하게 수정 (10.06.08)
 
@@ -367,11 +352,11 @@
 	#define YDG_MOD_DOPPELGANGER_END_SOUND					// 도플갱어 종료 사운드 추가 (2009.08.20)
 	#define YDG_MOD_TOURMODE_MAXSPEED						// 투어모드 최고속도 올림 (2009.07.10)
 
-	#define ASG_FIX_QUEST_PROTOCOL_ADD						// 신규 퀘스트 프로토콜 추가.(2009.09.07)
+	#define ASG_FIX_QUEST_PROTOCOL_ADD)
 
-	#define PBG_ADD_NEWLOGO_IMAGECHANGE						// 로딩화면 이미지 변경(09.08.12)
+	#define PBG_ADD_NEWLOGO_IMAGECHANGE
 
-	#define PJH_NEW_SERVER_SELECT_MAP						// 서버 선택화면 변경(09.08.17)
+	#define PJH_NEW_SERVER_SELECT_MAP
 
 
 	//-----------------------------------------------------------------------------
@@ -380,17 +365,17 @@
 	#ifdef SEASON5
 		#define YDG_ADD_DOPPELGANGER_EVENT
 		#ifdef YDG_ADD_DOPPELGANGER_EVENT
-			#define YDG_ADD_MAP_DOPPELGANGER1					// 도플갱어 맵1 (라클리온베이스) (2009.03.22)
-			#define YDG_ADD_MAP_DOPPELGANGER2					// 도플갱어 맵2 (불카누스베이스) (2009.03.22)
-			#define YDG_ADD_MAP_DOPPELGANGER3					// 도플갱어 맵3 (아틀란스베이스) (2009.03.22)
-			#define YDG_ADD_MAP_DOPPELGANGER4					// 도플갱어 맵4 (칸투르1차베이스) (2009.03.22)
-			#define YDG_ADD_DOPPELGANGER_MONSTER				// 도플갱어 몬스터 추가 (2009.05.20)
-			#define YDG_ADD_DOPPELGANGER_NPC					// 도플갱어 NPC 루가드 추가 (2009.05.20)
-			#define YDG_ADD_DOPPELGANGER_ITEM					// 도플갱어 아이템 추가 (2009.05.20)
-			#define YDG_ADD_DOPPELGANGER_UI						// 도플갱어 UI 추가 (2009.05.20)
-			#define YDG_ADD_DOPPELGANGER_PROTOCOLS				// 도플갱어 프로토콜 추가 (2009.06.23)
-			#define YDG_ADD_DOPPELGANGER_PORTAL					// 도플갱어 맵 포탈 추가 (2009.07.30)
-			#define YDG_ADD_DOPPELGANGER_SOUND					// 도플갱어 사운드 추가 (2009.08.04)
+			#define YDG_ADD_MAP_DOPPELGANGER1
+			#define YDG_ADD_MAP_DOPPELGANGER2
+			#define YDG_ADD_MAP_DOPPELGANGER3
+			#define YDG_ADD_MAP_DOPPELGANGER4
+			#define YDG_ADD_DOPPELGANGER_MONSTER
+			#define YDG_ADD_DOPPELGANGER_NPC
+			#define YDG_ADD_DOPPELGANGER_ITEM
+			#define YDG_ADD_DOPPELGANGER_UI
+			#define YDG_ADD_DOPPELGANGER_PROTOCOLS
+			#define YDG_ADD_DOPPELGANGER_PORTAL
+			#define YDG_ADD_DOPPELGANGER_SOUND
 		#endif	// YDG_ADD_DOPPELGANGER_EVENT
 
 		#define LDS_ADD_EMPIRE_GUARDIAN
@@ -439,9 +424,9 @@
 			#define LDS_ADD_MODEL_ATTACH_SPECIFIC_NODE_			// 특정 모델의 특정 노드에 다른 특정 모델을 ATTACH 하는 함수를 추가합니다. (09.06.12)
 			#define LDS_ADD_INTERPOLATION_VECTOR3				// vec3_t의 보간 함수를 zzzmathlib.h에 추가. (09.06.24)
 			#define LDS_MOD_INCREASE_BITMAPIDXBLURNUMBERS		// BITMAP_BLUR 인덱스 수를 기존4개 에서 실사용갯수인 10개로 늘립니다. (09.07.02)
-			#define LDS_ADD_EFFECT_FIRESCREAM_FOR_MONSTER		// 다크로드의 파이어스크림 스킬에 특정 몬스터(에르칸느)의 파이어스크림을 추가합니다. (09.07.07)
-			#define LDS_MOD_EFFECTBLURSPARK_FORCEOFSWORD		// EffectBlurSpark 의 검기들의 갯수 제한에 문제로 검기가 간혹 깨지는 현상으로 부분 수정. (09.07.28)
-			#define LDS_ADD_MAP_EMPIREGUARDIAN4_MAPEFFECT		// 주말맵의 맵 Effect에 추가되는 파티클, EFFECT들.. 
+			#define LDS_ADD_EFFECT_FIRESCREAM_FOR_MONSTER
+			#define LDS_MOD_EFFECTBLURSPARK_FORCEOFSWORD
+			#define LDS_ADD_MAP_EMPIREGUARDIAN4_MAPEFFECT
 			#define LDS_FIX_MEMORYLEAK_DESTRUCTORFORBMD			// BMD의 소멸자로 인한 기존 BMD에서 발생한 memoryleak FIXED.. (2009.08.13)
 
 			#define PBG_ADD_RAYMOND_GUARDIANPRIEST_MONSTER_EFFECT	// (레이몬드)(치유병)몬스터 이펙트 작업(09.07.02)
@@ -450,9 +435,6 @@
 			#define KJH_ADD_EG_MONSTER_GUARDIANDEFENDER_EFFECT		// 수호군 방패병 이팩트 (09.07.31)
 		#endif //LDS_ADD_EMPIRE_GUARDIAN
 
-		//------------------------------------------------
-		// 3. 신 퀘스트 시스템
-		// - 안상규
 		#define ASG_ADD_NEW_QUEST_SYSTEM						// 뉴 퀘스트 시스템(2009.05.20)
 		#ifdef ASG_ADD_NEW_QUEST_SYSTEM
 			#define ASG_ADD_UI_QUEST_PROGRESS					// 퀘스트 진행 창(NPC용)(2009.05.27)
@@ -481,12 +463,11 @@
 		#define LJH_ADD_LOOK_FOR_MOVE_ILLEGALLY_BY_MSG			// 유저가 채팅메세지를 이용 이동할수 없는 맵에 이동하려 하는지 판정(2009.10.29)
 		#define PBG_FIX_SETOPTION_CALCULATE_SECRET_POTION		// 비약관련 세트 옵션 적용버그(09.11.04)
 				
-		// Season 5 3차 본섭버젼 버그 수정
+		// Season 5
 		#define LJH_FIX_BUG_BUYING_AG_AURA_WHEN_USING_SD_AURA	// SD증가 오라를 하용하는 중 AG오라를 구입할 수 있는 버그 수정(09.11.16)
 		#define PBG_FIX_JELINTNPC_TEXTWIDTH						// 제린트npc ui설정 버그 수정(09.11.10)
 		#define PBG_FIX_STOPBGMSOUND							// 로딩이후 bgm사운드 종료되지 않는 버그 수정(09.11.10)
 		#define PBG_FIX_SDELITE_OVERLAY							// sd엘리트 물약 겹쳐지지 않는 버그 수정(09.11.17)
-		#define YDG_FIX_CURSEDTEMPLE_GAUGEBAR_ERROR				// 환영사원 성물 획득/등록 게이지 오류 수정 (2009.12.03)
 		#define LJH_FIX_ITEM_CANNOT_BE_EQUIPPED_AFTER_LOGOUT	// (JP_575)재 로그인 시 착용하고 있던 세트 아이템의 옵션 미적용으로 그 아이템을 더이상 착용할수 없는 버그 수정(09.12.10)-> 한국과 동일하게
 		#define LJH_FIX_HERO_MOVES_EVEN_NOT_PRESENT				// (국내버그)(JP_524)유저의 캐릭터가 화면에 없을때도 이동할 수 있었던 버그 수정 (예:공성서버으로/에서 이동)(09.12.11)
 		#define LJH_FIX_NOT_CALCULATED_BUFF						// 세트계산과 관련되어 버프가 적용되지 않았던 버그 수정(2010.01.15)
@@ -581,21 +562,9 @@
 #define LDS_FIX_GLPARAM_SWAPMODE_BITMAP				// System 안정화 (OPENGL ERROR) // Wrong OpenGL Texture Parameter SWAPMode  (10.02.19)
 #define LDS_FIX_NONINIT_TEXTBOLDTABLE				// 게임 버그 FIXED // 마스터스킬창의 TOOLTIP 렌덤 볼드 문제. 볼드 텍스트TABLE이 초기화가 되지 않아 이전 TEXT에서 사용되었던 항목별 BOLD 여부 값이 그대로 적용되는 오류. (10.02.12)
 
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//----------------------------------------------------------------------------------------------
-// << 버그수정 패치 >>
-//----------------------------------------------------------------------------------------------
-// [2010.03.11 글로벌 1.03r] - 이동석
 
 #define LDS_MOD_EVENTCHERRYBLOSSOM_FORENG				// 벚꽃 이벤트를 글로벌에 맞춰 변경(10.03.10)
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//----------------------------------------------------------------------------------------------
-// << 버그수정 패치 >>
-//----------------------------------------------------------------------------------------------
-// [2010.03.03 글로벌 1.03q] - 이동석
 
 #define KJH_ADD_SERVER_LIST_SYSTEM						// 서버리스트 시스템 변경 (09.10.19) - 국내의 내용을 미리 당겨 사용.
 #define ASG_ADD_SERVER_LIST_SCRIPTS						// ServerList.txt 스크립트 추가.(2009.10.29) - 국내의 내용을 미리 당겨 사용.
@@ -606,13 +575,7 @@
 #endif	//ASG_ADD_SERVER_LIST_SCRIPTS
 #define ASG_FIX_NOT_EXECUTION_WEBSTARTER_MSG			// 웹스타터 미실행 메시지 Text.txt 번호 수정(10.03.03)
 
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//----------------------------------------------------------------------------------------------
-// << 버그수정 패치 >>
-//----------------------------------------------------------------------------------------------
-// [2010.02.24 글로벌 1.03p] - 안상규
 
 #define ASG_MOD_CHARGED_CHANNEL_TICKET_ADD_DESCRIPTION			// 유료 채널 입장권 설명 추가.(2010.02.24)
 #define ASG_ADD_CASH_SHOP_ALREADY_HAVE_ITEM_MSG					// 캐쉬샵 중복 아이템 메시지 추가.(2010.02.24)	
@@ -620,24 +583,12 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//----------------------------------------------------------------------------------------------
-// << 부분유료화 6차 + Season 4.5 >> 
-//----------------------------------------------------------------------------------------------
-// [2010.02.22 글로벌 1.03o] - 안상규
-
-//-----------------------------------------------------------------------------
 // [ Season 4.5 ] 
-//		- PK필드/불카누스/겜블/팬더팻
-#define SEASON4_5										
+#define SEASON4_5							
 #ifdef SEASON4_5
 
-	//------------------------------------------------
-	// 컨텐츠 추가
-	//------------------------------------------------
-	// - 김재희
 	#define KJH_ADD_09SUMMER_EVENT					// 09년 여름이벤트		(09.06.23)
 
-	// - 양대근
 	#define YDG_ADD_NEW_DUEL_SYSTEM					// 새로운 결투 시스템 (2009.01.05) [09.03.19 테섭]
 	#ifdef YDG_ADD_NEW_DUEL_SYSTEM
 		#define YDG_ADD_NEW_DUEL_UI					// 새로운 결투 관련 UI 추가 (2009.01.05) [09.03.19 테섭]
@@ -647,11 +598,9 @@
 		#define YDG_ADD_MAP_DUEL_ARENA				// 새로운 결투장 맵 추가 (2009.02.04) [09.03.19 테섭]
 	#endif	// YDG_ADD_PVP_SYSTEM
 
-	// - 박보근
 	#define PBG_ADD_PKFIELD							// PK필드 추가(2008.12.29) [09.03.19 테섭]
 	#define PBG_ADD_HONOROFGLADIATORBUFFTIME		// 검투사의 명예 버프 시간 툴팁 추가(2009.03.19) [09.03.19 테섭]
 
-	// - 이동근
 	#define LDK_ADD_GAMBLE_SYSTEM					// 젠소모 무기 뽑기 상점 (09.01.05) [09.03.19 테섭]
 	#ifdef LDK_ADD_GAMBLE_SYSTEM
 		#define LDK_ADD_GAMBLE_NPC_MOSS				// 겜블 상인 모스 [09.03.19 테섭]
@@ -659,11 +608,9 @@
 		#define LDK_ADD_GAMBLERS_WEAPONS			// 겜블전용 레어 무기들 [09.03.19 테섭]
 	#endif //LDK_ADD_GAMBLE_SYSTEM
 
-	// - 박종훈
 	#define PJH_ADD_PANDA_PET
 	#define PJH_ADD_PANDA_CHANGERING
 
-	// Season 4.5 내부 테섭 버그 수정
 	#define ADD_FIX_AFTER_SEASON4_5_TEST
 	#ifdef ADD_FIX_AFTER_SEASON4_5_TEST
 		#define YDG_FIX_PANDA_CHANGERING_PANTS_BUG				// 다크로드 맨몸으로 팬더 변신반지 착용시 바지 보이는 버그 (09.07.21)
@@ -703,8 +650,6 @@
 #define ADD_TOTAL_CHARGE_6TH
 #ifdef ADD_TOTAL_CHARGE_6TH
 
-	// 1. 케쉬 샾 아이템
-	// ---------------------------------------------------------------------------
 	#define ADD_CASH_SHOP_6TH
 		#ifdef ADD_CASH_SHOP_6TH
 		// - 안상규

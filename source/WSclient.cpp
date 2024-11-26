@@ -4982,7 +4982,6 @@ BOOL ReceiveMagicContinue(BYTE *ReceiveBuffer,int Size, BOOL bEncrypted)
 					else
 						SetAction ( so, PLAYER_ATTACK_STRIKE );
 #endif // KJH_FIX_CHAOTIC_ANIMATION_ON_RIDE_PET
-					// 사운드
 					PlayBuffer(SOUND_FIRE_SCREAM);
 				}
 				break;
@@ -6867,7 +6866,6 @@ void ReceivePartyLeave( BYTE *ReceiveBuffer )
 	g_PKSystem->SetHeroPartyPKState(Hero->PK);
 #endif //LJH_ADD_MORE_ZEN_FOR_ONE_HAVING_A_PARTY_WITH_MURDERER	
 
-    //  따라가고 있을때 서로 파티가 아니면은 X.
     if ( g_iFollowCharacter>=0 )
     {
         bool IsParty = false;
@@ -7290,7 +7288,6 @@ void ReceiveGuildInfo( BYTE *ReceiveBuffer )
 	int Index = g_GuildCache.SetGuildMark( Data->GuildKey, Data->UnionName, Data->GuildName, Data->Mark );
 }
 
-// 길드직책을 임명/변경/해제 결과
 void ReceiveGuildAssign( BYTE *ReceiveBuffer )
 {
 	char szTemp[MAX_GLOBAL_TEXT_STRING] = "Invalid GuildAssign";
@@ -11792,9 +11789,7 @@ void    ReceivePreviewPort ( BYTE* ReceiveBuffer )
 
 void ReceiveMapInfoResult ( BYTE* ReceiveBuffer )
 {
-#ifndef KWAK_FIX_COMPILE_LEVEL4_WARNING_EX
     LPPRECEIVE_MAP_INFO_RESULT pData = (LPPRECEIVE_MAP_INFO_RESULT)ReceiveBuffer;
-#endif // KWAK_FIX_COMPILE_LEVEL4_WARNING_EX
 }
 
 void ReceiveGuildCommand ( BYTE* ReceiveBuffer )

@@ -205,10 +205,6 @@ int __stdcall HackShieldCallback(long lCode, long lParamSize, void* pParam)
 			break;
 		}
 
-		//이미 후킹이 이루어진 상태 
-		//일부 API가 이미 후킹되어 있는 상태
-		//그러나 실제로는 이를 차단하고 있기 때문에 다른 후킹시도 프로그램으 동작하지 않습니다.
-		//이 Callback은 단지 경보내지는 정보제공 차원에서 사용할 수 있습니다.
 		case AHNHS_ACTAPC_DETECT_ALREADYHOOKED:
 		{
 			PACTAPCPARAM_DETECT_HOOKFUNCTION pHookFunction = (PACTAPCPARAM_DETECT_HOOKFUNCTION)pParam;

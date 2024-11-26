@@ -70,10 +70,10 @@ bool M31HuntingGround::MoveHuntingGroundObject(OBJECT* pObject)
 				Vector(1.f,1.f,1.f,Light);
 				CreateEffect(MODEL_BUTTERFLY01,pObject->Position,pObject->Angle,Light, 1, pObject);
 			}
-			pObject->HiddenMesh = -2;	//. Hide Object
+			pObject->HiddenMesh = -2;
 		}
 		break;
-	case 45:		//. 반디불 박스(노랑) : 2004/11/05
+	case 45:
 		{
 			int time = timeGetTime()%1024;
 			if(time >= 0 && time < 10) {
@@ -81,11 +81,11 @@ bool M31HuntingGround::MoveHuntingGroundObject(OBJECT* pObject)
 				Vector(1.f,1.f,1.f,Light);
 				CreateEffect(MODEL_BUTTERFLY01,pObject->Position,pObject->Angle,Light, 2, pObject);
 			}
-			pObject->HiddenMesh = -2;	//. Hide Object
+			pObject->HiddenMesh = -2;
 		}
 		break;
-	case 3:		//. 먼지불빛 박스 : 2004/11/09
-	case 53:	//. 붉은먼지 박스 : 2004/11/26
+	case 3:
+	case 53:
 		pObject->HiddenMesh = -2;
 		break;
 	case 27:
@@ -94,7 +94,7 @@ bool M31HuntingGround::MoveHuntingGroundObject(OBJECT* pObject)
 			pObject->Position[2] += vibration;
 		}
 		break;
-	case 42:	//. 라이트 박스 : 2004/11/11
+	case 42:
 		{
 			Luminosity = (float)(rand()%4+3)*0.1f;
 			Vector(Luminosity*0.9f,Luminosity*0.2f,Luminosity*0.1f,Light);
@@ -104,7 +104,6 @@ bool M31HuntingGround::MoveHuntingGroundObject(OBJECT* pObject)
 		break;
 	}
 
-	//. 배경음악 컨트롤
 	if(::timeGetTime() - g_MusicStartStamp > 300000) {
 		g_MusicStartStamp = ::timeGetTime();
 		PlayBuffer ( SOUND_BC_HUNTINGGROUND_AMBIENT );
@@ -112,7 +111,6 @@ bool M31HuntingGround::MoveHuntingGroundObject(OBJECT* pObject)
 	return true;
 }
 
-//. 오브젝트 효과를 추가한다.
 bool M31HuntingGround::RenderHuntingGroundObjectVisual(OBJECT* pObject, BMD* pModel)
 {
 	if(!IsInHuntingGround())
@@ -122,19 +120,19 @@ bool M31HuntingGround::RenderHuntingGroundObjectVisual(OBJECT* pObject, BMD* pMo
 	
 	switch(pObject->Type)
 	{
-	case 3:		//. 먼지불빛 박스 : 2004/11/09
+	case 3:
 		if(rand()%3==0) {
 			Vector ( 1.f, 1.f, 1.f, Light );
 			CreateParticle(BITMAP_WATERFALL_3,pObject->Position,pObject->Angle,Light,3,pObject->Scale);
 		}
 		break;
-	case 53:	//. 붉은연기 박스 : 2004/11/26
+	case 53:
 		if (rand()%3==0) {
 			Vector ( 1.f, 1.f, 1.f, Light );
 			CreateParticle (BITMAP_SMOKE,pObject->Position,pObject->Angle,Light,22,pObject->Scale);
 		}
 		break;
-	case 49:	//. 사신동상
+	case 49:
 		{
 			vec3_t Relative, Position;
 			Vector ( 0.f, -10.f, 0.f, Relative );
@@ -156,7 +154,7 @@ bool M31HuntingGround::RenderHuntingGroundObjectMesh(OBJECT* pObject, BMD* pMode
 {
 	if(IsInHuntingGround())
 	{		
-		if(pObject->Type == 27 || pObject->Type == 54)	//. 연꽃 : 2004/11/08, 용암
+		if(pObject->Type == 27 || pObject->Type == 54)
 		{
 			vec3_t LightBackup;
 			VectorCopy(pModel->BodyLight, LightBackup);		//. backup
@@ -170,16 +168,16 @@ bool M31HuntingGround::RenderHuntingGroundObjectMesh(OBJECT* pObject, BMD* pMode
 			
 			return true;
 		}
-		if(pObject->Type == 10)	//. 빛플랜
-		{	//. 지형 라이트 영향 안받도록
+		if(pObject->Type == 10)
+		{
 			pModel->BodyLight[0] = 0.56f;
 			pModel->BodyLight[1] = 0.80f;
 			pModel->BodyLight[2] = 0.81f;
 			pModel->RenderBody(RENDER_TEXTURE,pObject->Alpha,pObject->BlendMesh,pObject->BlendMeshLight,pObject->BlendMeshTexCoordU,pObject->BlendMeshTexCoordV,pObject->HiddenMesh);
 			return true;
 		}
-		if(pObject->Type == 52)	//. 빛플랜
-		{	//. 지형 라이트에 영향 받도록, 깜박거리게
+		if(pObject->Type == 52)
+		{
 			float Luminosity = sinf(pObject->Timer+WorldTime*0.0009f)*0.5f+0.9f;
 			pModel->BodyLight[0] *= Luminosity;
 			pModel->BodyLight[1] *= Luminosity;
@@ -190,13 +188,12 @@ bool M31HuntingGround::RenderHuntingGroundObjectMesh(OBJECT* pObject, BMD* pMode
 	return RenderHuntingGroundMonsterObjectMesh(pObject, pModel,ExtraMon);
 }
 
-//. 몬스터
 CHARACTER* M31HuntingGround::CreateHuntingGroundMonster(int iType, int PosX, int PosY, int Key)
 {
 	CHARACTER* pCharacter = NULL;
 	switch(iType)
 	{
-	case 290:	//. 몬스터1(울프)
+	case 290:
 		{
 			OpenMonsterModel(81);   //  81
 		    pCharacter = CreateCharacter(Key,MODEL_MONSTER01+81,PosX,PosY);
@@ -208,7 +205,7 @@ CHARACTER* M31HuntingGround::CreateHuntingGroundMonster(int iType, int PosX, int
 			BoneManager::RegisterBone(pCharacter, "Monster81_EyeLeft", 30);
 		}
 		break;
-	case 291:	//. 몬스터2(불골렘)
+	case 291:
 		{
 			OpenMonsterModel(82);   //  82
 		    pCharacter = CreateCharacter(Key,MODEL_MONSTER01+82,PosX,PosY);
@@ -222,7 +219,7 @@ CHARACTER* M31HuntingGround::CreateHuntingGroundMonster(int iType, int PosX, int
 			BoneManager::RegisterBone(pCharacter, "Monster82_Back", 46);
 		}
 		break;
-	case 292:	//. 몬스터3(벌괴물)
+	case 292:
 		{
 			OpenMonsterModel(83);	//	83
 			pCharacter = CreateCharacter(Key,MODEL_MONSTER01+83,PosX,PosY);
@@ -238,7 +235,7 @@ CHARACTER* M31HuntingGround::CreateHuntingGroundMonster(int iType, int PosX, int
 	case 303:
 #endif
 
-	case 293:	//. 몬스터4(독골렘)
+	case 293:
 		{
 			OpenMonsterModel(84);	// 84
 			pCharacter = CreateCharacter(Key,MODEL_MONSTER01+84,PosX,PosY);
@@ -258,7 +255,7 @@ CHARACTER* M31HuntingGround::CreateHuntingGroundMonster(int iType, int PosX, int
 	case 302:
 #endif
 
-	case 294:	//. 몬스터5(트롤)
+	case 294:
 		{
 			OpenMonsterModel(85);	//85
 			pCharacter = CreateCharacter(Key,MODEL_MONSTER01+85,PosX,PosY);
@@ -270,7 +267,7 @@ CHARACTER* M31HuntingGround::CreateHuntingGroundMonster(int iType, int PosX, int
 			BoneManager::RegisterBone(pCharacter, "Monster85_RightEye", 19);
 		}
 		break;
-	case 295:	//. 몬스터6(보스)
+	case 295:
 		{
 			OpenMonsterModel(87);	//87
 			pCharacter = CreateCharacter(Key,MODEL_MONSTER01+87,PosX,PosY);
@@ -286,10 +283,10 @@ CHARACTER* M31HuntingGround::CreateHuntingGroundMonster(int iType, int PosX, int
 		}
 		break;
 	case 297:
-		{	//. 저주받은 기사
+		{
 			pCharacter = CreateCharacter(Key,MODEL_PLAYER,PosX,PosY);
 			strcpy(pCharacter->ID, "저주받은 기사");
-			pCharacter->Skin = 1;	//. 기사
+			pCharacter->Skin = 1;
 			pCharacter->BodyPart[BODYPART_HELM  ].Type = MODEL_HELM  +1;
 			pCharacter->BodyPart[BODYPART_ARMOR ].Type = MODEL_ARMOR +1;
 			pCharacter->BodyPart[BODYPART_PANTS ].Type = MODEL_PANTS +1;
@@ -315,7 +312,7 @@ bool M31HuntingGround::MoveHuntingGroundMonsterVisual(OBJECT* pObject, BMD* pMod
 {
 	switch(pObject->Type)
 	{
-	case MODEL_MONSTER01+82:	//. 불골렘
+	case MODEL_MONSTER01+82:
 		{
 			vec3_t Light;
 			Vector ( 1.f, 0.2f, 0.1f, Light );
@@ -329,7 +326,7 @@ void M31HuntingGround::MoveHuntingGroundBlurEffect(CHARACTER* pCharacter, OBJECT
 {
 	switch(pObject->Type)
 	{
-	case MODEL_MONSTER01+85:	//. 액스워리어
+	case MODEL_MONSTER01+85:
 		{
 			if(pObject->CurrentAction == MONSTER01_ATTACK1 || pObject->CurrentAction == MONSTER01_ATTACK2)
 			{
@@ -350,14 +347,14 @@ void M31HuntingGround::MoveHuntingGroundBlurEffect(CHARACTER* pCharacter, OBJECT
 					pModel->TransformPosition(BoneTransform[23],StartRelative,StartPos,false);
 					pModel->TransformPosition(BoneTransform[23],EndRelative,EndPos,false);
 
-					CreateBlur(pCharacter,StartPos,EndPos,Light,3,true,23);	// 왼손
+					CreateBlur(pCharacter,StartPos,EndPos,Light,3,true,23);
 
 					Vector(30.f, 10.f, 80.f, StartRelative);
 					Vector(30.f, -65.f, 230, EndRelative);
 					pModel->TransformPosition(BoneTransform[34],StartRelative,StartPos,false);
 					pModel->TransformPosition(BoneTransform[34],EndRelative,EndPos,false);
 					
-					CreateBlur(pCharacter,StartPos,EndPos,Light,3,true,34);	// 오른손
+					CreateBlur(pCharacter,StartPos,EndPos,Light,3,true,34);
 					
 					fAnimationFrame += fSpeedPerFrame;
 				}
@@ -370,7 +367,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterVisual(CHARACTER* pCharacter, O
 {
 	switch(pObject->Type)
 	{
-	case MODEL_MONSTER01+81:	//. 울프
+	case MODEL_MONSTER01+81:
 		{
 			vec3_t Position, Light;
 			Vector ( 0.9f, 0.2f, 0.1f, Light );
@@ -401,7 +398,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterVisual(CHARACTER* pCharacter, O
 				pObject->SubType = FALSE;
 		}
 		break;
-	case MODEL_MONSTER01+82:	//. 불골렘
+	case MODEL_MONSTER01+82:
 		{
 			vec3_t Light;
 			Vector ( 1.f, 1.f, 1.f, Light );
@@ -491,7 +488,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterVisual(CHARACTER* pCharacter, O
 				pObject->SubType = FALSE;
 		}
 		break;
-	case MODEL_MONSTER01+83:	//. 여왕벌
+	case MODEL_MONSTER01+83:
 		{
 			if(pObject->CurrentAction == MONSTER01_WALK || pObject->CurrentAction == MONSTER01_RUN)
 			{
@@ -530,7 +527,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterVisual(CHARACTER* pCharacter, O
 		}
 		break;
 
-	case MODEL_MONSTER01+84:	//. 독골렘
+	case MODEL_MONSTER01+84:
 		{
 #ifndef KWAK_FIX_COMPILE_LEVEL4_WARNING_EX
 			int angle = timeGetTime()%360;
@@ -605,7 +602,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterVisual(CHARACTER* pCharacter, O
 		}
 		break;
 
-	case MODEL_MONSTER01+85:	//. 트롤
+	case MODEL_MONSTER01+85:
 		{
 			vec3_t Position, Light;
 			Vector ( 0.9f, 0.2f, 0.1f, Light );
@@ -638,7 +635,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterVisual(CHARACTER* pCharacter, O
 				pObject->SubType = FALSE;
 		}
 		break;
-	case MODEL_MONSTER01+87:	//. 보스
+	case MODEL_MONSTER01+87:
 		{
 			vec3_t Position, Relative, Light;
 			Vector ( 0.9f, 0.2f, 0.1f, Light );
@@ -685,7 +682,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterObjectMesh(OBJECT* pObject, BMD
 {
 	switch(pObject->Type)
 	{
-	case MODEL_MONSTER01+81:	//. 울프
+	case MODEL_MONSTER01+81:
 		{
 			pModel->RenderBody(RENDER_TEXTURE,pObject->Alpha,pObject->BlendMesh,pObject->BlendMeshLight,pObject->BlendMeshTexCoordU,pObject->BlendMeshTexCoordV,1);
 			pModel->BeginRender(1.f);
@@ -698,7 +695,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterObjectMesh(OBJECT* pObject, BMD
 			return true;
 		}
 		break;
-	case MODEL_MONSTER01+82:	//. 불골렘
+	case MODEL_MONSTER01+82:
 		{
 			pModel->BeginRender(1.f);
 			vec3_t LightBackup;
@@ -723,7 +720,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterObjectMesh(OBJECT* pObject, BMD
 			return true;
 		}
 		break;
-	case MODEL_MONSTER01+83:	//. 여왕벌
+	case MODEL_MONSTER01+83:
 		{
 			pModel->BeginRender(1.f);
 			
@@ -805,7 +802,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterObjectMesh(OBJECT* pObject, BMD
 			return true;
 		}
 		break;
-	case MODEL_MONSTER01+85:	//. 액스워리어
+	case MODEL_MONSTER01+85:
 		{
 			pModel->BeginRender(1.f);
 			vec3_t LightBackup;
@@ -838,7 +835,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterObjectMesh(OBJECT* pObject, BMD
 			return true;
 		}
 		break;
-	case MODEL_MONSTER01+87:	//. 보스
+	case MODEL_MONSTER01+87:
 		{
 			pModel->RenderBody(RENDER_TEXTURE,pObject->Alpha,pObject->BlendMesh,pObject->BlendMeshLight,pObject->BlendMeshTexCoordU,pObject->BlendMeshTexCoordV, 5);
 			
@@ -869,7 +866,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterObjectMesh(OBJECT* pObject, BMD
 			return true;
 		}
 		break;
-	case MODEL_FISSURE:	//. 지면 균열
+	case MODEL_FISSURE:
 		{
 			pModel->BeginRender(1.f);
 
@@ -882,7 +879,7 @@ bool M31HuntingGround::RenderHuntingGroundMonsterObjectMesh(OBJECT* pObject, BMD
 			return true;
 		}
 		break;
-	case MODEL_FISSURE_LIGHT:	//. 지면 균열 빛
+	case MODEL_FISSURE_LIGHT:
 		{
 			pModel->BeginRender(1.f);
 
@@ -900,34 +897,31 @@ bool M31HuntingGround::RenderHuntingGroundMonsterObjectMesh(OBJECT* pObject, BMD
 	return false;
 }
 
-/* 일단은 없어도 될것으로 생각된다. 나중에 필요없어질때는 삭제할것 */
-/* pCharacter->Skill에 따라서 분기 처리를 하면 될것 */
 bool M31HuntingGround::AttackEffectHuntingGroundMonster(CHARACTER* pCharacter, OBJECT* pObject, BMD* pModel)
 {
 	if(!IsInHuntingGround())
 		return false;
 
-	//. 디폴트 처리로 넘기고 싶지않거든 true를 리턴하라.
 	switch(pCharacter->MonsterIndex)
 	{
-	case 290:	//. 울프
+	case 290:
 		break;
-	case 292:	//. 여왕벌
+	case 292:
 
 #ifdef LOREN_RAVINE_EVENT
 	case 303:
 #endif
 
-	case 293:	//. 독골렘
-	case 291:	//. 불골렘
-	case 295:	//. 보스
+	case 293:
+	case 291:
+	case 295:
 		return true;
 
 #ifdef LOREN_RAVINE_EVENT
 	case 302:
 #endif
 
-	case 294:	//. 트롤
+	case 294:
 		break;
 	}
 	return false;
@@ -953,7 +947,6 @@ bool M31HuntingGround::SetCurrentActionHuntingGroundMonster(CHARACTER* pCharacte
 	return false;
 }
 
-//. 화면처리
 bool M31HuntingGround::CreateMist(PARTICLE* pParticleObj)
 {
 	if(!IsInHuntingGround())
@@ -968,19 +961,19 @@ bool M31HuntingGround::CreateMist(PARTICLE* pParticleObj)
 		vec3_t TargetPosition = {0.f, 0.f, 0.f}, TargetAngle = {0.f, 0.f, 0.f};
 		switch(rand()%8)
 		{
-		case 0:	//. 우
+		case 0:
 			TargetPosition[0] = Hero->Object.Position[0] + (300+rand()%250);
 			TargetPosition[1] = Hero->Object.Position[1] + (300+rand()%250);
 			break;
-		case 1:	//. 하
+		case 1:
 			TargetPosition[0] = Hero->Object.Position[0] + (250+rand()%250);
 			TargetPosition[1] = Hero->Object.Position[1] - (250+rand()%250);
 			break;
-		case 2:	//. 상
+		case 2:
 			TargetPosition[0] = Hero->Object.Position[0] - (200+rand()%250);
 			TargetPosition[1] = Hero->Object.Position[1] + (200+rand()%250);
 			break;
-		case 3:	//. 좌
+		case 3:
 			TargetPosition[0] = Hero->Object.Position[0] - (300+rand()%250);
 			TargetPosition[1] = Hero->Object.Position[1] - (300+rand()%250);
 			break;
@@ -1002,7 +995,6 @@ bool M31HuntingGround::CreateMist(PARTICLE* pParticleObj)
 			break;
 		}
 
-		//. 이동방향으로 범위 평행이동
 		if(Hero->Movement)
 		{
 			float Matrix[3][4];

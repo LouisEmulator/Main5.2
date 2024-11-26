@@ -98,13 +98,13 @@ namespace SEASON3B
 		bool InventoryProcess();
 		bool BtnProcess();
 
-		void RenderMixDescriptions(float fPos_x, float fPos_y);	// 조합에 강제로 지정된 텍스트 출력
+		void RenderMixDescriptions(float fPos_x, float fPos_y);
 		
 		void CheckMixInventory();
 		bool Mix();
 		void RenderMixEffect();
 
-		int Rtn_MixRequireZen( int _nMixZen, int _nTax );	// 함수헤더 [lem.2010.7.29]
+		int Rtn_MixRequireZen( int _nMixZen, int _nTax );
 		
 	};
 }

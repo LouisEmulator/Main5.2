@@ -2529,7 +2529,7 @@ void CUILetterTextListBox::AddTextToRenderList(const char * pszText)
 	if (pszText == NULL) return;
 
 	static LETTER_TEXT text;
-	if (strlen(pszText) >= 20)	// 사이즈 오버
+	if (strlen(pszText) >= 20)
 	{
 		static char Text1[80][MAX_TEXT_LENGTH + 1];
 		int iLine = CutText3(pszText, Text1[0], m_iWidth - 30, 80, MAX_TEXT_LENGTH + 1);
@@ -2573,7 +2573,6 @@ BOOL CUILetterTextListBox::RenderDataLine(int iLineNumber)
 {
 	EnableAlphaTest();
 	char Text[MAX_TEXT_LENGTH + 1] = {0};
-	// 내용
 	g_pRenderText->SetTextColor(230, 220, 200, 255);
 	g_pRenderText->SetBgColor(0, 0, 0, 0);
 
@@ -2610,7 +2609,7 @@ CUISocketListBox::CUISocketListBox()
 {
 	m_iMaxLineCount = UIMAX_TEXT_LINE;
 	m_iCurrentRenderEndLine = 0;
-	m_iNumRenderLine = 6;	// 3의 배수로 -_-
+	m_iNumRenderLine = 6;
 
 	m_fScrollBarRange_top = 0;
 	m_fScrollBarRange_bottom = 0;
@@ -2666,13 +2665,11 @@ void CUISocketListBox::SetNumRenderLine(int iLine)
 
 void CUISocketListBox::RenderInterface()
 {
-	// 배경칠
 	EnableAlphaTest();
 	SetLineColor(7, 0.4f);
 	RenderColor(m_iPos_x - 1, m_iPos_y - m_iHeight - 1, m_iWidth + 1, m_iHeight + 2);
 	EndRenderColor();
 
-	// 스크롤 바
 	if (GetState() != UISTATE_SCROLL)
 		ComputeScrollBar();
 
@@ -5990,7 +5987,7 @@ CUIBCGuildListBox::CUIBCGuildListBox()
 {
 	m_iMaxLineCount = UIMAX_TEXT_LINE;
 	m_iCurrentRenderEndLine = 0;
-	m_iNumRenderLine = 15;	// 3의 배수로 -_-
+	m_iNumRenderLine = 15;
 
 	m_fScrollBarRange_top = 0;
 	m_fScrollBarRange_bottom = 0;
@@ -6057,12 +6054,10 @@ void CUIBCGuildListBox::SetNumRenderLine(int iLine)
 
 void CUIBCGuildListBox::RenderInterface()
 {
-	// 배경칠
 	EnableAlphaTest();
 	SetLineColor(7, 0.4f);
 	RenderColor(m_iPos_x - 1, m_iPos_y - m_iHeight - 1, m_iWidth + 1, m_iHeight + 2);
 
-	//남겨놔...
 	SetLineColor(0, 0.4f);
 	RenderColor(m_iPos_x - 1, m_iPos_y + 25 - 1, m_iWidth  - 100 + 1, 20);
 
@@ -6070,21 +6065,16 @@ void CUIBCGuildListBox::RenderInterface()
 	RenderColor(m_iPos_x - 1 + m_iWidth - 100 + 1, m_iPos_y + 25 - 1, m_iWidth - 60, 20);
 	EndRenderColor();
 
-	// 스크롤 바
 	if (GetState() != UISTATE_SCROLL)
 		ComputeScrollBar();
 
 	g_pGuardWindow->RenderScrollBarFrame(m_iPos_x + m_iWidth - 8, m_fScrollBarRange_top, m_fScrollBarRange_bottom - m_fScrollBarRange_top);
 	g_pGuardWindow->RenderScrollBar(m_iPos_x + m_iWidth - 12, m_fScrollBarPos_y, (GetState() == UISTATE_SCROLL && MouseLButtonPush));
 
-	// 길드명
 	g_pRenderText->RenderText(m_iPos_x+5, m_iPos_y - m_iHeight - 12, GlobalText[182] );
-	// 진영
-	g_pRenderText->RenderText(m_iPos_x+80, m_iPos_y - m_iHeight - 12, GlobalText[1603] );	// 1603 "진영"
-	// 주체
-	g_pRenderText->RenderText(m_iPos_x+120, m_iPos_y - m_iHeight - 12, GlobalText[1604] );	// 1604 "주체"
-
-	g_pRenderText->RenderText(m_iPos_x + 18, m_iPos_y + 31 - 1, GlobalText[1977] );	// 1977 "점수"
+	g_pRenderText->RenderText(m_iPos_x+80, m_iPos_y - m_iHeight - 12, GlobalText[1603] );
+	g_pRenderText->RenderText(m_iPos_x+120, m_iPos_y - m_iHeight - 12, GlobalText[1604] );
+	g_pRenderText->RenderText(m_iPos_x + 18, m_iPos_y + 31 - 1, GlobalText[1977] );
 }
 
 int CUIBCGuildListBox::GetRenderLinePos_y(int iLineNumber)
@@ -6125,22 +6115,20 @@ BOOL CUIBCGuildListBox::RenderDataLine(int iLineNumber)
 	int iPos_y = GetRenderLinePos_y(iLineNumber);
 
 	char Text[MAX_TEXT_LENGTH + 1] = {0};
-	// 길드명
+
 	sprintf(Text,"%s", m_TextListIter->szName);
 	g_pRenderText->RenderText(iPos_x + 2, iPos_y, Text);
 
-	// 진영
 	if( m_TextListIter->byJoinSide == 1 )
-		sprintf(Text,"%s", GlobalText[1606] );	// 1606 "수성측"
+		sprintf(Text,"%s", GlobalText[1606] );
 	else
-		sprintf(Text,"%s", GlobalText[1605] );	// 1605 "공성측"
+		sprintf(Text,"%s", GlobalText[1605] );
 	g_pRenderText->RenderText(iPos_x + 100, iPos_y, Text, 0, 0, RT3_WRITE_RIGHT_TO_LEFT);
 
-	// 주체
 	if( m_TextListIter->byGuildInvolved == 1 )
-		sprintf(Text,"%s", GlobalText[1607] );	// 1607 "주체"
+		sprintf(Text,"%s", GlobalText[1607] );
 	else
-		sprintf(Text,"%s", GlobalText[1608] );	// 1608 "보조"
+		sprintf(Text,"%s", GlobalText[1608] );
 
 	g_pRenderText->RenderText(iPos_x + 137, iPos_y, Text, 0, 0, RT3_WRITE_RIGHT_TO_LEFT);
 
@@ -6151,7 +6139,7 @@ BOOL CUIBCGuildListBox::RenderDataLine(int iLineNumber)
 			wsprintf(Dummy,"--");
 		else
 			wsprintf(Dummy,"%s :     %d",m_TextListIter->szName,m_TextListIter->iGuildScore);
-		g_pRenderText->RenderText(m_iPos_x + 60, m_iPos_y + 31 - 1, Dummy );	// 1977 "점수"
+		g_pRenderText->RenderText(m_iPos_x + 60, m_iPos_y + 31 - 1, Dummy );
 	}
 
 	DisableAlphaBlend();
@@ -6214,7 +6202,7 @@ CUIMoveCommandListBox::CUIMoveCommandListBox()
 	m_iMaxLineCount = UIMAX_TEXT_LINE;
 	m_iCurrentRenderEndLine = 0;
 
-	m_iNumRenderLine = 21;	// 3의 배수로 -_-
+	m_iNumRenderLine = 21;
 
 	m_fScrollBarRange_top = 0;
 	m_fScrollBarRange_bottom = 0;

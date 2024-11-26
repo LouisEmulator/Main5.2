@@ -250,42 +250,40 @@ typedef struct tagITEM
 	union 
 	{
 		BYTE  x;    //client olny
-		BYTE  lineal_pos;	// 선형 위치(==y*column+x)
+		BYTE  lineal_pos;
 	};
 	union
 	{
 		BYTE  y;    //client olny
-		BYTE  ex_src_type;	// 아이템 메니져를 통하지 않는 static한 아이템의 경우 이 변수로 구분한다.
-		// 0: 없음, 1: 인벤토리 장비창
+		BYTE  ex_src_type;
 	};
-	WORD  Jewel_Of_Harmony_Option;//옵션 종류
-	WORD  Jewel_Of_Harmony_OptionLevel;//옵션 레벨( 값이 아님 )
+	WORD  Jewel_Of_Harmony_Option;
+	WORD  Jewel_Of_Harmony_OptionLevel;
 	bool option_380;
 #ifdef SOCKET_SYSTEM
-	BYTE bySocketOption[MAX_SOCKETS];	// 소켓 정보 (서버에서 받은것 그대로 저장-서버에 재전송용)
-	BYTE SocketCount;					// 소켓 개수 (0~MAX_SOCKETS), 0: 소켓 아이템 아님
-	BYTE SocketSeedID[MAX_SOCKETS];		// 시드 고유번호 (0~49), SOCKET_EMPTY: 빈 소켓
-	BYTE SocketSphereLv[MAX_SOCKETS];	// 스피어 레벨 (1~5)
-	BYTE SocketSeedSetOption;			// 시드 세트 옵션 (소켓 장착시 결정되는)
+	BYTE bySocketOption[MAX_SOCKETS];
+	BYTE SocketCount;
+	BYTE SocketSeedID[MAX_SOCKETS];
+	BYTE SocketSphereLv[MAX_SOCKETS];
+	BYTE SocketSeedSetOption;
 #endif	// SOCKET_SYSTEM
+
+	int   Number;
+	BYTE  Color;
 	
-	// 정리할 때 지워야 하는 소스
-	int   Number;	//. UI_RENEW_INVENTORY_BASE: 사용하지 않을 예정
-	BYTE  Color;	//. UI_RENEW_INVENTORY_BASE: 사용하지 않을 예정
-	
-	BYTE byColorState;		// 아이템 밑에 깔리는 칼라 세팅
+	BYTE byColorState;
 	
 #ifdef KJH_ADD_PERIOD_ITEM_SYSTEM
-	bool	bPeriodItem;	// 기간제 아이템인가?
-	bool	bExpiredPeriod;	// 기간이 만료되었나?
-	//DWORD	dwLeftTime;		// 기간제 아이템일때 남은시간 (단위 : 초)	- Render용
-	long	lExpireTime;	// 기간 만료 시간.
-	//DWORD	dwPastSystemTime;	// 지난System시간		- 계산용
+	bool	bPeriodItem;
+	bool	bExpiredPeriod;
+	//DWORD	dwLeftTime;
+	long	lExpireTime;
+	//DWORD	dwPastSystemTime;
 #endif // KJH_ADD_PERIOD_ITEM_SYSTEM
 
 private:
 	friend class SEASON3B::CNewUIItemMng;
-	int   RefCount;		//. 오로지 CNewUIItemMng 에서만 접근 가능
+	int   RefCount;
 } ITEM;
 #pragma pack(pop)
 

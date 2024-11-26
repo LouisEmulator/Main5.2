@@ -112,13 +112,13 @@ void CXmasEvent::CreateXmasEventEffect(CHARACTER* pCha, OBJECT *pObj, int iType)
 	switch(c->Object.SubType)
 	{
 	case MODEL_XMAS_EVENT_CHA_SSANTA:
-		::strcpy(c->ID, GlobalText[2245]);	// 2245 "산타할아버지"
+		::strcpy(c->ID, GlobalText[2245]);
 		break;
 	case MODEL_XMAS_EVENT_CHA_DEER:
-		::strcpy(c->ID, GlobalText[2246]);	// 2246 "루돌프"
+		::strcpy(c->ID, GlobalText[2246]);
 		break;
 	case MODEL_XMAS_EVENT_CHA_SNOWMAN:
-		::strcpy(c->ID, GlobalText[2247]);	// 2247 "눈사람"
+		::strcpy(c->ID, GlobalText[2247]);
 		break;
 	}
 
@@ -136,7 +136,6 @@ void CXmasEvent::CreateXmasEventEffect(CHARACTER* pCha, OBJECT *pObj, int iType)
 	o->CurrentAction = pObj->CurrentAction;
 	o->AnimationFrame = pObj->AnimationFrame;
 
-	// 나타날 때 폭발씬 이펙트
 	vec3_t vPos, vLight;
 	Vector(0.6f, 0.6f, 0.6f, vLight);
 
@@ -210,10 +209,6 @@ void CXmasEvent::GenID()
 	m_iEffectID++;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-// 새해 이벤트
-///////////////////////////////////////////////////////////////////////////////////////////////////////
 CNewYearsDayEvent::CNewYearsDayEvent()
 {
 
@@ -351,7 +346,6 @@ bool CNewYearsDayEvent::MoveMonsterVisual(CHARACTER* c,OBJECT* o, BMD* b)
 				}
 				if(rand()%2 == 0)
 				{
-					// 흰 연기
 					Vector(0.3f, 0.3f, 0.8f, vLight);
 					CreateParticle(BITMAP_LIGHT+2, vWorldPos, o->Angle, vLight, 1, 1.f);
 				}
@@ -359,14 +353,12 @@ bool CNewYearsDayEvent::MoveMonsterVisual(CHARACTER* c,OBJECT* o, BMD* b)
 
 			if(o->CurrentAction == MONSTER01_DIE)
 			{
-				// 폭발
 				if(o->AnimationFrame <= 0.3f)
 				{
 					o->m_iAnimation = rand()%6 + MODEL_NEWYEARSDAY_EVENT_BEKSULKI;
 					CreateParticle(BITMAP_EXPLOTION, vWorldPos, o->Angle, vLight, 0, 0.5f);
 					if(rand()%4 == 0) o->m_iAnimation = MODEL_NEWYEARSDAY_EVENT_PIG;
 
-					// 죽을때 사운드
 					PlayBuffer(SOUND_NEWYEARSDAY_DIE);
 				}
 				
@@ -384,11 +376,6 @@ bool CNewYearsDayEvent::MoveMonsterVisual(CHARACTER* c,OBJECT* o, BMD* b)
 	}
 	return false;
 }
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-// 행운의 파란가방 이벤트
-///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #ifdef CSK_FIX_BLUELUCKYBAG_MOVECOMMAND
 

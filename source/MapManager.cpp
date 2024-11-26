@@ -1172,18 +1172,18 @@ void CMapManager::Load() // OK
 			gLoadData.OpenTexture( i, DirName );
 		}
 		
-		if(this->WorldActive == WD_1DUNGEON)	// 던전
+		if(this->WorldActive == WD_1DUNGEON)
 		{
 			Models[40].Actions[1].PlaySpeed = 0.4f;
 		}
-        else if(this->WorldActive == WD_8TARKAN)	// 타르칸
+        else if(this->WorldActive == WD_8TARKAN)
         {
-            Models[11].StreamMesh = 0;  //  얇은 모래 폭포.
-            Models[12].StreamMesh = 0;  //  모래늪.
-            Models[13].StreamMesh = 0;  //  모래폭포.
-            Models[73].StreamMesh = 0;  //  용암 흐르기2.
-            Models[75].StreamMesh = 0;  //  용암 흐르기3.
-            Models[79].StreamMesh = 0;  //  용암 흐르기4.
+            Models[11].StreamMesh = 0;
+            Models[12].StreamMesh = 0;
+            Models[13].StreamMesh = 0;
+            Models[73].StreamMesh = 0;
+            Models[75].StreamMesh = 0;
+            Models[79].StreamMesh = 0;
         }
 		if (this->WorldActive == WD_51HOME_6TH_CHAR 
 #ifndef PJH_NEW_SERVER_SELECT_MAP
@@ -1238,11 +1238,11 @@ void CMapManager::LoadWorld(int Map)
 	}
 	RemoveAllShopTitleExceptHero();
 
-	g_Direction.Init();					// 맵 이동시 연출관련 초기화 
-	g_Direction.HeroFallingDownInit();	// 맵 이동시 연출관련 초기화
+	g_Direction.Init();
+	g_Direction.HeroFallingDownInit();
 	g_Direction.DeleteMonster();
 	M39Kanturu3rd::Kanturu3rdInit();
-	g_Direction.m_CKanturu.m_iKanturuState = 0; // --;
+	g_Direction.m_CKanturu.m_iKanturuState = 0;
 	g_Direction.m_CKanturu.m_iMayaState = 0;
 	g_Direction.m_CKanturu.m_iNightmareState = 0;
 
@@ -1353,13 +1353,13 @@ void CMapManager::LoadWorld(int Map)
 	{
 		switch( CryWolfState )
 		{
-		case CRYWOLF_OCCUPATION_STATE_PEACE:    // 평화상태
+		case CRYWOLF_OCCUPATION_STATE_PEACE:
 			sprintf ( FileName, "Data\\%s\\EncTerrain%d.att", WorldName, iMapWorld);
 			break;
-		case CRYWOLF_OCCUPATION_STATE_OCCUPIED: // 점령상태
+		case CRYWOLF_OCCUPATION_STATE_OCCUPIED:
 			sprintf ( FileName, "Data\\%s\\EncTerrain%d.att", WorldName, iMapWorld*10+1);
 			break;
-		case CRYWOLF_OCCUPATION_STATE_WAR:		// 전쟁상태
+		case CRYWOLF_OCCUPATION_STATE_WAR:
 			sprintf ( FileName, "Data\\%s\\EncTerrain%d.att", WorldName, iMapWorld*10+2);
 			break;
 		}
